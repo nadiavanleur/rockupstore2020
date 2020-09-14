@@ -1,6 +1,5 @@
 {
-  "version": "2",
-  "name": "rockupstore2020",
+  "version": 2,
   "alias": "rockupstore2020",
   "builds": [
     {
