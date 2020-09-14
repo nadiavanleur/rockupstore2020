@@ -1,0 +1,11 @@
+{
+  "version": "2",
+  "name": "rockupstore2020",
+  "alias": "rockupstore2020",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/next"
+    }
+  ]
+}

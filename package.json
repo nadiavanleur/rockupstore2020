@@ -2,9 +2,10 @@
   "name": "rockupstore2020",
   "version": "1.0.0",
   "description": "",
-  "main": "server.js",
   "scripts": {
-    "dev": "nodemon server.js"
+    "dev": "now dev",
+    "build": "next build",
+    "start": "next start"
   },
   "author": "Nadia van Leur <hellow@nadiavanleur.nl>",
   "license": "ISC",
