@@ -1,0 +1,16 @@
+// Block
+.c-section {
+  background: $color-white;
+  border: $border-base;
+  padding: $supple-space-base;
+}
+
+// Elements
+.c-section__title {
+  margin-bottom: $supple-space-base;
+}
+
+// Modifiers
+.c-section--quinary {
+  background: $color-quinary-500;
+}

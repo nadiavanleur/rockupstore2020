@@ -1,0 +1,49 @@
+// Block
+.c-menus {
+  @include mq($until: $hamburger-breakpoint) {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    z-index: 100;
+    display: flex;
+    flex-direction: column;
+  }
+}
+
+// Elements
+.c-menus__toggle {
+  width: 100%;
+  flex: 0 0 auto;
+
+  @include mq($from: $hamburger-breakpoint) {
+    display: none;
+  }
+}
+
+.c-menus__container {
+  @include mq($until: $hamburger-breakpoint) {
+    display: none;
+    flex: 1 0 auto;
+    flex-direction: column-reverse;
+    justify-content: flex-end;
+    border: $border-base;
+    background: $color-septenary-500;
+    padding-top: $supple-space-small;
+
+    & > * {
+      flex: 0 0 auto;
+    }
+  }
+}
+
+// Modifiers
+.c-menus--open {
+  @include mq($until: $hamburger-breakpoint) {
+    height: 100%;
+
+    .c-menus__container {
+      display: flex;
+    }
+  }
+}

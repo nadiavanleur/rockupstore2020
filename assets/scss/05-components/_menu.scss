@@ -1,0 +1,35 @@
+// Block
+.c-menu {
+  background: $color-black;
+}
+
+// Elements
+.c-menu__item {
+  position: relative;
+}
+
+.c-menu__submenu {
+  padding: 0 $supple-space-small;
+  background-color: $color-septenary-500;
+
+  @include mq($from: $hamburger-breakpoint) {
+    display: none;
+    position: absolute;
+    bottom: 0;
+    left: 0;
+    width: 100%;
+    min-width: 250px;
+    border: $border-base;
+    transform: translateY(100%);
+
+    .c-menu__link:hover + &,
+    .c-menu__link:focus + &,
+    .c-menu__item:hover > & {
+      display: block;
+    }
+
+    .c-menu__item:focus-within > & {
+      display: block;
+    }
+  }
+}

@@ -1,0 +1,96 @@
+// Block
+.c-card {
+  transition: all $base-animation-duration;
+  display: flex;
+  flex-direction: column;
+  border: $border-base;
+  padding: $supple-space-base;
+  position: relative;
+  background: $color-white;
+
+  & > * {
+    flex: 0 0 auto;
+  }
+}
+
+// Elements
+.c-card__image-container {
+  position: relative;
+  z-index: 2;
+  width: 100%;
+  margin-bottom: $supple-space-small;
+  border: $border-base;
+
+  &::after {
+    content: "";
+    display: block;
+    padding-bottom: 100%;
+  }
+}
+
+.c-card__image,
+.c-card__hover-image {
+  width: 100%;
+  pointer-events: none;
+  position: absolute;
+  top: 50%;
+  left: 50%;
+  transform: translate(-50%, -50%);
+
+  @supports (object-fit: cover) {
+    top: 0;
+    left: 0;
+    transform: none;
+    height: 100%;
+    object-fit: cover;
+    object-position: center center;
+  }
+}
+
+.c-card__hover-image {
+  transition: opacity $base-animation-duration;
+  z-index: 2;
+  opacity: 0;
+
+  .c-card:hover &,
+  .c-card:focus & {
+    opacity: 1;
+  }
+
+  .c-card:focus-within & {
+    opacity: 1;
+  }
+}
+
+.c-card__content {
+  flex: 1 0 auto;
+  display: flex;
+  flex-direction: column;
+
+  & > * {
+    flex: 0 0 auto;
+  }
+}
+
+.c-card__body {
+  flex: 1 0 auto;
+}
+
+.c-card__tags {
+  position: absolute;
+  z-index: 3;
+  top: -$border-base-width * 3;
+  right: $border-base-width;
+}
+
+// Modifiers
+.c-card--link {
+  &:hover,
+  &:focus {
+    @include backdrop;
+  }
+
+  &:focus-within {
+    @include backdrop;
+  }
+}
