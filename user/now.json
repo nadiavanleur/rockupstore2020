@@ -1,0 +1,14 @@
+{
+  "version": 2,
+  "alias": "rockupstore2020",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/next"
+    },
+    {
+      "src": "pages/_app.js",
+      "use": "@now/node-server@0.4.26"
+    }
+  ]
+}

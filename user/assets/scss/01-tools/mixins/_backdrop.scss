@@ -1,0 +1,11 @@
+@mixin backdrop($color: $color-secondary-500) {
+  transform: translate(-$border-base-width, -$border-base-width);
+  box-shadow: ($border-base-width * 2) ($border-base-width * 2) 0
+      (-$border-base-width) $color,
+    ($border-base-width * 2) ($border-base-width * 2) 0 0 $color-black;
+}
+
+@mixin no-backdrop {
+  transform: none;
+  box-shadow: none;
+}

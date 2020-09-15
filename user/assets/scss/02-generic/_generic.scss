@@ -1,0 +1,112 @@
+html {
+  overflow-x: hidden;
+  border: $border-base;
+  background-color: $color-tertiary-500;
+  background: linear-gradient(
+        90deg,
+        $color-tertiary-500 ($border-base-width * 3),
+        transparent 1%
+      )
+      center,
+    linear-gradient(
+        $color-tertiary-500 ($border-base-width * 3),
+        transparent 1%
+      )
+      center,
+    $color-black;
+  background-size: ($border-base-width * 4) ($border-base-width * 4);
+
+  @include mq($until: $hamburger-breakpoint) {
+    padding-top: $a11y-size;
+  }
+}
+
+figure {
+  margin: 0;
+
+  img {
+    width: 100%;
+  }
+
+  figcaption {
+    font-style: italic;
+  }
+}
+
+p {
+  margin: 0;
+}
+
+* {
+  text-decoration-skip-ink: auto;
+}
+
+ul {
+  margin: 0;
+}
+
+table {
+  margin: 0;
+}
+
+blockquote {
+  margin-bottom: 0;
+}
+
+label,
+input,
+select,
+button {
+  font-size: $font-size-small;
+}
+
+input[type="text"] {
+  border: none;
+  border-bottom: $border-base;
+}
+
+.e-select__container {
+  position: relative;
+
+  &::before {
+    content: "⇵";
+    position: absolute;
+    right: 0;
+    z-index: 0;
+  }
+
+  select {
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding-right: 2ch;
+  }
+}
+
+select {
+  border: none;
+  appearance: none;
+  background: none;
+}
+
+button {
+  min-height: $a11y-size;
+  min-width: $a11y-size;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: $color-black;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    color: $color-gray-700;
+    cursor: not-allowed;
+  }
+}

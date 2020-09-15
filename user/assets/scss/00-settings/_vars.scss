@@ -1,0 +1,154 @@
+/*  =========================================================================
+    settings.vars
+    Global variables, config switches.
+    Used in conjunction with supple css.
+    ========================================================================= */
+
+/*  =========================================================================
+    Overrides
+    Any variables you find set in supple that you do not wish to keep, simply
+    redefine here. This means that if supple sets your`$supple-font-size`
+    at 16px and you wish it to be 18px, simplyredeclare that variable
+    in this section.
+    ========================================================================= */
+
+/*  Typography
+    ========================================================================= */
+
+$supple-font-size: 16px;
+$supple-line-height: 24px;
+
+$supple-space-tiny: 6px;
+$supple-space-small: 12px;
+$supple-space-base: 24px;
+$supple-space-large: 36px;
+$supple-space-huge: 48px;
+
+/*  =========================================================================
+    Custom
+    Place any of your own variables that sit on top of supple here.
+    Please use the `!default` flag because variables defined here can be
+    overwritten by another theme
+    ========================================================================= */
+
+/*  Typography
+    Base typographic settings
+    ========================================================================= */
+
+$font-family-base: "Open Sans", sans-serif !default;
+$font-family-heading: "Poppins", $font-family-base !default;
+
+/*  Colors
+    ========================================================================= */
+
+/**
+ * Colors
+ */
+$color-primary-500: hsl(0, 100%, 70%) !default;
+$color-secondary-500: hsl(33, 100%, 70%) !default;
+$color-tertiary-500: hsl(48, 100%, 70%) !default;
+$color-quaternary-500: hsl(168, 100%, 70%) !default;
+$color-quinary-500: hsl(196, 100%, 70%) !default;
+$color-senary-500: hsl(266, 100%, 70%) !default;
+$color-septenary-500: hsl(323, 100%, 70%) !default;
+
+/**
+ * Status colors
+ */
+$color-error: $color-primary-500 !default;
+$color-success: $color-quaternary-500 !default;
+$color-warning: $color-secondary-500 !default;
+$color-focus-ring: $color-quinary-500 !default;
+
+/**
+ * Grayscale
+ */
+$color-white: hsl(0, 0%, 100%) !default;
+$color-gray-300: hsl(0, 0%, 93%) !default;
+$color-gray-500: hsl(0, 0%, 85%) !default;
+$color-gray-700: hsl(0, 0%, 37%) !default;
+$color-black: hsl(0, 0%, 0%) !default;
+
+/*  Animations
+    Global to keep animations consistent
+    ========================================================================= */
+
+$base-animation-duration: 150ms !default;
+$base-animation-timing: cubic-bezier(
+  0.55,
+  0,
+  0.1,
+  1
+) !default; // Google swift bezier
+
+/*  Responsive
+    Used in conjunction with Sass MQ: https://sass-mq.github.io/sass-mq/
+    ========================================================================= */
+
+$mq-base-font-size: $supple-font-size;
+
+/**
+ * Name your breakpoints in a way that creates a ubiquitous language
+ * across team members. It will improve communication between
+ * stakeholders, designers, developers, and testers.
+ */
+$mq-breakpoints: (
+  sm: 30em,
+  md: 40em,
+  lg: 60em,
+  xl: 80em,
+);
+
+$hamburger-breakpoint: md;
+
+/**
+ * If you want to display the currently active breakpoint in the top
+ * right corner of your site during development, add the breakpoints
+ * to this list, ordered by width, e.g. (mobile, tablet, desktop).
+ */
+$mq-show-breakpoints: (sm, md, lg, xl);
+
+/*  Selectors
+    Variables for common selector types like: :hover, :active, etc.
+    ========================================================================= */
+
+$all-hovers: "&:hover, &:focus" !default;
+
+/**
+ * Supple breakpoints
+ */
+$supple-breakpoint-has-fractions: (
+  from: sm md lg xl,
+  until: sm md lg xl,
+);
+
+$supple-breakpoint-has-layout-fit: (
+  from: sm md lg xl,
+  until: sm md lg xl,
+);
+
+$supple-breakpoint-has-layout-fill: (
+  from: sm md lg xl,
+  until: sm md lg xl,
+);
+
+$supple-breakpoint-has-hidden: (
+  from: sm md lg xl,
+  until: sm md lg xl,
+);
+
+$supple-breakpoint-has-spacing: (
+  from: sm md lg xl,
+  until: sm md lg xl,
+);
+
+/**
+ * Border
+ */
+$border-base-width: $supple-space-tiny;
+$border-base: $border-base-width solid $color-black;
+
+/**
+ * A11y
+ */
+$a11y-size: $supple-space-huge;

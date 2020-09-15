@@ -1,10 +1,4 @@
 {
   "version": 2,
-  "alias": "rockupstore2020",
-  "builds": [
-    {
-      "src": "package.json",
-      "use": "@now/next"
-    }
-  ]
+  "alias": "rockupstore2020"
 }

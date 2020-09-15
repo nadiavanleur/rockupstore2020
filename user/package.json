@@ -1,0 +1,30 @@
+{
+  "name": "rockupstore2020",
+  "version": "1.0.0",
+  "description": "",
+  "scripts": {
+    "dev": "now dev",
+    "build": "next build",
+    "start": "next start"
+  },
+  "author": "Nadia van Leur <hellow@nadiavanleur.nl>",
+  "license": "ISC",
+  "dependencies": {
+    "apollo-boost": "^0.4.9",
+    "apollo-cache-inmemory": "^1.6.6",
+    "apollo-link-http": "^1.5.17",
+    "express": "^4.17.1",
+    "graphql": "^15.3.0",
+    "graphql-tag": "^2.11.0",
+    "isomorphic-unfetch": "^3.0.0",
+    "next": "^9.5.3",
+    "node-sass": "^4.14.1",
+    "nodemon": "^2.0.4",
+    "react": "^16.13.1",
+    "react-apollo": "^3.1.5",
+    "react-dom": "^16.13.1",
+    "sass-mq": "^5.0.1",
+    "supple": "^4.0.1",
+    "woocommerce-api": "^1.5.0"
+  }
+}

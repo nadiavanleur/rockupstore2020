@@ -1,0 +1,39 @@
+.c-button {
+  min-height: $a11y-size;
+  min-width: $a11y-size;
+  padding: 0 $supple-space-base;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: $color-black;
+  color: $color-white;
+  cursor: pointer;
+  text-transform: uppercase;
+  font-family: $font-family-heading;
+  font-weight: $font-weight-bold;
+  text-decoration: none;
+  transition: all $base-animation-duration;
+
+  &:hover,
+  &:focus {
+    @include backdrop;
+    text-decoration: none;
+  }
+
+  &:disabled {
+    color: $color-gray-700;
+    cursor: not-allowed;
+  }
+}
+
+.c-button--link {
+  color: $color-black;
+  background: none;
+  justify-content: left;
+
+  &:hover,
+  &:focus {
+    @include no-backdrop;
+    text-decoration: underline;
+  }
+}

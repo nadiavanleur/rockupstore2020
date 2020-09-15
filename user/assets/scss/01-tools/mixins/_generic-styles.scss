@@ -1,0 +1,4 @@
+@mixin blockquote {
+  border-left: 2px solid $color-gray-500;
+  padding-left: $supple-space-base;
+}
