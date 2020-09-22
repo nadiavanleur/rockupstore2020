@@ -17,6 +17,7 @@ const Card = ({
           {image && image.sourceUrl && (
             <img
               src={image.sourceUrl}
+              srcSet={image.srcSet}
               alt={image.altText || image.title || ""}
               className="c-card__image"
             />
@@ -24,6 +25,7 @@ const Card = ({
           {hoverImage && hoverImage.sourceUrl && (
             <img
               src={hoverImage.sourceUrl}
+              srcSet={hoverImage.srcSet}
               alt={hoverImage.altText || hoverImage.title || ""}
               className="c-card__hover-image"
             />
@@ -33,8 +35,8 @@ const Card = ({
       <div className="c-card__content">
         {title && <h3 className="c-card__title">{title}</h3>}
         <div className="c-card__body">{children}</div>
-        {cta && cta.url && cta.label && (
-          <Link href={cta.url}>
+        {cta && cta.href && cta.label && (
+          <Link href={cta.href} as={cta.as}>
             <a className="c-card__cta u-umbrella">{cta.label}</a>
           </Link>
         )}

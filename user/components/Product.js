@@ -3,7 +3,6 @@ import Card from "./Card";
 import Variants from "./Variants";
 
 const Product = ({ image, hoverImage, title, price, url, attributes }) => {
-  //   console.dir({ image, hoverImage, title, price, url, attributes });
   return (
     <Card
       image={image}

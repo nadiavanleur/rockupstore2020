@@ -2,8 +2,6 @@ import React from "react";
 import Product from "./Product";
 
 const ProductsList = ({ products }) => {
-  // console.dir({ products });
-
   if (products && products.length) {
     return (
       <ul className="o-layout o-layout--gutter-base o-layout--equalheight">

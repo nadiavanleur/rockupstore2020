@@ -1,8 +1,13 @@
 import React from "react";
 import Button from "./Button";
+import { useContext } from "react";
+import { AppContext } from "./context/AppContext";
 
 const Menu = ({ menu, extraLayoutClasses }) => {
   if (!menu || !menu.length) return null;
+
+  const [cart, setCart] = useContext(AppContext);
+  console.log(cart, setCart);
 
   return (
     <nav className="c-menu">

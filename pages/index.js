@@ -263,7 +263,6 @@ const PRODUCTS_QUERY = gql`
  * Index
  */
 const Index = ({ products, menus, settings, ...other }) => {
-  console.log({ products, menus, settings, ...other });
   return (
     <Layout menus={menus} settings={settings}>
       <Section title="Popular" extraClasses="c-section--quinary">
