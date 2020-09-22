@@ -1,8 +1,10 @@
 import client from "../../components/ApolloClient";
 import Layout from "../../components/Layout";
-import gql from "graphql-tag";
 import Section from "../../components/Section";
+import gql from "graphql-tag";
 import { withRouter } from "next/router";
+import Slider from "../../components/Slider";
+import AddToCard from "../../components/AddToCart";
 
 const MENU_FRAGMENT = gql`
   fragment MenuFragment on Menu {
@@ -262,9 +264,80 @@ const PRODUCT_QUERY = gql`
  */
 const Index = ({ product, menus, settings }) => {
   console.dir(product);
+  const attributes =
+    product.attributes &&
+    product.attributes.edges &&
+    product.attributes.edges.filter(
+      ({ node: attribute }) => attribute.variation
+    );
+  console.log(attributes);
 
   return (
     <Layout menus={menus} settings={settings}>
+      <Section title={product.name}>
+        <div className="o-layout o-layout--gutter-base">
+          <div className="o-layout__cell o-layout__cell--fill@from-md">
+            <Slider>
+              {product.image && product.image.sourceUrl && (
+                <div>
+                  <img
+                    src={product.image.sourceUrl}
+                    srcSet={product.image.srcSet}
+                    alt={product.image.altText || product.image.title || ""}
+                  />
+                </div>
+              )}
+              {product.galleryImages &&
+                product.galleryImages.edges &&
+                product.galleryImages.edges.length &&
+                product.galleryImages.edges.map(({ node: image }) => {
+                  if (image && image.sourceUrl)
+                    return (
+                      <div>
+                        <img
+                          src={image.sourceUrl}
+                          srcSet={image.srcSet}
+                          alt={image.altText || image.title || ""}
+                        />
+                      </div>
+                    );
+                })}
+            </Slider>
+          </div>
+          <div className="o-layout__cell o-layout__cell--fill@from-md">
+            <div
+              className={`c-price${
+                product.onSale ? " c-price--on-sale" : ""
+              } u-margin-bottom-small`}
+            >
+              {product.salePrice && (
+                <div className="c-price__old">{product.salePrice}</div>
+              )}
+              {product.price && <div className="c-price">{product.price}</div>}
+            </div>
+
+            {attributes &&
+              attributes.map(({ node: attribute }) => (
+                <div className="o-layout o-layout--gutter-base o-layout--align-middle u-margin-bottom-small">
+                  {attribute.name && (
+                    <div className="o-layout__cell u-fraction--2of12">
+                      <label htmlFor={attribute.id}>{attribute.name}</label>
+                    </div>
+                  )}
+                  <div className="o-layout__cell u-fraction--10of12">
+                    <select id={attribute.id}>
+                      {attribute.options.map((option) => (
+                        <option value={option}>{option}</option>
+                      ))}
+                    </select>
+                  </div>
+                </div>
+              ))}
+
+            <AddToCard product={product} />
+          </div>
+        </div>
+      </Section>
       Product page
     </Layout>
   );
