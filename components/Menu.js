@@ -1,19 +1,19 @@
 import React from "react";
 import Button from "./Button";
-import { useContext } from "react";
-import { AppContext } from "./context/AppContext";
+import CartIcon from "./cart/CartIcon";
 
 const Menu = ({ menu, extraLayoutClasses }) => {
   if (!menu || !menu.length) return null;
-
-  const [cart, setCart] = useContext(AppContext);
-  console.log(cart, setCart);
 
   return (
     <nav className="c-menu">
       <ul className={`o-layout ${extraLayoutClasses || ""}`}>
         {menu.map((menuItem) => {
           if (menuItem.parentId) return;
+          const href = menuItem.connectedNode
+            ? menuItem.connectedNode.node.uri
+            : menuItem.path || "/";
+
           return (
             <li
               className="c-menu__item o-layout__cell o-layout__cell--fill@from-md"
@@ -22,14 +22,12 @@ const Menu = ({ menu, extraLayoutClasses }) => {
               <Button
                 label={menuItem.label}
                 tag="a"
-                href={
-                  menuItem.connectedNode
-                    ? menuItem.connectedNode.node.uri
-                    : menuItem.path || "/"
-                }
+                href={href}
                 target={menuItem.target}
                 extraClasses="c-menu__link"
-              />
+              >
+                {href === "/cart/" && <CartIcon />}
+              </Button>
               {menuItem.childItems &&
                 menuItem.childItems.nodes &&
                 !!menuItem.childItems.nodes.length && (

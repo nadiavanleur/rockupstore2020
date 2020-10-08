@@ -1,6 +1,6 @@
 import React from "react";
 
-const Variants = ({ attributes }) => {
+const Variables = ({ attributes }) => {
   if (!attributes || !attributes.length) return null;
 
   return (
@@ -29,4 +29,4 @@ const Variants = ({ attributes }) => {
   );
 };
 
-export default Variants;
+export default Variables;

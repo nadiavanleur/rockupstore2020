@@ -1,0 +1,12 @@
+input {
+  &[type="text"],
+  &[type="number"] {
+    border: none;
+    padding: $supple-space-tiny;
+  }
+
+  &[type="number"] {
+    padding-right: 0;
+    width: calc(5ch + #{$supple-space-tiny * 2});
+  }
+}

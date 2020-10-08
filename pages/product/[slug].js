@@ -4,7 +4,7 @@ import Section from "../../components/Section";
 import gql from "graphql-tag";
 import { withRouter } from "next/router";
 import Slider from "../../components/Slider";
-import AddToCard from "../../components/AddToCart";
+import AddToCard from "../../components/cart/AddToCart";
 
 const MENU_FRAGMENT = gql`
   fragment MenuFragment on Menu {
@@ -260,21 +260,35 @@ const PRODUCT_QUERY = gql`
 `;
 
 /**
- * Index
+ * ProductPage
  */
-const Index = ({ product, menus, settings }) => {
-  console.dir(product);
+const ProductPage = ({ product, menus, settings }) => {
   const attributes =
     product.attributes &&
     product.attributes.edges &&
     product.attributes.edges.filter(
       ({ node: attribute }) => attribute.variation
     );
-  console.log(attributes);
+  const variables =
+    (attributes && attributes.map(({ node: attribute }) => attribute)) || [];
+
+  // Default selected variables
+  let selectedVariables = variables.map((variable) => ({
+    name: variable.name,
+    value: variable.options[0],
+  }));
+
+  // Update selected variables
+  const updateSelectedVariables = ({ target }) => {
+    const changedVariable = selectedVariables.find(
+      (variable) => variable.name === target.name
+    );
+    changedVariable.value = target.value;
+  };
 
   return (
     <Layout menus={menus} settings={settings}>
-      <Section title={product.name}>
+      <Section>
         <div className="o-layout o-layout--gutter-base">
           <div className="o-layout__cell o-layout__cell--fill@from-md">
             <Slider>
@@ -293,7 +307,7 @@ const Index = ({ product, menus, settings }) => {
                 product.galleryImages.edges.map(({ node: image }) => {
                   if (image && image.sourceUrl)
                     return (
-                      <div>
+                      <div key={image.sourceUrl}>
                         <img
                           src={image.sourceUrl}
                           srcSet={image.srcSet}
@@ -305,6 +319,7 @@ const Index = ({ product, menus, settings }) => {
             </Slider>
           </div>
           <div className="o-layout__cell o-layout__cell--fill@from-md">
+            <h2 className="u-margin-bottom-small">{product.name}</h2>
             <div
               className={`c-price${
                 product.onSale ? " c-price--on-sale" : ""
@@ -316,25 +331,34 @@ const Index = ({ product, menus, settings }) => {
               {product.price && <div className="c-price">{product.price}</div>}
             </div>
 
-            {attributes &&
-              attributes.map(({ node: attribute }) => (
-                <div className="o-layout o-layout--gutter-base o-layout--align-middle u-margin-bottom-small">
-                  {attribute.name && (
+            {variables &&
+              variables.map((variable) => (
+                <div
+                  className="o-layout o-layout--gutter-base o-layout--align-middle u-margin-bottom-small"
+                  key={variable.name}
+                >
+                  {variable.name && (
                     <div className="o-layout__cell u-fraction--2of12">
-                      <label htmlFor={attribute.id}>{attribute.name}</label>
+                      <label htmlFor={variable.id}>{variable.name}</label>
                     </div>
                   )}
                   <div className="o-layout__cell u-fraction--10of12">
-                    <select id={attribute.id}>
-                      {attribute.options.map((option) => (
-                        <option value={option}>{option}</option>
+                    <select
+                      id={variable.id}
+                      name={variable.name}
+                      onChange={updateSelectedVariables}
+                    >
+                      {variable.options.map((option) => (
+                        <option value={option} key={option}>
+                          {option}
+                        </option>
                       ))}
                     </select>
                   </div>
                 </div>
               ))}
 
-            <AddToCard product={product} />
+            <AddToCard product={product} variables={selectedVariables} />
           </div>
         </div>
       </Section>
@@ -343,7 +367,7 @@ const Index = ({ product, menus, settings }) => {
   );
 };
 
-Index.getInitialProps = async (router) => {
+ProductPage.getInitialProps = async (router) => {
   const { slug } = router.query;
 
   const productResult = await client.query({
@@ -387,4 +411,4 @@ Index.getInitialProps = async (router) => {
   };
 };
 
-export default withRouter(Index);
+export default withRouter(ProductPage);

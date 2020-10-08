@@ -1,0 +1,13 @@
+// Block
+.c-count-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 1.25rem;
+  min-height: 1.25rem;
+  margin-left: $supple-space-tiny;
+  padding: 0 ($supple-space-tiny / 2);
+  font-size: $font-size-small;
+  background: $color-quinary-500;
+  color: $color-black;
+}

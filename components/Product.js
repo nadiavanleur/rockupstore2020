@@ -1,6 +1,6 @@
 import React from "react";
 import Card from "./Card";
-import Variants from "./Variants";
+import Variables from "./Variables";
 
 const Product = ({ image, hoverImage, title, price, href, as, attributes }) => {
   return (
@@ -14,7 +14,7 @@ const Product = ({ image, hoverImage, title, price, href, as, attributes }) => {
       cta={{ label: "View product", href, as }}
       extraClasses="c-card--link"
     >
-      <Variants attributes={attributes} />
+      <Variables attributes={attributes} />
     </Card>
   );
 };

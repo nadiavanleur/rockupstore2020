@@ -1,7 +1,15 @@
 import React from "react";
 import Link from "next/link";
 
-const Button = ({ tag, type, label, href, extraClasses, ...attr }) => {
+const Button = ({
+  tag,
+  type,
+  label,
+  href,
+  extraClasses,
+  children,
+  ...attr
+}) => {
   const Tag = tag || "button";
 
   const tagToLink = (children) => {
@@ -17,7 +25,7 @@ const Button = ({ tag, type, label, href, extraClasses, ...attr }) => {
       {...attr}
       className={`c-button ${extraClasses || ""}`}
     >
-      {label}
+      {label} {children}
     </Tag>
   );
 };

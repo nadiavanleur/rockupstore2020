@@ -1,17 +1,16 @@
+$background-color: $color-white;
+
 html {
   overflow-x: hidden;
   border: $border-base;
-  background-color: $color-tertiary-500;
+  background-color: $background-color;
   background: linear-gradient(
         90deg,
-        $color-tertiary-500 ($border-base-width * 3),
+        $background-color ($border-base-width * 3),
         transparent 1%
       )
       center,
-    linear-gradient(
-        $color-tertiary-500 ($border-base-width * 3),
-        transparent 1%
-      )
+    linear-gradient($background-color ($border-base-width * 3), transparent 1%)
       center,
     $color-black;
   background-size: ($border-base-width * 4) ($border-base-width * 4);
@@ -85,7 +84,6 @@ input[type="text"] {
 
 select {
   border: none;
-  appearance: none;
   background: none;
 }
 
