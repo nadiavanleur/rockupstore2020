@@ -37,13 +37,16 @@ const CartItem = ({ cartItem, setCart, handleRemoveItem, collapsed }) => {
           alt={cartItem.image.altText || cartItem.image.title || ""}
         />
       </td>
-      <td>
-        <Link href="product/[slug]" as={`/product/${cartItem.slug}`}>
-          <a className="u-umbrella">
-            {cartItem.name} | {cartItem.slug}
-          </a>
-        </Link>
-      </td>
+      {!collapsed && (
+        <td>
+          <small>
+            <Link href="product/[slug]" as={`/product/${cartItem.slug}`}>
+              <a className="u-umbrella">{cartItem.slug}</a>
+            </Link>
+          </small>
+        </td>
+      )}
+      <td>{cartItem.name}</td>
       {!collapsed && (
         <td className="u-text-right u-umbrella__overlay">
           {cartItem.variants.length && (
@@ -83,7 +86,7 @@ const CartItem = ({ cartItem, setCart, handleRemoveItem, collapsed }) => {
         {cartItem.quantity > 1 && (
           <div>
             <small>
-              {cartItem.quantity} x &euro; {cartItem.price.toFixed(2)}
+              {cartItem.quantity} x {cartItem.price.toFixed(2)}
             </small>
           </div>
         )}

@@ -20,6 +20,7 @@ const CartItems = ({ collapsed }) => {
             <th hidden>ID</th>
             {!collapsed && <th>Delete</th>}
             <th>Image</th>
+            {!collapsed && <th>ID</th>}
             <th>Name</th>
             {!collapsed && <th className="u-text-right">Quantity</th>}
             <th className="u-text-right">Price</th>
@@ -48,7 +49,7 @@ const CartItems = ({ collapsed }) => {
             </small>
           </div>
           <div className="o-layout__cell o-layout__cell--fit">
-            <b>€ {cart.totalPrice}</b>
+            <b>&euro; {cart.totalPrice}</b>
           </div>
           {!collapsed && (
             <div className="o-layout__cell o-layout__cell--fit">

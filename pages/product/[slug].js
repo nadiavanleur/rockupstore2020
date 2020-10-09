@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import { withRouter } from "next/router";
 import Slider from "../../components/Slider";
 import AddToCard from "../../components/cart/AddToCart";
+import Select from "../../components/inputs/Select";
 
 const MENU_FRAGMENT = gql`
   fragment MenuFragment on Menu {
@@ -343,17 +344,12 @@ const ProductPage = ({ product, menus, settings }) => {
                     </div>
                   )}
                   <div className="o-layout__cell u-fraction--10of12">
-                    <select
+                    <Select
                       id={variable.id}
                       name={variable.name}
                       onChange={updateSelectedVariables}
-                    >
-                      {variable.options.map((option) => (
-                        <option value={option} key={option}>
-                          {option}
-                        </option>
-                      ))}
-                    </select>
+                      options={variable.options}
+                    />
                   </div>
                 </div>
               ))}

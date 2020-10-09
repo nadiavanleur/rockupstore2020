@@ -5,6 +5,7 @@ import gql from "graphql-tag";
 import Section from "../components/Section";
 import CartItems from "../components/cart/CartItems";
 import Button from "../components/Button";
+import BillingForm from "../components/checkout/BillingForm";
 
 const MENU_FRAGMENT = gql`
   fragment MenuFragment on Menu {
@@ -103,7 +104,7 @@ const Cart = ({ menus, settings }) => {
               title="Billing details"
               extraContainerClasses="o-retain--no-padding"
             >
-              <mark>[@TODO: Billing form]</mark>
+              <BillingForm />
             </Section>
           </div>
           <div className="o-layout__cell u-fraction--6of12@from-md">
