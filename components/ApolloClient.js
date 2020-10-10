@@ -11,20 +11,6 @@ const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 });
 
-// const fragmentMatcher = new IntrospectionFragmentMatcher({
-//   introspectionQueryResultData: {
-//     __schema: {
-//       types: [
-//         {
-//           kind: "INTERFACE",
-//           name: "Document",
-//           possibleTypes: [{ name: "MyInterface1" }, { name: "SomeInterface2" }],
-//         },
-//       ],
-//     },
-//   },
-// });
-
 const client = new ApolloClient({
   link: createHttpLink({
     uri: clientConfig.graphqlUrl,

@@ -4,11 +4,11 @@ import Footer from "./Footer";
 import Metadata from "./Metadata";
 import { AppProvider } from "./context/AppContext";
 
-const Layout = ({ children, extraClasses, menus, settings }) => {
+const Layout = ({ children, extraClasses, menus, settings, title }) => {
   const { topMenu, categoriesMenu, footerMenu } = menus || {};
   return (
     <AppProvider>
-      <Metadata />
+      <Metadata settings={settings} title={title} />
       <Header
         topMenu={topMenu}
         categoriesMenu={categoriesMenu}

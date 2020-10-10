@@ -11,14 +11,16 @@ import {
   CATEGORIES_MENU_QUERY,
   FOOTER_MENU_QUERY,
   USER_MENU_QUERY,
-} from "../../graphql/queries/menus";
-import SETTINGS_QUERY from "../../graphql/queries/settings";
-import PRODUCT_QUERY from "../../graphql/queries/product-by-slug";
+} from "../../graphql/queries/get-menus";
+import SETTINGS_QUERY from "../../graphql/queries/get-settings";
+import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
 
 /**
  * ProductPage
  */
 const ProductPage = ({ product, menus, settings }) => {
+  if (product.type === "GROUP") return; //@TODO Group product
+
   const attributes =
     product.attributes &&
     product.attributes.edges &&
@@ -43,7 +45,7 @@ const ProductPage = ({ product, menus, settings }) => {
   };
 
   return (
-    <Layout menus={menus} settings={settings}>
+    <Layout menus={menus} settings={settings} title={product.name}>
       <Section>
         <div className="o-layout o-layout--gutter-base">
           <div className="o-layout__cell o-layout__cell--fill@from-md">

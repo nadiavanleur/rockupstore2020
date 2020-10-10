@@ -8,9 +8,9 @@ import {
   CATEGORIES_MENU_QUERY,
   FOOTER_MENU_QUERY,
   USER_MENU_QUERY,
-} from "../graphql/queries/menus";
-import SETTINGS_QUERY from "../graphql/queries/settings";
-import PRODUCTS_QUERY from "../graphql/queries/products";
+} from "../graphql/queries/get-menus";
+import SETTINGS_QUERY from "../graphql/queries/get-settings";
+import PRODUCTS_QUERY from "../graphql/queries/get-products";
 
 /**
  * Index

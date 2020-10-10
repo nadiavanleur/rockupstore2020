@@ -11,15 +11,15 @@ import {
   CATEGORIES_MENU_QUERY,
   FOOTER_MENU_QUERY,
   USER_MENU_QUERY,
-} from "../graphql/queries/menus";
-import SETTINGS_QUERY from "../graphql/queries/settings";
+} from "../graphql/queries/get-menus";
+import SETTINGS_QUERY from "../graphql/queries/get-settings";
 
 /**
  * Cart
  */
 const Cart = ({ menus, settings }) => {
   return (
-    <Layout menus={menus} settings={settings}>
+    <Layout menus={menus} settings={settings} title="Cart">
       <Section title="Cart">
         <CartItems />
       </Section>

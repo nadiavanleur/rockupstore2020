@@ -2,7 +2,18 @@ import React from "react";
 import Card from "./Card";
 import Variables from "./Variables";
 
-const Product = ({ image, hoverImage, title, price, href, as, attributes }) => {
+const Product = ({
+  image,
+  hoverImage,
+  title,
+  price,
+  href,
+  as,
+  attributes,
+  type,
+}) => {
+  if (type === "GROUP") return; //@TODO Group product
+
   return (
     <Card
       image={image}

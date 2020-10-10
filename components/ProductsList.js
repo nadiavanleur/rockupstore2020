@@ -15,6 +15,7 @@ const ProductsList = ({ products }) => {
             id,
             productId,
             attributes,
+            type,
           }) => (
             <li
               className="o-layout__cell u-fraction--6of12@from-md u-fraction--4of12@from-lg u-margin-bottom-base"
@@ -34,6 +35,7 @@ const ProductsList = ({ products }) => {
                   href="/product/[slug]"
                   as={slug && `/product/${slug}`}
                   attributes={attributes}
+                  type={type}
                 />
               }
             </li>
