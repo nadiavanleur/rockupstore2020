@@ -4,14 +4,16 @@
   "description": "",
   "scripts": {
     "dev": "now dev",
-    "build": "next build",
-    "start": "next start"
+    "build": "npm run build-fragment && next build",
+    "start": "next start",
+    "build-fragment": "node schemaQuery.js"
   },
   "author": "Nadia van Leur <hellow@nadiavanleur.nl>",
   "license": "ISC",
   "dependencies": {
     "apollo-boost": "^0.4.9",
     "apollo-cache-inmemory": "^1.6.6",
+    "apollo-client": "^2.6.10",
     "apollo-link-http": "^1.5.17",
     "express": "^4.17.1",
     "graphql": "^15.3.0",

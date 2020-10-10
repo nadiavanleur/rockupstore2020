@@ -49,7 +49,7 @@ const CartItems = ({ collapsed }) => {
             </small>
           </div>
           <div className="o-layout__cell o-layout__cell--fit">
-            <b>&euro; {cart.totalPrice}</b>
+            <b>&euro; {cart.totalPrice.toFixed(2)}</b>
           </div>
           {!collapsed && (
             <div className="o-layout__cell o-layout__cell--fit">

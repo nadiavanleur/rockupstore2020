@@ -1,91 +1,16 @@
 import client from "../components/ApolloClient";
 import Layout from "../components/Layout";
-import ProductsList from "../components/ProductsList";
 import gql from "graphql-tag";
 import Section from "../components/Section";
 import CartItems from "../components/cart/CartItems";
-import Button from "../components/Button";
 import BillingForm from "../components/checkout/BillingForm";
-
-const MENU_FRAGMENT = gql`
-  fragment MenuFragment on Menu {
-    id
-    menuItems {
-      nodes {
-        id
-        parentId
-        label
-        target
-        connectedNode {
-          node {
-            id
-            uri
-          }
-        }
-        childItems {
-          nodes {
-            id
-            parentId
-            label
-            target
-            path
-            connectedNode {
-              node {
-                id
-                uri
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-const TOP_MENU_QUERY = gql`
-  query TopMenuQuery {
-    menu(idType: NAME, id: "Top menu") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const CATEGORIES_MENU_QUERY = gql`
-  query CategoriesMenuQuery {
-    menu(idType: NAME, id: "Categories") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const FOOTER_MENU_QUERY = gql`
-  query FooterMenuQuery {
-    menu(idType: NAME, id: "Footer menu") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const USER_MENU_QUERY = gql`
-  query UserMenuQuery {
-    menu(idType: NAME, id: "User menu") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const SETTINGS_QUERY = gql`
-  query SettingsQuery {
-    allSettings {
-      generalSettingsTitle
-      generalSettingsDescription
-    }
-  }
-`;
+import {
+  TOP_MENU_QUERY,
+  CATEGORIES_MENU_QUERY,
+  FOOTER_MENU_QUERY,
+  USER_MENU_QUERY,
+} from "../graphql/queries/menus";
+import SETTINGS_QUERY from "../graphql/queries/settings";
 
 /**
  * Cart
