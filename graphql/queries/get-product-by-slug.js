@@ -47,11 +47,26 @@ const PRODUCT_QUERY = gql`
         id
         price
         salePrice
+        stockQuantity
+        variations {
+          nodes {
+            variationId
+            id
+            attributes {
+              nodes {
+                id
+                name
+                value
+              }
+            }
+          }
+        }
       }
       ... on SimpleProduct {
         id
         price
         salePrice
+        stockQuantity
       }
       ... on ExternalProduct {
         id
@@ -67,6 +82,20 @@ const PRODUCT_QUERY = gql`
               id
               price
               salePrice
+              stockQuantity
+              variations {
+                nodes {
+                  variationId
+                  id
+                  attributes {
+                    nodes {
+                      id
+                      name
+                      value
+                    }
+                  }
+                }
+              }
             }
             ... on SimpleProduct {
               id

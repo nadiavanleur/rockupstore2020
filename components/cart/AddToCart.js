@@ -15,7 +15,6 @@ const AddToCart = ({ product, variables }) => {
     clientMutationId: v4(),
     productId: product.productId,
   };
-  console.log(productQueryInput);
   const [cart, setCart] = useContext(AppContext);
   const [showViewCart, setShowViewCart] = useState(false);
   const [requestError, setRequestError] = useState(null);

@@ -1,3 +1,5 @@
+import { getFloatValue } from "../helpers/getFloatValue";
+
 /**
  * Returns cart data in the required format.
  * @param {String} data Cart data
@@ -9,38 +11,39 @@ export const getFormattedCart = (data) => {
   if (data === undefined || !data.cart.contents.nodes.length)
     return formattedCart;
 
-  const givenProducts = data.cart.contents.nodes;
-  console.dir(givenProducts);
+  const currentProducts = data.cart.contents.nodes;
+  console.dir(currentProducts);
   // Create an empty object.
   formattedCart = {};
   formattedCart.products = [];
-  let totalProductsCount = 0;
+  let totalProducts = 0;
 
-  for (let i = 0; i < givenProducts.length; i++) {
-    const givenProduct = givenProducts[i].product;
+  for (let i = 0; i < currentProducts.length; i++) {
+    const currentProduct = currentProducts[i].product;
     const product = {};
-    const total = getFloatVal(givenProducts[i].total);
+    const total = getFloatValue(currentProducts[i].total);
 
-    product.productId = givenProduct.productId;
-    product.cartKey = givenProducts[i].key;
-    product.name = givenProduct.name;
-    product.qty = givenProducts[i].quantity;
-    product.price = total / product.qty;
-    product.totalPrice = givenProducts[i].total;
+    product.productId = currentProduct.productId;
+    product.slug = currentProduct.slug;
+    product.cartKey = currentProducts[i].key;
+    product.name = currentProduct.name;
+    product.quantity = currentProducts[i].quantity;
+    product.price = total / product.quantity;
+    product.totalPrice = currentProducts[i].total;
     product.image = {
-      sourceUrl: givenProduct.image.sourceUrl,
-      srcSet: givenProduct.image.srcSet,
-      title: givenProduct.image.title,
+      sourceUrl: currentProduct.image.sourceUrl,
+      srcSet: currentProduct.image.srcSet,
+      title: currentProduct.image.title,
     };
 
-    totalProductsCount += givenProducts[i].quantity;
+    totalProducts += currentProducts[i].quantity;
 
     // Push each item into the products array.
     formattedCart.products.push(product);
   }
 
-  formattedCart.totalProductsCount = totalProductsCount;
-  formattedCart.totalProductsPrice = data.cart.total;
+  formattedCart.totalProducts = totalProducts;
+  formattedCart.totalPrice = data.cart.total;
 
   return formattedCart;
 };

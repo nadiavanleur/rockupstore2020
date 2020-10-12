@@ -1,38 +1,46 @@
 {
   "name": "rockupstore2020",
   "version": "1.0.0",
-  "description": "",
+  "description": "This is a wordpress template created for Rock Up Store.",
   "scripts": {
     "dev": "now dev",
     "build": "npm run build-fragment && next build",
     "start": "next start",
     "build-fragment": "node schemaQuery.js"
   },
-  "author": "Nadia van Leur <hellow@nadiavanleur.nl>",
+  "author": "Nadia van Leur <nadiavanleur@gmail.com>",
   "license": "ISC",
   "dependencies": {
-    "@apollo/react-hooks": "^3.1.5",
-    "apollo-boost": "^0.4.9",
-    "apollo-cache-inmemory": "^1.6.6",
-    "apollo-client": "^2.6.10",
-    "apollo-link": "^1.2.14",
-    "apollo-link-http": "^1.5.17",
-    "express": "^4.17.1",
-    "graphql": "^14.7.0",
-    "graphql-tag": "^2.11.0",
-    "isomorphic-unfetch": "^3.0.0",
-    "lodash": "^4.17.20",
-    "next": "^9.5.5",
+    "@apollo/react-hooks": "3.1.3",
+    "apollo-boost": "0.4.4",
+    "apollo-client": "2.6.4",
+    "apollo-cache-inmemory": "1.6.3",
+    "apollo-link": "1.2.13",
+    "apollo-link-http": "1.5.15",
+    "express": "4.17.1",
+    "graphql": "14.4.2",
+    "graphql-tag": "2.10.1",
+    "isomorphic-unfetch": "3.0.0",
+    "lodash": "4.17.19",
+    "next": "9.4.4",
+    "nodemon": "1.19.1",
+    "react": "16.8.6",
+    "react-apollo": "3.0.1",
+    "react-dom": "16.8.6",
+    "uuid": "7.0.2",
+    "validator": "13.0.0",
+    "woocommerce-api": "1.4.2",
     "node-sass": "^4.14.1",
-    "nodemon": "^1.19.4",
-    "react": "^16.13.1",
-    "react-apollo": "^3.1.5",
-    "react-dom": "^16.13.1",
     "react-responsive-carousel": "^3.2.9",
     "sass-mq": "^5.0.1",
-    "supple": "^4.0.1",
-    "uuid": "^7.0.3",
-    "validator": "^13.1.17",
-    "woocommerce-api": "^1.5.0"
-  }
+    "supple": "^4.0.1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://nadiavanleur@github.com/nadiavanleur/rockupstore2020.git"
+  },
+  "bugs": {
+    "url": "https://github.com/nadiavanleur/rockupstore2020/issues"
+  },
+  "homepage": "https://github.com/nadiavanleur/rockupstore2020#readme"
 }

@@ -14,6 +14,7 @@ import {
 } from "../../graphql/queries/get-menus";
 import SETTINGS_QUERY from "../../graphql/queries/get-settings";
 import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
+import VariationSelect from "../../components/VariationSelect";
 
 /**
  * ProductPage
@@ -21,28 +22,15 @@ import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
 const ProductPage = ({ product, menus, settings }) => {
   if (product.type === "GROUP") return; //@TODO Group product
 
-  const attributes =
-    product.attributes &&
-    product.attributes.edges &&
-    product.attributes.edges.filter(
-      ({ node: attribute }) => attribute.variation
-    );
-  const variables =
-    (attributes && attributes.map(({ node: attribute }) => attribute)) || [];
-
-  // Default selected variables
-  let selectedVariables = variables.map((variable) => ({
-    name: variable.name,
-    value: variable.options[0],
-  }));
-
-  // Update selected variables
-  const updateSelectedVariables = ({ target }) => {
-    const changedVariable = selectedVariables.find(
-      (variable) => variable.name === target.name
-    );
-    changedVariable.value = target.value;
+  // Update selected variation
+  const updateSelectedVariation = (value) => {
+    console.log(value);
+    // const changedVariable = selectedVariables.find(
+    //   (variable) => variable.name === target.name
+    // );
+    // changedVariable.value = target.value;
   };
+  console.log(product);
 
   return (
     <Layout menus={menus} settings={settings} title={product.name}>
@@ -89,29 +77,13 @@ const ProductPage = ({ product, menus, settings }) => {
               {product.price && <div className="c-price">{product.price}</div>}
             </div>
 
-            {variables &&
-              variables.map((variable) => (
-                <div
-                  className="o-layout o-layout--gutter-base o-layout--align-middle u-margin-bottom-small"
-                  key={variable.name}
-                >
-                  {variable.name && (
-                    <div className="o-layout__cell u-fraction--2of12">
-                      <label htmlFor={variable.id}>{variable.name}</label>
-                    </div>
-                  )}
-                  <div className="o-layout__cell u-fraction--10of12">
-                    <Select
-                      id={variable.id}
-                      name={variable.name}
-                      onChange={updateSelectedVariables}
-                      options={variable.options}
-                    />
-                  </div>
-                </div>
-              ))}
+            <VariationSelect
+              variations={product.variations}
+              attributes={product.attributes}
+              updateSelectedVariation={updateSelectedVariation}
+            />
 
-            <AddToCard product={product} variables={selectedVariables} />
+            {/* <AddToCard product={product} variables={selectedVariables} /> */}
           </div>
         </div>
       </Section>
