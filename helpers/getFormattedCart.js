@@ -12,7 +12,6 @@ export const getFormattedCart = (data) => {
     return formattedCart;
 
   const currentProducts = data.cart.contents.nodes;
-  console.dir(currentProducts);
   // Create an empty object.
   formattedCart = {};
   formattedCart.products = [];

@@ -10,10 +10,11 @@ import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
 import ADD_TO_CART from "../../graphql/mutations/add-to-cart";
 
-const AddToCart = ({ product, variables }) => {
+const AddToCart = ({ product, variationId, hasVariations }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     productId: product.productId,
+    variationId,
   };
   const [cart, setCart] = useContext(AppContext);
   const [showViewCart, setShowViewCart] = useState(false);
@@ -46,6 +47,11 @@ const AddToCart = ({ product, variables }) => {
       // If error.
       if (addToCartError) {
         setRequestError(addToCartError.graphQLErrors[0].message);
+      } else {
+        // Kick off done animation
+        const DONE_CLASS = "c-button--done";
+        target.classList.remove(DONE_CLASS);
+        setTimeout(() => target.classList.add(DONE_CLASS), 100);
       }
 
       // On Success:
@@ -70,23 +76,24 @@ const AddToCart = ({ product, variables }) => {
     setCart(newCart);
   };
 
-  const handleClick = ({ target }) => {
+  const handleClick = () => {
     // oldAddToCart();
     setRequestError(null);
     addToCart();
-
-    // Kick off done animation
-    const DONE_CLASS = "c-button--done";
-    target.classList.remove(DONE_CLASS);
-    setTimeout(() => target.classList.add(DONE_CLASS), 100);
   };
 
   return (
-    <Button
-      label="Add to cart"
-      onClick={handleClick}
-      data-done="Added to cart"
-    />
+    <>
+      <Button
+        label="Add to cart"
+        onClick={handleClick}
+        data-done="Added to cart"
+        disabled={hasVariations && !variationId}
+      />
+      {requestError && (
+        <p className="u-text-error u-margin-top-small">{requestError}</p>
+      )}
+    </>
   );
 };
 

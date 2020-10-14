@@ -1,10 +1,16 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Select = ({ id, name, onChange, options }) => {
+const Select = ({ id, name, onChange, options, defaultSelected, ...attr }) => {
   return (
     <div className="e-select__container">
-      <select id={id} name={name} onChange={onChange}>
+      <select
+        id={id}
+        name={name}
+        onChange={onChange}
+        defaultValue={defaultSelected}
+        {...attr}
+      >
         {options &&
           !!options.length &&
           options.map((option) => (

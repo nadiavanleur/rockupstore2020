@@ -15,6 +15,7 @@ import {
 import SETTINGS_QUERY from "../../graphql/queries/get-settings";
 import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
 import VariationSelect from "../../components/VariationSelect";
+import { useState } from "react";
 
 /**
  * ProductPage
@@ -22,15 +23,8 @@ import VariationSelect from "../../components/VariationSelect";
 const ProductPage = ({ product, menus, settings }) => {
   if (product.type === "GROUP") return; //@TODO Group product
 
-  // Update selected variation
-  const updateSelectedVariation = (value) => {
-    console.log(value);
-    // const changedVariable = selectedVariables.find(
-    //   (variable) => variable.name === target.name
-    // );
-    // changedVariable.value = target.value;
-  };
-  console.log(product);
+  const defaultVariation = product.variations && product.variations.nodes[0];
+  const [selectedVariation, setSelectedVariation] = useState(defaultVariation);
 
   return (
     <Layout menus={menus} settings={settings} title={product.name}>
@@ -80,10 +74,17 @@ const ProductPage = ({ product, menus, settings }) => {
             <VariationSelect
               variations={product.variations}
               attributes={product.attributes}
-              updateSelectedVariation={updateSelectedVariation}
+              defaultSelectedVariation={selectedVariation}
+              updateSelectedVariation={setSelectedVariation}
             />
 
-            {/* <AddToCard product={product} variables={selectedVariables} /> */}
+            <AddToCard
+              product={product}
+              variationId={selectedVariation && selectedVariation.variationId}
+              hasVariations={
+                !!product.variations && !!product.variations.length
+              }
+            />
           </div>
         </div>
       </Section>
