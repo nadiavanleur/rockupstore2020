@@ -4,24 +4,27 @@ import { addCartItem } from "../../helpers/addCartItem";
 import { removeCartItem } from "../../helpers/removeCartItem";
 import Link from "next/link";
 
-const CartItem = ({ cartItem, setCart, handleRemoveItem, collapsed }) => {
-  const handleQuantityUpdate = (variables, newQuantity) => {
+const CartItem = ({ cartItem, setCart, collapsed }) => {
+  const handleQuantityUpdate = (attributes, newQuantity) => {
     if (!process.browser) return;
 
-    const newCart = addCartItem({ product: cartItem, variables, newQuantity });
+    const newCart = addCartItem({ product: cartItem, attributes, newQuantity });
     setCart(newCart);
   };
 
-  const deleteCartItem = (variables) => {
+  const deleteCartItem = (attributes) => {
+    // @TODO
     if (!process.browser) return;
 
-    const newCart = removeCartItem({ product: cartItem, variables });
+    const newCart = removeCartItem({ product: cartItem, attributes });
     setCart(newCart);
   };
+
+  console.log(cartItem);
 
   return (
-    <tr key={cartItem.slug} className="u-umbrella__container">
-      <td hidden>{cartItem.slug}</td>
+    <tr key={cartItem.product.slug} className="u-umbrella__container">
+      <td hidden>{cartItem.product.slug}</td>
       {!collapsed && (
         <td>
           <button onClick={deleteCartItem} className="u-umbrella__overlay">
@@ -32,43 +35,52 @@ const CartItem = ({ cartItem, setCart, handleRemoveItem, collapsed }) => {
       <td>
         <img
           width="70"
-          src={cartItem.image.sourceUrl}
-          srcSet={cartItem.image.srcSet}
-          alt={cartItem.image.altText || cartItem.image.title || ""}
+          src={cartItem.product.image.sourceUrl}
+          srcSet={cartItem.product.image.srcSet}
+          alt={
+            cartItem.product.image.altText || cartItem.product.image.title || ""
+          }
         />
       </td>
       {!collapsed && (
         <td>
           <small>
-            <Link href="product/[slug]" as={`/product/${cartItem.slug}`}>
-              <a className="u-umbrella">{cartItem.slug}</a>
+            <Link
+              href="product/[slug]"
+              as={`/product/${cartItem.product.slug}`}
+            >
+              <a className="u-umbrella">{cartItem.product.slug}</a>
             </Link>
           </small>
         </td>
       )}
-      <td>{cartItem.name}</td>
+      <td>{cartItem.product.name}</td>
       {!collapsed && (
         <td className="u-text-right u-umbrella__overlay">
-          {cartItem.variants.length && (
+          {cartItem.variations.length && (
             <table>
               <tbody>
-                {cartItem.variants.map((variant) => {
-                  const variantString = variant.variables
+                {cartItem.variations.map((variation) => {
+                  const variationString = variation.attributes.nodes
                     .map((variable) => variable.value)
                     .join(", ");
 
                   return (
-                    <tr key={`${cartItem.slug}-${variantString}`}>
-                      <td>{variantString}</td>
+                    <tr key={`${cartItem.product.slug}-${variationString}`}>
+                      <td>{variationString}</td>
+                      <td>
+                        <small>{variation.price}</small>
+                      </td>
                       <td className="u-text-right u-text-bottom">
                         <input
                           type="number"
                           min="1"
-                          defaultValue={variant.quantity}
-                          name={`${cartItem.slug}-${variantString}`}
+                          max={variation.stockQuantity}
+                          defaultValue={variation.quantity}
+                          name={`${cartItem.product.slug}-${variationString}`}
                           onChange={({ target }) =>
                             handleQuantityUpdate(
-                              variant.variables,
+                              variation.variationId,
                               target.value
                             )
                           }
@@ -85,12 +97,10 @@ const CartItem = ({ cartItem, setCart, handleRemoveItem, collapsed }) => {
       <td className="u-text-right u-text-bottom">
         {cartItem.quantity > 1 && (
           <div>
-            <small>
-              {cartItem.quantity} x {cartItem.price.toFixed(2)}
-            </small>
+            <small>{cartItem.quantity} items</small>
           </div>
         )}
-        <div>&euro; {cartItem.totalPrice.toFixed(2)}</div>
+        <div>{cartItem.total}</div>
       </td>
     </tr>
   );

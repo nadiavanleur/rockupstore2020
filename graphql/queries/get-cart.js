@@ -1,55 +1,25 @@
 import gql from "graphql-tag";
+import PRODUCT_FRAGMENT from "../fragments/product";
 
 const GET_CART = gql`
   query GET_CART {
     cart {
       contents {
+        itemCount
         nodes {
           key
           product {
-            id
-            productId
-            name
-            description
-            type
-            onSale
-            slug
-            averageRating
-            reviewCount
-            image {
-              id
-              sourceUrl
-              srcSet
-              altText
-              title
-            }
-            galleryImages {
-              nodes {
-                id
-                sourceUrl
-                srcSet
-                altText
-                title
-              }
-            }
+            ...ProductFragment
           }
           variation {
             id
             variationId
-            name
-            description
-            type
-            onSale
             price
-            regularPrice
+            onSale
             salePrice
-            image {
-              id
-              sourceUrl
-              srcSet
-              altText
-              title
-            }
+            purchasable
+            description
+            stockQuantity
             attributes {
               nodes {
                 id
@@ -95,6 +65,7 @@ const GET_CART = gql`
       discountTotal
     }
   }
+  ${PRODUCT_FRAGMENT}
 `;
 
 export default GET_CART;

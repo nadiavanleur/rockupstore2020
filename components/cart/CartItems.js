@@ -3,14 +3,45 @@ import PropTypes from "prop-types";
 import { AppContext } from "../context/AppContext";
 import CartItem from "./CartItem";
 import Button from "../Button";
+import EmptyCart from "./EmptyCart";
 
 const CartItems = ({ collapsed }) => {
   const [cart, setCart] = useContext(AppContext);
 
+  console.log(cart);
+
   const handleRemoveItem = () => {};
 
-  if (!cart || !cart.totalProducts || !cart.products || !cart.products.length)
+  if (
+    !cart ||
+    !cart.contents ||
+    !cart.contents.itemCount ||
+    !cart.contents.nodes.length
+  )
     return <p>Cart is empty.</p>;
+
+  // Move variations to cartItems
+  const cartItems = [];
+  cart.contents.nodes.forEach((newItem) => {
+    if (!newItem.variation) cartItems.push(newItem);
+
+    const exisitingItem = cartItems.find(
+      (item) => item.product.productId === newItem.product.productId
+    );
+
+    newItem.variation.quantity = newItem.quantity;
+    newItem.variation.total = newItem.total;
+
+    if (exisitingItem) {
+      exisitingItem.variations.push(newItem.variation);
+      exisitingItem.quantity += newItem.quantity;
+    } else {
+      newItem.variations = [];
+      newItem.variations.push(newItem.variation);
+      delete newItem.variation;
+      cartItems.push(newItem);
+    }
+  });
 
   return (
     <>
@@ -27,34 +58,67 @@ const CartItems = ({ collapsed }) => {
           </tr>
         </thead>
         <tbody>
-          {cart.products &&
-            cart.products.map((cartItem) => (
-              <CartItem
-                cartItem={cartItem}
-                setCart={setCart}
-                handleRemoveItem={handleRemoveItem}
-                key={cartItem.id}
-                collapsed={collapsed}
-              />
-            ))}
+          {cartItems.map((cartItem) => (
+            <CartItem
+              cartItem={cartItem}
+              setCart={setCart}
+              handleRemoveItem={handleRemoveItem}
+              collapsed={collapsed}
+              key={cartItem.id}
+            />
+          ))}
         </tbody>
       </table>
 
-      <div className="u-padding-right-small u-text-right">
-        <div className="o-layout o-layout--gutter-base o-layout--align-right o-layout--align-middle">
-          <div className="o-layout__cell o-layout__cell--fit">Total</div>
-          <div className="o-layout__cell o-layout__cell--fit">
-            <small>
-              {cart.totalProducts} item{cart.totalProducts !== 1 ? "s" : ""}
-            </small>
-          </div>
-          <div className="o-layout__cell o-layout__cell--fit">
-            <b>&euro; {cart.totalPrice.toFixed(2)}</b>
-          </div>
+      <div className="o-layout o-layout--align-right o-layout--gutter-base">
+        <div className="o-layout__cell u-fraction--4of12@from-md">
+          <table>
+            <thead className="u-visually-hidden">
+              <tr>
+                <th>Total</th>
+              </tr>
+            </thead>
+            <tbody>
+              {!collapsed && (
+                <tr>
+                  <th>
+                    <small>items</small>
+                  </th>
+                  <td className="u-text-right">
+                    {cart.contents.itemCount} item
+                    {cart.contents.itemCount !== 1 ? "s" : ""}
+                  </td>
+                </tr>
+              )}
+              <tr>
+                <th>
+                  <small>subtotal</small>
+                </th>
+                <td className="u-text-right">{cart.subtotal}</td>
+              </tr>
+              <tr>
+                <th>
+                  <small>shipping</small>
+                </th>
+                <td className="u-text-right">{cart.shippingTotal}</td>
+              </tr>
+              <tr>
+                <th>
+                  <small>total</small>
+                </th>
+                <td className="u-text-right">{cart.total}</td>
+              </tr>
+            </tbody>
+          </table>
           {!collapsed && (
-            <div className="o-layout__cell o-layout__cell--fit">
-              <Button label="Checkout" tag="a" href="/checkout" />
-            </div>
+            <>
+              <div className="u-margin-top-base">
+                <Button label="Checkout" tag="a" href="/checkout" />
+              </div>
+              <div className="u-margin-top-small">
+                <EmptyCart />
+              </div>
+            </>
           )}
         </div>
       </div>

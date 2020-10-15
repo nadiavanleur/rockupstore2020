@@ -64,6 +64,5 @@ export const addCartItem = ({
   );
 
   localStorage.setItem("cart", JSON.stringify(cart));
-  console.log(cart);
   return cart;
 };

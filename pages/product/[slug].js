@@ -17,6 +17,8 @@ import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
 import VariationSelect from "../../components/VariationSelect";
 import { useState } from "react";
 
+// @TODO: fitfinder
+
 /**
  * ProductPage
  */
@@ -25,6 +27,15 @@ const ProductPage = ({ product, menus, settings }) => {
 
   const defaultVariation = product.variations && product.variations.nodes[0];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);
+
+  const onSale = selectedVariation ? selectedVariation.onSale : product.onSale;
+  const salePrice = selectedVariation
+    ? selectedVariation.salePrice
+    : product.salePrice;
+  const price = selectedVariation ? selectedVariation.price : product.price;
+  const description = selectedVariation
+    ? selectedVariation.description || product.description
+    : product.description;
 
   return (
     <Layout menus={menus} settings={settings} title={product.name}>
@@ -62,13 +73,11 @@ const ProductPage = ({ product, menus, settings }) => {
             <h2 className="u-margin-bottom-small">{product.name}</h2>
             <div
               className={`c-price${
-                product.onSale ? " c-price--on-sale" : ""
+                onSale ? " c-price--on-sale" : ""
               } u-margin-bottom-small`}
             >
-              {product.salePrice && (
-                <div className="c-price__old">{product.salePrice}</div>
-              )}
-              {product.price && <div className="c-price">{product.price}</div>}
+              {salePrice && <div className="c-price__old">{salePrice}</div>}
+              {price && <div className="c-price">{price}</div>}
             </div>
 
             <VariationSelect
@@ -78,17 +87,12 @@ const ProductPage = ({ product, menus, settings }) => {
               updateSelectedVariation={setSelectedVariation}
             />
 
-            <AddToCard
-              product={product}
-              variationId={selectedVariation && selectedVariation.variationId}
-              hasVariations={
-                !!product.variations && !!product.variations.length
-              }
-            />
+            <AddToCard product={product} variation={selectedVariation} />
+
+            {description && <p>{description}</p>}
           </div>
         </div>
       </Section>
-      Product page
     </Layout>
   );
 };

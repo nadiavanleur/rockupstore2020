@@ -22,8 +22,8 @@ const Button = ({
     <Tag
       type={type || Tag !== "button" ? type : "button"}
       href={href}
-      {...attr}
       className={`c-button ${extraClasses || ""}`}
+      {...attr}
     >
       {label} {children}
     </Tag>

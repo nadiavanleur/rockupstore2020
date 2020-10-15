@@ -7,7 +7,6 @@ import { getFloatValue } from "../helpers/getFloatValue";
  */
 export const getFormattedCart = (data) => {
   let formattedCart = null;
-  console.dir(data);
   if (data === undefined || !data.cart.contents.nodes.length)
     return formattedCart;
 
