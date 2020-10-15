@@ -49,7 +49,7 @@ const CartItems = ({ collapsed }) => {
 
   return (
     <>
-      <table width="100%" className="u-margin-bottom-small">
+      <table width="100%" className="c-responsive-table u-margin-bottom-small">
         <thead className="u-visually-hidden">
           <tr>
             <th hidden>ID</th>
@@ -57,7 +57,7 @@ const CartItems = ({ collapsed }) => {
             <th>Image</th>
             {!collapsed && <th>ID</th>}
             <th>Name</th>
-            {!collapsed && <th className="u-text-right">Quantity</th>}
+            <th className="u-text-right">Quantity</th>
             <th className="u-text-right">Price</th>
           </tr>
         </thead>
@@ -74,12 +74,14 @@ const CartItems = ({ collapsed }) => {
         </tbody>
       </table>
 
-      <div className="o-layout o-layout--align-right o-layout--gutter-base">
-        <div className="o-layout__cell u-fraction--4of12@from-md">
+      <div className="o-layout o-layout--align-right o-layout--gutter-base u-margin-top-base">
+        <div className="o-layout__cell u-fraction--6of12@from-lg">
           <table>
             <thead className="u-visually-hidden">
               <tr>
                 <th>Total</th>
+                <th />
+                <th />
               </tr>
             </thead>
             <tbody>
@@ -87,37 +89,46 @@ const CartItems = ({ collapsed }) => {
                 <th>
                   <small>subtotal</small>
                 </th>
+                <td />
                 <td className="u-text-right">{cart.subtotal}</td>
               </tr>
               <tr>
                 <th>
                   <small>shipping</small>
                 </th>
+                <td />
                 <td className="u-text-right">{cart.shippingTotal}</td>
               </tr>
               <tr>
                 <th>
                   <small>total</small>
                 </th>
-                <td className="u-text-right">
+                <td className="u-text-right" width="100">
                   <small>
                     {cart.contents.itemCount} item
                     {cart.contents.itemCount !== 1 ? "s" : ""}
-                  </small>{" "}
+                  </small>
+                </td>
+                <td className="u-text-right" width="100">
                   {cart.total}
                 </td>
               </tr>
             </tbody>
           </table>
           {!collapsed && (
-            <>
-              <div className="u-margin-top-base">
-                <Button label="Checkout" tag="a" href="/checkout" />
-              </div>
-              <div className="u-margin-top-small">
+            <div className="o-layout o-layout--gutter-small o-layout--align-middle o-layout--align-right u-margin-top-base">
+              <div className="o-layout__cell o-layout__cell--fit@from-md">
                 <EmptyCart />
               </div>
-            </>
+              <div className="o-layout__cell o-layout__cell--fit@from-md">
+                <Button
+                  label="Checkout"
+                  tag="a"
+                  href="/checkout"
+                  extraClasses="c-button--fill"
+                />
+              </div>
+            </div>
           )}
         </div>
       </div>

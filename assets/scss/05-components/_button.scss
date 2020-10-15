@@ -3,7 +3,7 @@
   min-height: $a11y-size;
   min-width: $a11y-size;
   padding: 0 $supple-space-base;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background: $color-black;
@@ -75,5 +75,8 @@
 }
 
 .c-button--fill {
+  display: flex;
+  justify-content: center;
+  text-align: center;
   width: 100%;
 }

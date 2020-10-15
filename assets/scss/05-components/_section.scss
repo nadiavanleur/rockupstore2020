@@ -3,6 +3,17 @@
   background: $color-white;
   border: $border-base;
   padding: $supple-space-base;
+  margin: 0 $supple-space-base $supple-space-base;
+
+  @include mq($until: lg) {
+    padding: $supple-space-small;
+    margin: 0 $supple-space-small $supple-space-small;
+  }
+
+  @include mq($until: md) {
+    padding: $supple-space-tiny;
+    margin: 0 $supple-space-tiny $supple-space-tiny;
+  }
 }
 
 // Elements

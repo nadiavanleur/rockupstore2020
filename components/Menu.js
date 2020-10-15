@@ -24,7 +24,7 @@ const Menu = ({ menu, extraLayoutClasses }) => {
                 tag="a"
                 href={href}
                 target={menuItem.target}
-                extraClasses="c-menu__link"
+                extraClasses="c-menu__link c-button--fill"
               >
                 {href === "/cart/" && <CartIcon />}
               </Button>

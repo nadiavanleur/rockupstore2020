@@ -1,0 +1,38 @@
+// Block
+.c-responsive-table {
+  @include mq($until: lg) {
+    display: block;
+  }
+
+  & > tbody {
+    @include mq($until: lg) {
+      display: block;
+    }
+
+    & > .c-responsive-table__row {
+      @include mq($until: lg) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100% !important;
+      }
+    }
+  }
+}
+// Elements
+.c-responsive-table__row > td {
+  flex: 0 0 100%;
+  padding: $supple-space-tiny;
+}
+
+// Modifiers
+.c-responsive-table__cell--right {
+  @include mq($until: lg) {
+    text-align: right;
+  }
+}
+.c-responsive-table__cell--last {
+  @include mq($until: lg) {
+    order: 100;
+  }
+}

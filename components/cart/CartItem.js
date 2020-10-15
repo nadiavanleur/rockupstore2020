@@ -24,18 +24,24 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
   console.log(cartItem);
 
   return (
-    <tr key={cartItem.product.slug} className="u-umbrella__container">
-      <td hidden>{cartItem.product.slug}</td>
+    <tr
+      key={cartItem.product.slug}
+      className="c-responsive-table__row u-umbrella__container"
+    >
       {!collapsed && (
-        <td>
+        <td
+          width="70"
+          className="c-responsive-table__cell--right c-responsive-table__cell--last"
+        >
           <button onClick={deleteCartItem} className="u-umbrella__overlay">
             Delete
           </button>
         </td>
       )}
-      <td>
+      <td width="100">
         <img
           width="70"
+          height="70"
           src={cartItem.product.image.sourceUrl}
           srcSet={cartItem.product.image.srcSet}
           alt={
@@ -43,21 +49,16 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
           }
         />
       </td>
-      {!collapsed && (
-        <td>
-          <small>
-            <Link
-              href="product/[slug]"
-              as={`/product/${cartItem.product.slug}`}
-            >
-              <a className="u-umbrella">{cartItem.product.slug}</a>
-            </Link>
-          </small>
-        </td>
-      )}
+      <td width="70" className="c-responsive-table__cell--right">
+        <small>
+          <Link href="product/[slug]" as={`/product/${cartItem.product.slug}`}>
+            <a className="u-umbrella">{cartItem.product.slug}</a>
+          </Link>
+        </small>
+      </td>
       <td>{cartItem.product.name}</td>
       {!collapsed && (
-        <td className="u-text-right u-umbrella__overlay">
+        <td className="c-responsive-table__cell--full-width u-text-right u-umbrella__overlay">
           <table>
             <tbody>
               {cartItem.variations ? (
@@ -120,14 +121,16 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
               )}
             </tbody>
           </table>
-          {cartItem.quantity > 1 && (
-            <div>
-              <small>{cartItem.quantity} items</small>
-            </div>
-          )}
         </td>
       )}
-      <td className="u-text-right u-text-bottom">
+      <td className="u-text-right u-text-bottom" width="100">
+        {cartItem.quantity > 1 && (
+          <div>
+            <small>{cartItem.quantity} items</small>
+          </div>
+        )}
+      </td>
+      <td className="u-text-right u-text-bottom" width="100">
         <div>{cartItem.total}</div>
       </td>
     </tr>

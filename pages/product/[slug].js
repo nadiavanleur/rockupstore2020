@@ -58,11 +58,12 @@ const ProductPage = ({ product, menus, settings }) => {
                 product.galleryImages.edges.map(({ node: image }) => {
                   if (image && image.sourceUrl)
                     return (
-                      <div key={image.sourceUrl}>
+                      <div key={image.sourceUrl} className="o-flexembed">
                         <img
                           src={image.sourceUrl}
                           srcSet={image.srcSet}
                           alt={image.altText || image.title || ""}
+                          className="o-flexembed__item"
                         />
                       </div>
                     );
