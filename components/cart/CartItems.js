@@ -20,10 +20,14 @@ const CartItems = ({ collapsed }) => {
   )
     return <p>Cart is empty.</p>;
 
+  // @TODO move function to getFormattedCart
   // Move variations to cartItems
   const cartItems = [];
   cart.contents.nodes.forEach((newItem) => {
-    if (!newItem.variation) cartItems.push(newItem);
+    if (!newItem.variation) {
+      cartItems.push(newItem);
+      return;
+    }
 
     const exisitingItem = cartItems.find(
       (item) => item.product.productId === newItem.product.productId
@@ -79,17 +83,6 @@ const CartItems = ({ collapsed }) => {
               </tr>
             </thead>
             <tbody>
-              {!collapsed && (
-                <tr>
-                  <th>
-                    <small>items</small>
-                  </th>
-                  <td className="u-text-right">
-                    {cart.contents.itemCount} item
-                    {cart.contents.itemCount !== 1 ? "s" : ""}
-                  </td>
-                </tr>
-              )}
               <tr>
                 <th>
                   <small>subtotal</small>
@@ -106,7 +99,13 @@ const CartItems = ({ collapsed }) => {
                 <th>
                   <small>total</small>
                 </th>
-                <td className="u-text-right">{cart.total}</td>
+                <td className="u-text-right">
+                  <small>
+                    {cart.contents.itemCount} item
+                    {cart.contents.itemCount !== 1 ? "s" : ""}
+                  </small>{" "}
+                  {cart.total}
+                </td>
               </tr>
             </tbody>
           </table>

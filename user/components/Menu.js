@@ -8,7 +8,7 @@ const Menu = ({ menu, extraLayoutClasses }) => {
     <nav className="c-menu">
       <ul className={`o-layout ${extraLayoutClasses || ""}`}>
         {menu.map((menuItem) => {
-          if (menuItem.parentId) return;
+          if (menuItem.parentId) return null;
           return (
             <li
               className="c-menu__item o-layout__cell o-layout__cell--fill@from-md"

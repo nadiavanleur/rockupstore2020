@@ -14,7 +14,7 @@ const AddToCart = ({ product, variation }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     productId: product.productId,
-    variationId: variation.variationId,
+    variationId: variation ? variation.variationId : undefined,
   };
   const [cart, setCart] = useContext(AppContext);
   const [showViewCart, setShowViewCart] = useState(false);
@@ -88,7 +88,7 @@ const AddToCart = ({ product, variation }) => {
     !!product.variations && !!product.variations.nodes.length;
 
   const itemNotAvailable = hasVariations
-    ? !variation.variationId || !variation.purchasable
+    ? !variation || !variation.variationId || !variation.purchasable
     : !product.purchasable;
 
   return (

@@ -9,7 +9,7 @@ const Menu = ({ menu, extraLayoutClasses }) => {
     <nav className="c-menu">
       <ul className={`o-layout ${extraLayoutClasses || ""}`}>
         {menu.map((menuItem) => {
-          if (menuItem.parentId) return;
+          if (menuItem.parentId) return null;
           const href = menuItem.connectedNode
             ? menuItem.connectedNode.node.uri
             : menuItem.path || "/";

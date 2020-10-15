@@ -6,6 +6,7 @@ import Link from "next/link";
 
 const CartItem = ({ cartItem, setCart, collapsed }) => {
   const handleQuantityUpdate = (attributes, newQuantity) => {
+    // @TODO
     if (!process.browser) return;
 
     const newCart = addCartItem({ product: cartItem, attributes, newQuantity });
@@ -57,49 +58,76 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
       <td>{cartItem.product.name}</td>
       {!collapsed && (
         <td className="u-text-right u-umbrella__overlay">
-          {cartItem.variations.length && (
-            <table>
-              <tbody>
-                {cartItem.variations.map((variation) => {
-                  const variationString = variation.attributes.nodes
-                    .map((variable) => variable.value)
-                    .join(", ");
+          <table>
+            <tbody>
+              {cartItem.variations ? (
+                <>
+                  {cartItem.variations.map((variation) => {
+                    const variationString = variation.attributes.nodes
+                      .map((variable) => variable.value)
+                      .join(", ");
 
-                  return (
-                    <tr key={`${cartItem.product.slug}-${variationString}`}>
-                      <td>{variationString}</td>
-                      <td>
-                        <small>{variation.price}</small>
-                      </td>
-                      <td className="u-text-right u-text-bottom">
-                        <input
-                          type="number"
-                          min="1"
-                          max={variation.stockQuantity}
-                          defaultValue={variation.quantity}
-                          name={`${cartItem.product.slug}-${variationString}`}
-                          onChange={({ target }) =>
-                            handleQuantityUpdate(
-                              variation.variationId,
-                              target.value
-                            )
-                          }
-                        />
-                      </td>
-                    </tr>
-                  );
-                })}
-              </tbody>
-            </table>
+                    return (
+                      <tr key={`${cartItem.product.slug}-${variationString}`}>
+                        <td>
+                          <small>{variationString}</small>
+                        </td>
+                        <td>
+                          <small>{variation.price}</small>
+                        </td>
+                        <td className="u-text-right u-text-bottom">
+                          <input
+                            type="number"
+                            min="1"
+                            max={variation.stockQuantity}
+                            defaultValue={variation.quantity}
+                            name={`${cartItem.product.slug}-${variationString}`}
+                            onChange={({ target }) =>
+                              handleQuantityUpdate({
+                                productId: cartItem.product.productId,
+                                variationId: variation.variationId,
+                                quantity: target.value,
+                              })
+                            }
+                          />
+                        </td>
+                      </tr>
+                    );
+                  })}
+                </>
+              ) : (
+                <tr key={`${cartItem.product.slug}`}>
+                  <td></td>
+                  <td>
+                    <small>{cartItem.product.price}</small>
+                  </td>
+                  <td className="u-text-right u-text-bottom">
+                    <input
+                      type="number"
+                      min="1"
+                      max={cartItem.product.stockQuantity}
+                      defaultValue={cartItem.quantity}
+                      name={`${cartItem.product.slug}`}
+                      onChange={({ target }) =>
+                        handleQuantityUpdate({
+                          productId: cartItem.product.productId,
+                          quantity: target.value,
+                        })
+                      }
+                    />
+                  </td>
+                </tr>
+              )}
+            </tbody>
+          </table>
+          {cartItem.quantity > 1 && (
+            <div>
+              <small>{cartItem.quantity} items</small>
+            </div>
           )}
         </td>
       )}
       <td className="u-text-right u-text-bottom">
-        {cartItem.quantity > 1 && (
-          <div>
-            <small>{cartItem.quantity} items</small>
-          </div>
-        )}
         <div>{cartItem.total}</div>
       </td>
     </tr>

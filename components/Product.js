@@ -12,7 +12,7 @@ const Product = ({
   attributes,
   type,
 }) => {
-  if (type === "GROUP") return; //@TODO Group product
+  if (type === "GROUP") return null; //@TODO Group product
 
   return (
     <Card
@@ -20,7 +20,7 @@ const Product = ({
       hoverImage={hoverImage}
       title={title}
       tags={[
-        { label: price.replace(".00", ".-"), extraClasses: "c-tag--price" },
+        { label: price.replaceAll(".00", ""), extraClasses: "c-tag--price" },
       ]}
       cta={{ label: "View product", href, as }}
       extraClasses="c-card--link"

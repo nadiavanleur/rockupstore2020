@@ -23,7 +23,7 @@ import { useState } from "react";
  * ProductPage
  */
 const ProductPage = ({ product, menus, settings }) => {
-  if (product.type === "GROUP") return; //@TODO Group product
+  if (product.type === "GROUP") return null; //@TODO Group product
 
   const defaultVariation = product.variations && product.variations.nodes[0];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);

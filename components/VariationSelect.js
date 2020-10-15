@@ -3,12 +3,15 @@ import PropTypes from "prop-types";
 import Select from "./inputs/Select";
 
 const VariationSelect = ({
-  variations: { nodes: variations },
-  attributes: { edges: attributes },
+  variations: variationsProp,
+  attributes: attributesProp,
   updateSelectedVariation,
   defaultSelectedVariation,
 }) => {
-  if (!variations || !variations.length) return;
+  if (!variationsProp || !variationsProp.nodes.length) return null;
+
+  const variations = variationsProp.nodes;
+  const attributes = attributesProp.edges;
 
   //   Filter attributes
   const filteredAttributes =

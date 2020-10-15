@@ -7,7 +7,7 @@ const Variables = ({ attributes }) => {
     <ul className="o-list-clean">
       {attributes.map(({ name, options, variation }) => {
         if (!variation || !options || !options.length || options.length < 2)
-          return;
+          return null;
         return (
           <li className="u-margin-none">
             <div className="o-layout o-layout--gutter-tiny">
