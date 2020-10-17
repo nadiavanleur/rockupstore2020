@@ -4,7 +4,7 @@ import Section from "../../components/Section";
 import gql from "graphql-tag";
 import { withRouter } from "next/router";
 import Slider from "../../components/Slider";
-import AddToCard from "../../components/cart/AddToCart";
+import AddToCard from "../../components/mutationButtons/AddToCart";
 import Select from "../../components/inputs/Select";
 import {
   TOP_MENU_QUERY,

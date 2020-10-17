@@ -1,17 +1,29 @@
 import React, { useState, useContext, useEffect } from "react";
+import PropTypes from "prop-types";
 import { AppContext } from "../context/AppContext";
 import Button from "../Button";
+import { addCartItem } from "../../helpers/addCartItem";
+import { getFormattedCart } from "../../helpers/getFormattedCart";
 import { useQuery, useMutation } from "@apollo/react-hooks";
+import Link from "next/link";
 import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
-import EMPTY_CART from "../../graphql/mutations/empty-cart";
+import REMOVE_FROM_CART from "../../graphql/mutations/remove-from-cart";
 
-const EmptyCart = () => {
+/**
+ * @TODO
+ * Mutations:
+ * - removeItemsFromCart
+ * - restoreCartItems
+ */
+
+const RemoveFromCart = ({ keys, onCompleted }) => {
   const productQueryInput = {
     clientMutationId: v4(),
+    keys,
   };
   const [cart, setCart] = useContext(AppContext);
-  const [showViewCart, setShowViewCart] = useState(false);
+  const [showViewCart, setShowViewCart] = useState(null);
   const [requestError, setRequestError] = useState(null);
   let buttonElement;
 
@@ -26,24 +38,28 @@ const EmptyCart = () => {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       // Update cart data in React Context.
       setCart(updatedCart);
+      console.log(updatedCart, cart);
     },
-    onError: (error) => console.error(error),
   });
 
-  // Empty cart mutation
+  // Remove from cart mutation.
   const [
-    emptyCart,
-    { data: emptyCartRes, loading: emptyCartLoading, error: emptyCartError },
-  ] = useMutation(EMPTY_CART, {
+    RemoveFromCart,
+    {
+      data: RemoveFromCartRes,
+      loading: RemoveFromCartLoading,
+      error: RemoveFromCartError,
+    },
+  ] = useMutation(REMOVE_FROM_CART, {
     variables: {
       input: productQueryInput,
     },
-    onCompleted: () => {
-      console.info("completed EMPTY_CART");
+    onCompleted: async () => {
+      console.info("completed REMOVE_FROM_CART");
 
       // If error.
-      if (emptyCartError) {
-        setRequestError(emptyCartError.graphQLErrors[0].message);
+      if (RemoveFromCartError) {
+        setRequestError(RemoveFromCartError.graphQLErrors[0].message);
       } else {
         // Kick off done animation
         const DONE_CLASS = "c-button--done";
@@ -55,10 +71,13 @@ const EmptyCart = () => {
 
       // On Success:
       // 1. Make the GET_CART query to update the cart with new values in React context.
-      refetch();
+      await refetch();
 
       // 2. Show View Cart Button
       setShowViewCart(true);
+
+      // Fire onCompleted function from parent
+      if (onCompleted) onCompleted();
     },
     onError: (error) => {
       console.error(error);
@@ -70,28 +89,25 @@ const EmptyCart = () => {
 
   const handleClick = ({ target }) => {
     setRequestError(null);
-    emptyCart(target);
+    RemoveFromCart(target);
   };
 
   useEffect(() => {
     buttonElement = document.querySelector(
-      '[data-js-bind="empty-cart-button"]'
+      '[data-js-bind="remove-from-cart-button"]'
     );
   });
 
-  const buttonDisabled =
-    !cart || !cart.contents || !cart.contents.itemCount || emptyCartLoading;
-
   return (
     <>
-      <Button
-        label="Empty cart"
+      <button
         onClick={handleClick}
-        data-done="Cart emptied"
-        disabled={buttonDisabled}
-        data-js-bind="empty-cart-button"
-        extraClasses="c-button--link c-button--fill"
-      />
+        data-done="Removed from cart"
+        data-js-bind="remove-from-cart-button"
+        disabled={RemoveFromCartLoading}
+      >
+        Delete
+      </button>
       {requestError && (
         <p className="u-text-error u-margin-top-small">{requestError}</p>
       )}
@@ -99,4 +115,4 @@ const EmptyCart = () => {
   );
 };
 
-export default EmptyCart;
+export default RemoveFromCart;

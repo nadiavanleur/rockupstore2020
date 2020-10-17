@@ -3,25 +3,20 @@ import PropTypes from "prop-types";
 import { addCartItem } from "../../helpers/addCartItem";
 import { removeCartItem } from "../../helpers/removeCartItem";
 import Link from "next/link";
+import RemoveFromCart from "../mutationButtons/RemoveFromCart";
 
-const CartItem = ({ cartItem, setCart, collapsed }) => {
+const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
   const handleQuantityUpdate = (attributes, newQuantity) => {
-    // @TODO
+    /**
+     * @TODO
+     * Mutations:
+     * - updateItemQuantities
+     */
     if (!process.browser) return;
 
     const newCart = addCartItem({ product: cartItem, attributes, newQuantity });
     setCart(newCart);
   };
-
-  const deleteCartItem = (attributes) => {
-    // @TODO
-    if (!process.browser) return;
-
-    const newCart = removeCartItem({ product: cartItem, attributes });
-    setCart(newCart);
-  };
-
-  console.log(cartItem);
 
   return (
     <tr
@@ -31,9 +26,12 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
       {/* Delete */}
       {!collapsed && (
         <td width="70" className="c-responsive-table__cell--fixed-top-right">
-          <button onClick={deleteCartItem} className="u-umbrella__overlay">
-            Delete
-          </button>
+          <div className="u-umbrella__overlay">
+            <RemoveFromCart
+              keys={cartItem.keys}
+              onCompleted={() => setRestoreKeys(cartItem.keys)}
+            />
+          </div>
         </td>
       )}
 

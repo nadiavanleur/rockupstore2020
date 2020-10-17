@@ -17,7 +17,7 @@ const AddToCart = ({ product, variation }) => {
     variationId: variation ? variation.variationId : undefined,
   };
   const [cart, setCart] = useContext(AppContext);
-  const [showViewCart, setShowViewCart] = useState(false);
+  const [showViewCart, setShowViewCart] = useState(null);
   const [requestError, setRequestError] = useState(null);
   let buttonElement;
 
