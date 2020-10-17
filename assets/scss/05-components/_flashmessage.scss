@@ -1,0 +1,40 @@
+// Block
+.c-flashmessage {
+  background: $color-white;
+  border: $border-base;
+  padding: 0 $supple-space-small;
+  font-weight: 600;
+  transform: translateY(0%);
+  opacity: 1;
+  transition: all $base-animation-duration;
+
+  &,
+  & > * {
+    color: $color-black;
+  }
+}
+
+// Elements
+//
+
+// Modifiers
+.c-flashmessage--error {
+  background: $color-error;
+}
+
+.c-flashmessage--success {
+  background: $color-success;
+}
+
+.c-flashmessage--warning {
+  background: $color-warning;
+}
+
+.c-flashmessage--info {
+  background: $color-info;
+}
+
+.c-flashmessage--hidden {
+  transform: translateY(200%);
+  opacity: 0;
+}

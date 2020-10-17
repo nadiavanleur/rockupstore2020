@@ -8,12 +8,13 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import Link from "next/link";
 import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
-import REMOVE_FROM_CART from "../../graphql/mutations/remove-from-cart";
+import RESTORE_CART_ITEMS from "../../graphql/mutations/restore-cart-items";
 import FlashMessage from "../Flashmessage";
 import { FlashMessageContext } from "../context/FlashMessageContext";
-import RestoreCartItems from "../mutationButtons/RestoreCartItems";
 
-const RemoveFromCart = ({ keys, onCompleted, children }) => {
+const RestoreCartItems = ({ keys, onCompleted, children }) => {
+  if (!keys || !keys.length) return null;
+
   const productQueryInput = {
     clientMutationId: v4(),
     keys,
@@ -33,61 +34,47 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       // Update cart data in React Context.
       setCart(updatedCart);
+      console.log(updatedCart, cart);
     },
   });
 
   // Remove from cart mutation.
   const [
-    removeFromCart,
+    restoreCartItems,
     {
-      data: removeFromCartRes,
-      loading: removeFromCartLoading,
-      error: removeFromCartError,
+      data: restoreCartItemsRes,
+      loading: restoreCartItemsLoading,
+      error: restoreCartItemsError,
     },
-  ] = useMutation(REMOVE_FROM_CART, {
+  ] = useMutation(RESTORE_CART_ITEMS, {
     variables: {
       input: productQueryInput,
     },
-    onCompleted: () => {
-      console.info("completed REMOVE_FROM_CART");
+    onCompleted: async () => {
+      console.info("completed RESTORE_CART_ITEMS");
 
       // If error.
-      if (removeFromCartError) {
-        console.error(removeFromCartError, flashMessages);
+      if (restoreCartItemsError) {
         setFlashMessages([
           ...flashMessages,
           {
             type: "error",
-            message: removeFromCartError.graphQLErrors[0].message,
+            message: restoreCartItemsError.graphQLErrors[0].message,
           },
         ]);
       } else {
-        console.log(flashMessages);
-
         setFlashMessages([
           ...flashMessages,
           {
             type: "success",
-            message: `Item${keys.length > 1 ? "s" : ""} removed from cart`,
-            children: (
-              <RestoreCartItems keys={keys}>
-                {({ restoreCartItems, disabled }) => (
-                  <Button
-                    label="Restore"
-                    onClick={restoreCartItems}
-                    disabled={disabled}
-                    extraClasses="c-flashmessage__button c-button--link"
-                  />
-                )}
-              </RestoreCartItems>
-            ),
+            message: "Item restored",
           },
         ]);
       }
 
       // On Success:
       // 1. Make the GET_CART query to update the cart with new values in React context.
-      refetch();
+      await refetch();
 
       // 2. Show View Cart Button
       setShowViewCart(true);
@@ -98,7 +85,6 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
     onError: (error) => {
       console.error(error);
       if (error) {
-        console.log(flashMessages);
         setFlashMessages([
           ...flashMessages,
           {
@@ -110,14 +96,15 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
     },
   });
 
+  // @TODO flashmessage
   return (
     <>
       {children({
-        removeFromCart,
-        disabled: removeFromCartLoading,
+        restoreCartItems: restoreCartItems,
+        disabled: restoreCartItemsLoading,
       })}
     </>
   );
 };
 
-export default RemoveFromCart;
+export default RestoreCartItems;

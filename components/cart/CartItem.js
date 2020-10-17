@@ -29,8 +29,14 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
           <div className="u-umbrella__overlay">
             <RemoveFromCart
               keys={cartItem.keys}
-              onCompleted={() => setRestoreKeys(cartItem.keys)}
-            />
+              // onCompleted={() => setRestoreKeys(cartItem.keys)}
+            >
+              {({ removeFromCart, disabled }) => (
+                <button onClick={removeFromCart} disabled={disabled}>
+                  Delete
+                </button>
+              )}
+            </RemoveFromCart>
           </div>
         </td>
       )}

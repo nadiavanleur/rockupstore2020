@@ -1,22 +1,23 @@
 import React, { useContext, useState } from "react";
 import PropTypes from "prop-types";
-import { AppContext } from "../context/AppContext";
+import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
 import Button from "../Button";
 import EmptyCart from "../mutationButtons/EmptyCart";
+import RestoreCartItems from "../mutationButtons/RestoreCartItems";
 
 const CartItems = ({ collapsed }) => {
-  const [cart, setCart] = useContext(AppContext);
-  const [restoreKeys, setRestoreKeys] = useState(null);
+  const [cart, setCart] = useContext(CartContext);
+  // const [restoreKeys, setRestoreKeys] = useState(null);
 
-  console.log(restoreKeys);
   const cartEmpty =
     !cart ||
     !cart.contents ||
     !cart.contents.itemCount ||
     !cart.contents.nodes.length;
 
-  if (!restoreKeys && cartEmpty) return <p>Cart is empty.</p>;
+  // if (!restoreKeys && cartEmpty) return <p>Cart is empty.</p>;
+  if (cartEmpty) return <p>Cart is empty.</p>;
 
   // @TODO move function to getFormattedCart
   // Move variations to cartItems
@@ -59,9 +60,6 @@ const CartItems = ({ collapsed }) => {
 
   return (
     <div>
-      {/* Restore items */}
-      {restoreKeys && <mark>[@TODO: Restore cart items]</mark>}
-
       {/* Items */}
       <table width="100%" className="c-responsive-table u-margin-bottom-small">
         <thead className="u-visually-hidden">
@@ -79,7 +77,7 @@ const CartItems = ({ collapsed }) => {
             <CartItem
               cartItem={cartItem}
               setCart={setCart}
-              setRestoreKeys={setRestoreKeys}
+              // setRestoreKeys={setRestoreKeys}
               collapsed={collapsed}
               key={cartItem.id}
             />
@@ -133,7 +131,7 @@ const CartItems = ({ collapsed }) => {
             {!collapsed && (
               <div className="o-layout o-layout--gutter-small o-layout--align-middle o-layout--align-right u-margin-top-base">
                 <div className="o-layout__cell o-layout__cell--fit@from-md">
-                  <EmptyCart onCompleted={() => setRestoreKeys(allItemKeys)} />
+                  {/* <EmptyCart onCompleted={() => setRestoreKeys(allItemKeys)} /> */}
                 </div>
                 <div className="o-layout__cell o-layout__cell--fit@from-md">
                   <Button

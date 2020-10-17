@@ -1,6 +1,6 @@
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
-import { AppContext } from "../context/AppContext";
+import { CartContext } from "../context/CartContext";
 import Button from "../Button";
 import { addCartItem } from "../../helpers/addCartItem";
 import { getFormattedCart } from "../../helpers/getFormattedCart";
@@ -16,7 +16,7 @@ const AddToCart = ({ product, variation }) => {
     productId: product.productId,
     variationId: variation ? variation.variationId : undefined,
   };
-  const [cart, setCart] = useContext(AppContext);
+  const [cart, setCart] = useContext(CartContext);
   const [showViewCart, setShowViewCart] = useState(null);
   const [requestError, setRequestError] = useState(null);
   let buttonElement;
@@ -82,7 +82,7 @@ const AddToCart = ({ product, variation }) => {
     buttonElement = document.querySelector(
       '[data-js-bind="add-to-cart-button"]'
     );
-  });
+  }, []);
 
   const hasVariations =
     !!product.variations && !!product.variations.nodes.length;

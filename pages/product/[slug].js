@@ -16,6 +16,7 @@ import SETTINGS_QUERY from "../../graphql/queries/get-settings";
 import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
 import VariationSelect from "../../components/VariationSelect";
 import { useState } from "react";
+import FlashMessage from "../../components/Flashmessage";
 
 // @TODO: fitfinder
 

@@ -1,5 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import { AppContext } from "../context/AppContext";
+import { CartContext } from "../context/CartContext";
 import Button from "../Button";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { v4 } from "uuid";
@@ -10,7 +10,7 @@ const EmptyCart = ({ onCompleted }) => {
   const productQueryInput = {
     clientMutationId: v4(),
   };
-  const [cart, setCart] = useContext(AppContext);
+  const [cart, setCart] = useContext(CartContext);
   const [showViewCart, setShowViewCart] = useState(null);
   const [requestError, setRequestError] = useState(null);
   let buttonElement;
@@ -80,7 +80,7 @@ const EmptyCart = ({ onCompleted }) => {
     buttonElement = document.querySelector(
       '[data-js-bind="empty-cart-button"]'
     );
-  });
+  }, []);
 
   const buttonDisabled =
     !cart || !cart.contents || !cart.contents.itemCount || emptyCartLoading;

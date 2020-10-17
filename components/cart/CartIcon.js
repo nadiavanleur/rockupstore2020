@@ -1,8 +1,8 @@
 import React, { useContext } from "react";
-import { AppContext } from "../context/AppContext";
+import { CartContext } from "../context/CartContext";
 
 const CartIcon = () => {
-  const [cart, setCart] = useContext(AppContext);
+  const [cart, setCart] = useContext(CartContext);
 
   let totalProducts = 0;
 
