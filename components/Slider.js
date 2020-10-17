@@ -3,12 +3,12 @@ import { Carousel } from "react-responsive-carousel";
 
 class Slider extends Component {
   render() {
-    const { children } = this.props;
+    const { extraClasses, children } = this.props;
     const moreThanOneSlide = children && children.length > 1;
 
     return (
       <Carousel
-        className="c-slider"
+        className={`c-slider ${extraClasses || ""}`}
         showStatus={false}
         thumbWidth={50}
         infiniteLoop={moreThanOneSlide}

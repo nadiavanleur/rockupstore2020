@@ -13,17 +13,16 @@ const PRODUCT_FRAGMENT = gql`
     averageRating
     purchasable
     description
+    shortDescription
     galleryImages {
-      edges {
-        node {
-          altText
-          srcSet
-          sizes
-          id
-          uri
-          title
-          sourceUrl
-        }
+      nodes {
+        altText
+        srcSet
+        sizes
+        id
+        uri
+        title
+        sourceUrl
       }
     }
     image {
@@ -36,13 +35,11 @@ const PRODUCT_FRAGMENT = gql`
       sourceUrl
     }
     attributes {
-      edges {
-        node {
-          name
-          id
-          options
-          variation
-        }
+      nodes {
+        name
+        id
+        options
+        variation
       }
     }
     ...VariableProductFragment

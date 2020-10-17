@@ -8,17 +8,20 @@ const VariationSelect = ({
   updateSelectedVariation,
   defaultSelectedVariation,
 }) => {
-  if (!variationsProp || !variationsProp.nodes.length) return null;
+  if (
+    !variationsProp ||
+    !variationsProp.nodes.length ||
+    !attributesProp ||
+    !attributesProp.nodes.length
+  )
+    return null;
 
   const variations = variationsProp.nodes;
-  const attributes = attributesProp.edges;
+  const attributes = attributesProp.nodes;
 
   //   Filter attributes
   const filteredAttributes =
-    attributes &&
-    attributes
-      .filter(({ node: attribute }) => attribute.variation)
-      .map(({ node: attribute }) => attribute);
+    attributes && attributes.filter((attribute) => attribute.variation);
 
   const getMatchingVariation = (selectedAttributes) =>
     variations.find((variation) =>

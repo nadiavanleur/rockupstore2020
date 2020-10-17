@@ -20,7 +20,10 @@ const Product = ({
       hoverImage={hoverImage}
       title={title}
       tags={[
-        { label: price.replaceAll(".00", ""), extraClasses: "c-tag--price" },
+        {
+          label: price.replaceAll && price.replaceAll(".00", ""),
+          extraClasses: "c-tag--price",
+        },
       ]}
       cta={{ label: "View product", href, as }}
       extraClasses="c-card--link"

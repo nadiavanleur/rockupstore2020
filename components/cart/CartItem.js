@@ -28,35 +28,44 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
       key={cartItem.product.slug}
       className="c-responsive-table__row u-umbrella__container"
     >
+      {/* Delete */}
       {!collapsed && (
-        <td
-          width="70"
-          className="c-responsive-table__cell--right c-responsive-table__cell--last"
-        >
+        <td width="70" className="c-responsive-table__cell--fixed-top-right">
           <button onClick={deleteCartItem} className="u-umbrella__overlay">
             Delete
           </button>
         </td>
       )}
-      <td width="100">
-        <img
-          width="70"
-          height="70"
-          src={cartItem.product.image.sourceUrl}
-          srcSet={cartItem.product.image.srcSet}
-          alt={
-            cartItem.product.image.altText || cartItem.product.image.title || ""
-          }
-        />
+
+      {/* Image */}
+      <td width="100" className="c-responsive-table__cell--fit">
+        <div className="o-flexembed">
+          <img
+            width="70"
+            height="70"
+            src={cartItem.product.image.sourceUrl}
+            srcSet={cartItem.product.image.srcSet}
+            alt={
+              cartItem.product.image.altText ||
+              cartItem.product.image.title ||
+              ""
+            }
+            className="o-flexembed__item"
+          />
+        </div>
       </td>
-      <td width="70" className="c-responsive-table__cell--right">
-        <small>
-          <Link href="product/[slug]" as={`/product/${cartItem.product.slug}`}>
-            <a className="u-umbrella">{cartItem.product.slug}</a>
-          </Link>
-        </small>
+
+      {/* Name + url */}
+      <td>
+        {cartItem.product.name}
+        <Link href="/product/[slug]" as={`/product/${cartItem.product.slug}`}>
+          <a className="u-umbrella">
+            <span className="u-visually-hidden">Go to product page</span>
+          </a>
+        </Link>
       </td>
-      <td>{cartItem.product.name}</td>
+
+      {/* Quantity select */}
       {!collapsed && (
         <td className="c-responsive-table__cell--full-width u-text-right u-umbrella__overlay">
           <table>
@@ -123,6 +132,8 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
           </table>
         </td>
       )}
+
+      {/* Total quantity */}
       <td className="u-text-right u-text-bottom" width="100">
         {cartItem.quantity > 1 && (
           <div>
@@ -130,6 +141,8 @@ const CartItem = ({ cartItem, setCart, collapsed }) => {
           </div>
         )}
       </td>
+
+      {/* Total price */}
       <td className="u-text-right u-text-bottom" width="100">
         <div>{cartItem.total}</div>
       </td>

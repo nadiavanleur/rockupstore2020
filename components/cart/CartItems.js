@@ -52,13 +52,12 @@ const CartItems = ({ collapsed }) => {
       <table width="100%" className="c-responsive-table u-margin-bottom-small">
         <thead className="u-visually-hidden">
           <tr>
-            <th hidden>ID</th>
             {!collapsed && <th>Delete</th>}
             <th>Image</th>
-            {!collapsed && <th>ID</th>}
             <th>Name</th>
-            <th className="u-text-right">Quantity</th>
-            <th className="u-text-right">Price</th>
+            <th>Quantity select</th>
+            <th>Total quantity</th>
+            <th>Total price</th>
           </tr>
         </thead>
         <tbody>

@@ -26,9 +26,9 @@ const ProductsList = ({ products }) => {
                   title={name}
                   image={
                     galleryImages &&
-                    galleryImages.edges &&
-                    !!galleryImages.edges.length &&
-                    galleryImages.edges[0].node
+                    galleryImages.nodes &&
+                    !!galleryImages.nodes.length &&
+                    galleryImages.nodes[0]
                   }
                   hoverImage={image}
                   price={price}

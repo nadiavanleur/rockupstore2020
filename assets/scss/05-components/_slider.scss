@@ -45,3 +45,21 @@
     padding: 0 $a11y-size;
   }
 }
+
+// Modifiers
+.c-slider--product {
+  .slide {
+    & > * {
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      font-family: "object-fit: cover; object-position: center center;";
+    }
+  }
+}
