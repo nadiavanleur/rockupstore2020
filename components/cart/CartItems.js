@@ -5,58 +5,27 @@ import CartItem from "./CartItem";
 import Button from "../Button";
 import EmptyCart from "../mutationButtons/EmptyCart";
 import RestoreCartItems from "../mutationButtons/RestoreCartItems";
+import RemoveFromCart from "../mutationButtons/RemoveFromCart";
 
 const CartItems = ({ collapsed }) => {
   const [cart, setCart] = useContext(CartContext);
-  // const [restoreKeys, setRestoreKeys] = useState(null);
-
   const cartEmpty =
     !cart ||
     !cart.contents ||
     !cart.contents.itemCount ||
-    !cart.contents.nodes.length;
+    !cart.contents.nodes.length ||
+    !cart.cartItems;
 
-  // if (!restoreKeys && cartEmpty) return <p>Cart is empty.</p>;
   if (cartEmpty) return <p>Cart is empty.</p>;
 
-  // @TODO move function to getFormattedCart
-  // Move variations to cartItems
-  const cartItems = [];
-  cart.contents.nodes.forEach((newItem) => {
-    if (!newItem.variation) {
-      newItem.keys = [newItem.key];
-      cartItems.push(newItem);
-      return;
-    }
-
-    const exisitingItem = cartItems.find(
-      (item) => item.product.productId === newItem.product.productId
-    );
-
-    newItem.variation.quantity = newItem.quantity;
-    newItem.variation.total = newItem.total;
-
-    if (exisitingItem) {
-      exisitingItem.variations.push(newItem.variation);
-      exisitingItem.keys.push(newItem.key);
-      exisitingItem.quantity += newItem.quantity;
-    } else {
-      newItem.variations = [];
-      newItem.variations.push(newItem.variation);
-      delete newItem.variation;
-
-      newItem.keys = [];
-      newItem.keys.push(newItem.key);
-      delete newItem.key;
-
-      cartItems.push(newItem);
-    }
-  });
+  const { cartItems } = cart;
 
   const allItemKeys = cartItems.reduce(
     (a, cartItem) => [...a, ...cartItem.keys],
     []
   );
+
+  console.dir({ cartItems, allItemKeys });
 
   return (
     <div>
@@ -77,7 +46,6 @@ const CartItems = ({ collapsed }) => {
             <CartItem
               cartItem={cartItem}
               setCart={setCart}
-              // setRestoreKeys={setRestoreKeys}
               collapsed={collapsed}
               key={cartItem.id}
             />
@@ -131,7 +99,16 @@ const CartItems = ({ collapsed }) => {
             {!collapsed && (
               <div className="o-layout o-layout--gutter-small o-layout--align-middle o-layout--align-right u-margin-top-base">
                 <div className="o-layout__cell o-layout__cell--fit@from-md">
-                  {/* <EmptyCart onCompleted={() => setRestoreKeys(allItemKeys)} /> */}
+                  <RemoveFromCart keys={allItemKeys}>
+                    {({ removeFromCart, disabled }) => (
+                      <Button
+                        label="Empty cart"
+                        onClick={removeFromCart}
+                        disabled={disabled}
+                        extraClasses="c-button--link c-button--fill"
+                      />
+                    )}
+                  </RemoveFromCart>
                 </div>
                 <div className="o-layout__cell o-layout__cell--fit@from-md">
                   <Button

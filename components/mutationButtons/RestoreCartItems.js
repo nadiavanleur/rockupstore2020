@@ -29,12 +29,11 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
     onCompleted: () => {
       console.info("completed GET_CART");
 
-      const updatedCart = data.cart;
+      const updatedCart = getFormattedCart(data);
       // Update cart in the localStorage.
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       // Update cart data in React Context.
       setCart(updatedCart);
-      console.log(updatedCart, cart);
     },
   });
 
@@ -56,19 +55,19 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
       // If error.
       if (restoreCartItemsError) {
         setFlashMessages([
-          ...flashMessages,
           {
             type: "error",
             message: restoreCartItemsError.graphQLErrors[0].message,
           },
+          ...flashMessages,
         ]);
       } else {
         setFlashMessages([
-          ...flashMessages,
           {
             type: "success",
             message: "Item restored",
           },
+          ...flashMessages,
         ]);
       }
 
@@ -86,11 +85,11 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
       console.error(error);
       if (error) {
         setFlashMessages([
-          ...flashMessages,
           {
             type: "error",
             message: error.graphQLErrors[0].message,
           },
+          ...flashMessages,
         ]);
       }
     },

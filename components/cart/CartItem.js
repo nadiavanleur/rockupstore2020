@@ -27,10 +27,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
       {!collapsed && (
         <td width="70" className="c-responsive-table__cell--fixed-top-right">
           <div className="u-umbrella__overlay">
-            <RemoveFromCart
-              keys={cartItem.keys}
-              // onCompleted={() => setRestoreKeys(cartItem.keys)}
-            >
+            <RemoveFromCart keys={cartItem.keys}>
               {({ removeFromCart, disabled }) => (
                 <button onClick={removeFromCart} disabled={disabled}>
                   Delete
@@ -82,7 +79,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
                       .join(", ");
 
                     return (
-                      <tr key={`${cartItem.product.slug}-${variationString}`}>
+                      <tr key={variation.id}>
                         <td>
                           <small>{variationString}</small>
                         </td>

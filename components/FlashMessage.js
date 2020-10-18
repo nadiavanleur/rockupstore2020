@@ -33,7 +33,7 @@ const FlashMessage = ({ type, message, cta, children }) => {
               extraClasses="c-flashmessage__button c-button--link"
             />
           )}
-          {children}
+          <div onClick={closeMessage}>{children}</div>
         </div>
         <div className="o-layout__cell o-layout__cell--fit">
           <button onClick={closeMessage}>&times;</button>

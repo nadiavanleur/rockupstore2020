@@ -5,6 +5,7 @@ import { useQuery, useMutation } from "@apollo/react-hooks";
 import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
 import EMPTY_CART from "../../graphql/mutations/empty-cart";
+import { getFormattedCart } from "../../helpers/getFormattedCart";
 
 const EmptyCart = ({ onCompleted }) => {
   const productQueryInput = {
@@ -21,7 +22,7 @@ const EmptyCart = ({ onCompleted }) => {
     onCompleted: () => {
       console.info("completed GET_CART");
 
-      const updatedCart = data.cart;
+      const updatedCart = getFormattedCart(data);
       // Update cart in the localStorage.
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       // Update cart data in React Context.

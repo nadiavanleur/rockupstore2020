@@ -10,38 +10,48 @@ export const getFormattedCart = (data) => {
   if (data === undefined || !data.cart.contents.nodes.length)
     return formattedCart;
 
-  const currentProducts = data.cart.contents.nodes;
-  // Create an empty object.
-  formattedCart = {};
-  formattedCart.products = [];
-  let totalProducts = 0;
+  console.log(data);
+  const { cart } = data;
+  formattedCart = cart;
 
-  for (let i = 0; i < currentProducts.length; i++) {
-    const currentProduct = currentProducts[i].product;
-    const product = {};
-    const total = getFloatValue(currentProducts[i].total);
+  // Reformat cart items
+  const cartItems = [];
+  cart.contents.nodes.forEach((dataItem) => {
+    let newItem = { ...dataItem };
 
-    product.productId = currentProduct.productId;
-    product.slug = currentProduct.slug;
-    product.cartKey = currentProducts[i].key;
-    product.name = currentProduct.name;
-    product.quantity = currentProducts[i].quantity;
-    product.price = total / product.quantity;
-    product.totalPrice = currentProducts[i].total;
-    product.image = {
-      sourceUrl: currentProduct.image.sourceUrl,
-      srcSet: currentProduct.image.srcSet,
-      title: currentProduct.image.title,
-    };
+    if (!dataItem.variation) {
+      newItem.keys = [dataItem.key];
+      cartItems.push(newItem);
+      return;
+    }
 
-    totalProducts += currentProducts[i].quantity;
+    const exisitingItem = cartItems.find(
+      (item) => item.product.productId === dataItem.product.productId
+    );
 
-    // Push each item into the products array.
-    formattedCart.products.push(product);
-  }
+    newItem.variation.quantity = dataItem.quantity;
+    newItem.variation.total = dataItem.total;
 
-  formattedCart.totalProducts = totalProducts;
-  formattedCart.totalPrice = data.cart.total;
+    if (!exisitingItem) {
+      newItem.variations = [];
+      newItem.variations.push(dataItem.variation);
+      delete newItem.variation;
+
+      newItem.keys = [];
+      newItem.keys.push(dataItem.key);
+      delete newItem.key;
+
+      cartItems.push(newItem);
+    } else {
+      exisitingItem.variations.push(dataItem.variation);
+      exisitingItem.keys.push(dataItem.key);
+      exisitingItem.quantity += dataItem.quantity;
+    }
+  });
+
+  console.log(cartItems);
+
+  formattedCart.cartItems = cartItems;
 
   return formattedCart;
 };

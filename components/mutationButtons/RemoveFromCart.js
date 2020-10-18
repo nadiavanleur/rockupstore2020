@@ -13,7 +13,7 @@ import FlashMessage from "../Flashmessage";
 import { FlashMessageContext } from "../context/FlashMessageContext";
 import RestoreCartItems from "../mutationButtons/RestoreCartItems";
 
-const RemoveFromCart = ({ keys, onCompleted, children }) => {
+const RemoveFromCart = ({ keys, children }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     keys,
@@ -28,7 +28,7 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
     onCompleted: () => {
       console.info("completed GET_CART");
 
-      const updatedCart = data.cart;
+      const updatedCart = getFormattedCart(data);
       // Update cart in the localStorage.
       localStorage.setItem("cart", JSON.stringify(updatedCart));
       // Update cart data in React Context.
@@ -53,19 +53,15 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
 
       // If error.
       if (removeFromCartError) {
-        console.error(removeFromCartError, flashMessages);
         setFlashMessages([
-          ...flashMessages,
           {
             type: "error",
             message: removeFromCartError.graphQLErrors[0].message,
           },
+          ...flashMessages,
         ]);
       } else {
-        console.log(flashMessages);
-
         setFlashMessages([
-          ...flashMessages,
           {
             type: "success",
             message: `Item${keys.length > 1 ? "s" : ""} removed from cart`,
@@ -82,6 +78,7 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
               </RestoreCartItems>
             ),
           },
+          ...flashMessages,
         ]);
       }
 
@@ -91,20 +88,16 @@ const RemoveFromCart = ({ keys, onCompleted, children }) => {
 
       // 2. Show View Cart Button
       setShowViewCart(true);
-
-      // Fire onCompleted function from parent
-      if (onCompleted) onCompleted();
     },
     onError: (error) => {
       console.error(error);
       if (error) {
-        console.log(flashMessages);
         setFlashMessages([
-          ...flashMessages,
           {
             type: "error",
             message: error.graphQLErrors[0].message,
           },
+          ...flashMessages,
         ]);
       }
     },

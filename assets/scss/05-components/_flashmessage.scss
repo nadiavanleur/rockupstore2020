@@ -3,10 +3,14 @@
   background: $color-white;
   border: $border-base;
   padding: 0 $supple-space-small;
+  margin-top: $supple-space-tiny;
   font-weight: 600;
   transform: translateY(0%);
   opacity: 1;
+  max-height: 100px;
+  overflow: hidden;
   transition: all $base-animation-duration;
+  transition-delay: $base-animation-duration;
 
   &,
   & > * {
@@ -37,4 +41,7 @@
 .c-flashmessage--hidden {
   transform: translateY(200%);
   opacity: 0;
+  max-height: 0;
+  margin-top: 0;
+  border-width: 0;
 }
