@@ -23,8 +23,10 @@ $responsive-table-breakpoint: md;
 }
 // Elements
 .c-responsive-table__row > td {
-  flex: 0 0 100%;
-  padding: $supple-space-tiny;
+  @include mq($until: $responsive-table-breakpoint) {
+    flex: 0 0 100%;
+    padding: $supple-space-tiny;
+  }
 }
 
 // Modifiers
