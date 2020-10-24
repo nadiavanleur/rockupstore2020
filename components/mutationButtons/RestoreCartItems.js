@@ -20,7 +20,7 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
     keys,
   };
   const [cart, setCart] = useContext(CartContext);
-  const [flashMessages, setFlashMessages] = useContext(FlashMessageContext);
+  const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
   const [showViewCart, setShowViewCart] = useState(null);
 
   // Get Cart Data.
@@ -54,21 +54,15 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
 
       // If error.
       if (restoreCartItemsError) {
-        setFlashMessages([
-          {
-            type: "error",
-            message: restoreCartItemsError.graphQLErrors[0].message,
-          },
-          ...flashMessages,
-        ]);
+        addFlashMessage({
+          type: "error",
+          message: restoreCartItemsError.graphQLErrors[0].message,
+        });
       } else {
-        setFlashMessages([
-          {
-            type: "success",
-            message: "Item restored",
-          },
-          ...flashMessages,
-        ]);
+        addFlashMessage({
+          type: "success",
+          message: "Item restored",
+        });
       }
 
       // On Success:
@@ -84,13 +78,10 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
     onError: (error) => {
       console.error(error);
       if (error) {
-        setFlashMessages([
-          {
-            type: "error",
-            message: error.graphQLErrors[0].message,
-          },
-          ...flashMessages,
-        ]);
+        addFlashMessage({
+          type: "error",
+          message: error.graphQLErrors[0].message,
+        });
       }
     },
   });

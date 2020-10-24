@@ -17,6 +17,7 @@ import PRODUCT_QUERY from "../../graphql/queries/get-product-by-slug";
 import VariationSelect from "../../components/VariationSelect";
 import { useState } from "react";
 import FlashMessage from "../../components/Flashmessage";
+import Button from "../../components/Button";
 
 // @TODO: fitfinder
 
@@ -28,6 +29,15 @@ const ProductPage = ({ product, menus, settings }) => {
 
   const defaultVariation = product.variations && product.variations.nodes[0];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);
+
+  const hasVariations =
+    !!product.variations && !!product.variations.nodes.length;
+
+  const itemNotAvailable = hasVariations
+    ? !selectedVariation ||
+      !selectedVariation.variationId ||
+      !selectedVariation.purchasable
+    : !product.purchasable;
 
   let useProduct = { ...product };
   if (selectedVariation)
@@ -94,7 +104,16 @@ const ProductPage = ({ product, menus, settings }) => {
               updateSelectedVariation={setSelectedVariation}
             />
 
-            <AddToCard product={product} variation={selectedVariation} />
+            <AddToCard product={product} variation={selectedVariation}>
+              {({ addToCart, addToCartLoading }) => (
+                <Button
+                  label="Add to cart"
+                  onClick={addToCart}
+                  disabled={itemNotAvailable || addToCartLoading}
+                  extraClasses="c-button--fill"
+                />
+              )}
+            </AddToCard>
           </div>
         </div>
       </Section>

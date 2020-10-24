@@ -33,13 +33,16 @@ export const getFormattedCart = (data) => {
     newItem.variation.total = dataItem.total;
 
     if (!exisitingItem) {
-      newItem.variations = [];
-      newItem.variations.push(dataItem.variation);
-      delete newItem.variation;
+      const newVariation = dataItem.variation;
 
       newItem.keys = [];
       newItem.keys.push(dataItem.key);
+      newVariation.key = dataItem.key;
       delete newItem.key;
+
+      newItem.variations = [];
+      newItem.variations.push(newVariation);
+      delete newItem.variation;
 
       cartItems.push(newItem);
     } else {

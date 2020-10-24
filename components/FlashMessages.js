@@ -4,7 +4,7 @@ import { FlashMessageContext } from "./context/FlashMessageContext";
 import FlashMessage from "./Flashmessage";
 
 const FlashMessages = () => {
-  const [flashMessages, setFlashMessages] = useContext(FlashMessageContext);
+  const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
 
   if (!flashMessages) return null;
 

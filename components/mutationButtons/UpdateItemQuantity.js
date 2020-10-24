@@ -1,22 +1,23 @@
 import React, { useState, useContext, useEffect } from "react";
 import PropTypes from "prop-types";
 import { CartContext } from "../context/CartContext";
-import Button from "../Button";
-import { addCartItem } from "../../helpers/addCartItem";
 import { getFormattedCart } from "../../helpers/getFormattedCart";
 import { useQuery, useMutation } from "@apollo/react-hooks";
-import Link from "next/link";
 import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
-import REMOVE_FROM_CART from "../../graphql/mutations/remove-from-cart";
-import FlashMessage from "../Flashmessage";
+import UPDATE_ITEM_QUANTITY from "../../graphql/mutations/update-item-quantity";
 import { FlashMessageContext } from "../context/FlashMessageContext";
-import RestoreCartItems from "../mutationButtons/RestoreCartItems";
 
-const RemoveFromCart = ({ keys, children }) => {
+// @TODO: check all mutation flashmessages
+const UpdateItemQuantity = ({ key, quantity, children }) => {
   const productQueryInput = {
     clientMutationId: v4(),
-    keys,
+    items: [
+      {
+        key,
+        quantity,
+      },
+    ],
   };
   const [cart, setCart] = useContext(CartContext);
   const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
@@ -36,43 +37,26 @@ const RemoveFromCart = ({ keys, children }) => {
     },
   });
 
-  // Remove from cart mutation.
+  // Update quantity mutation.
   const [
-    removeFromCart,
+    updateItemQuantity,
     {
-      data: removeFromCartRes,
-      loading: removeFromCartLoading,
-      error: removeFromCartError,
+      data: updateItemQuantityRes,
+      loading: updateItemQuantityLoading,
+      error: updateItemQuantityError,
     },
-  ] = useMutation(REMOVE_FROM_CART, {
+  ] = useMutation(UPDATE_ITEM_QUANTITY, {
     variables: {
       input: productQueryInput,
     },
     onCompleted: () => {
-      console.info("completed REMOVE_FROM_CART");
+      console.info("completed UPDATE_ITEM_QUANTITY");
 
       // If error.
-      if (removeFromCartError) {
+      if (updateItemQuantityError) {
         addFlashMessage({
           type: "error",
-          message: removeFromCartError.graphQLErrors[0].message,
-        });
-      } else {
-        addFlashMessage({
-          type: "success",
-          message: `Item${keys.length > 1 ? "s" : ""} removed from cart`,
-          children: (
-            <RestoreCartItems keys={keys}>
-              {({ restoreCartItems, disabled }) => (
-                <Button
-                  label="Restore"
-                  onClick={restoreCartItems}
-                  disabled={disabled}
-                  extraClasses="c-flashmessage__button c-button--link"
-                />
-              )}
-            </RestoreCartItems>
-          ),
+          message: updateItemQuantityError.graphQLErrors[0].message,
         });
       }
 
@@ -97,11 +81,11 @@ const RemoveFromCart = ({ keys, children }) => {
   return (
     <>
       {children({
-        removeFromCart,
-        disabled: removeFromCartLoading,
+        updateItemQuantity,
+        disabled: updateItemQuantityLoading,
       })}
     </>
   );
 };
 
-export default RemoveFromCart;
+export default UpdateItemQuantity;

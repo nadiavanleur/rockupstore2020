@@ -9,16 +9,17 @@ import Link from "next/link";
 import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
 import ADD_TO_CART from "../../graphql/mutations/add-to-cart";
+import { FlashMessageContext } from "../context/FlashMessageContext";
 
-const AddToCart = ({ product, variation }) => {
+const AddToCart = ({ product, variation, children }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     productId: product.productId,
     variationId: variation ? variation.variationId : undefined,
   };
   const [cart, setCart] = useContext(CartContext);
+  const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
   const [showViewCart, setShowViewCart] = useState(null);
-  const [requestError, setRequestError] = useState(null);
   let buttonElement;
 
   // Get Cart Data.
@@ -48,14 +49,15 @@ const AddToCart = ({ product, variation }) => {
 
       // If error.
       if (addToCartError) {
-        setRequestError(addToCartError.graphQLErrors[0].message);
+        addFlashMessage({
+          type: "error",
+          message: addToCartError.graphQLErrors[0].message,
+        });
       } else {
-        // Kick off done animation
-        const DONE_CLASS = "c-button--done";
-        if (buttonElement) {
-          buttonElement.classList.remove(DONE_CLASS);
-          setTimeout(() => buttonElement.classList.add(DONE_CLASS), 100);
-        }
+        addFlashMessage({
+          type: "success",
+          message: `Item added to cart`,
+        });
       }
 
       // On Success:
@@ -68,15 +70,13 @@ const AddToCart = ({ product, variation }) => {
     onError: (error) => {
       console.error(error);
       if (error) {
-        setRequestError(error.graphQLErrors[0].message);
+        addFlashMessage({
+          type: "error",
+          message: error.graphQLErrors[0].message,
+        });
       }
     },
   });
-
-  const handleClick = ({ target }) => {
-    setRequestError(null);
-    addToCart(target);
-  };
 
   useEffect(() => {
     buttonElement = document.querySelector(
@@ -84,29 +84,12 @@ const AddToCart = ({ product, variation }) => {
     );
   }, []);
 
-  const hasVariations =
-    !!product.variations && !!product.variations.nodes.length;
-
-  const itemNotAvailable = hasVariations
-    ? !variation || !variation.variationId || !variation.purchasable
-    : !product.purchasable;
-
   return (
     <>
-      <Button
-        label="Add to cart"
-        onClick={handleClick}
-        data-done="Added to cart"
-        disabled={itemNotAvailable || addToCartLoading}
-        data-js-bind="add-to-cart-button"
-        extraClasses="c-button--fill"
-      />
-      {requestError && (
-        <p className="u-text-error u-margin-top-small">{requestError}</p>
-      )}
-      {itemNotAvailable && (
-        <p className="u-margin-top-small">Item not available</p>
-      )}
+      {children({
+        addToCart,
+        addToCartLoading,
+      })}
     </>
   );
 };

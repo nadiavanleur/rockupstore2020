@@ -4,6 +4,8 @@ import { addCartItem } from "../../helpers/addCartItem";
 import { removeCartItem } from "../../helpers/removeCartItem";
 import Link from "next/link";
 import RemoveFromCart from "../mutationButtons/RemoveFromCart";
+import UpdateItemQuantity from "../mutationButtons/UpdateItemQuantity";
+import { v4 } from "uuid";
 
 const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
   const handleQuantityUpdate = (attributes, newQuantity) => {
@@ -87,20 +89,40 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
                           <small>{variation.price}</small>
                         </td>
                         <td className="u-text-right u-text-bottom">
-                          <input
-                            type="number"
-                            min="1"
-                            max={variation.stockQuantity}
-                            defaultValue={variation.quantity}
-                            name={`${cartItem.product.slug}-${variationString}`}
-                            onChange={({ target }) =>
-                              handleQuantityUpdate({
-                                productId: cartItem.product.productId,
-                                variationId: variation.variationId,
-                                quantity: target.value,
-                              })
-                            }
-                          />
+                          <UpdateItemQuantity key={cartItem.keys[0]}>
+                            {({ updateItemQuantity, disabled }) => {
+                              let timer;
+
+                              return (
+                                <input
+                                  type="number"
+                                  min="1"
+                                  max={variation.stockQuantity}
+                                  defaultValue={variation.quantity}
+                                  name={`${cartItem.product.slug}-${variationString}`}
+                                  onChange={({ target }) => {
+                                    clearTimeout(timer);
+
+                                    timer = setTimeout(() => {
+                                      updateItemQuantity({
+                                        variables: {
+                                          input: {
+                                            clientMutationId: v4(),
+                                            items: [
+                                              {
+                                                key: variation.key,
+                                                quantity: target.value,
+                                              },
+                                            ],
+                                          },
+                                        },
+                                      });
+                                    }, 300);
+                                  }}
+                                />
+                              );
+                            }}
+                          </UpdateItemQuantity>
                         </td>
                       </tr>
                     );
@@ -113,19 +135,41 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
                     <small>{cartItem.product.price}</small>
                   </td>
                   <td className="u-text-right u-text-bottom">
-                    <input
-                      type="number"
-                      min="1"
-                      max={cartItem.product.stockQuantity}
-                      defaultValue={cartItem.quantity}
-                      name={`${cartItem.product.slug}`}
-                      onChange={({ target }) =>
-                        handleQuantityUpdate({
-                          productId: cartItem.product.productId,
-                          quantity: target.value,
-                        })
-                      }
-                    />
+                    <UpdateItemQuantity key={cartItem.keys[0]}>
+                      {({ updateItemQuantity, disabled }) => {
+                        let timer;
+
+                        return (
+                          <input
+                            type="number"
+                            min="1"
+                            max={cartItem.product.stockQuantity}
+                            defaultValue={cartItem.quantity}
+                            name={`${cartItem.product.slug}`}
+                            disabled={disabled}
+                            onChange={({ target }) => {
+                              clearTimeout(timer);
+
+                              timer = setTimeout(() => {
+                                updateItemQuantity({
+                                  variables: {
+                                    input: {
+                                      clientMutationId: v4(),
+                                      items: [
+                                        {
+                                          key: cartItem.keys[0],
+                                          quantity: target.value,
+                                        },
+                                      ],
+                                    },
+                                  },
+                                });
+                              }, 300);
+                            }}
+                          />
+                        );
+                      }}
+                    </UpdateItemQuantity>
                   </td>
                 </tr>
               )}
