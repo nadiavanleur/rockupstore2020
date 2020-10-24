@@ -23,28 +23,22 @@ class Header extends Component {
           <header className="o-retain o-retain--wall u-margin-none@until-md u-margin-bottom-base">
             <Menu menu={topMenu} />
           </header>
-          <Section extraClasses="u-margin-bottom-base">
-            <div className="o-layout o-layout--gutter-base o-layout--align-right u-margin-bottom-base">
-              {settings &&
-                (settings.generalSettingsTitle ||
-                  settings.generalSettingsDescription) && (
-                  <div className="o-layout__cell o-layout__cell--fill@from-md u-margin-bottom-base@until-md">
-                    <h1>
-                      {settings.generalSettingsTitle || ""}
-                      {settings.generalSettingsDescription && (
-                        <>
-                          <br></br>
-                          <small>{settings.generalSettingsDescription}</small>
-                        </>
-                      )}
-                    </h1>
-                  </div>
+          <Section
+            extraClasses="u-margin-bottom-base"
+            title={
+              <>
+                {settings?.generalSettingsTitle || ""}
+                {settings?.generalSettingsDescription && (
+                  <>
+                    <br></br>
+                    <small>{settings.generalSettingsDescription}</small>
+                  </>
                 )}
-              <div className="o-layout__cell o-layout__cell--fit@from-md">
-                <mark>[@TODO: search]</mark>
-              </div>
-            </div>
-            {categoriesMenu && !!categoriesMenu.length && (
+              </>
+            }
+            TitleTag="h1"
+          >
+            {!!categoriesMenu?.length && (
               <Menu
                 menu={categoriesMenu}
                 extraLayoutClasses="o-layout--gutter-small"

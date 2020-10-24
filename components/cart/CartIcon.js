@@ -6,7 +6,7 @@ const CartIcon = () => {
 
   let totalProducts = 0;
 
-  if (cart) totalProducts = cart.contents && cart.contents.itemCount;
+  if (cart) totalProducts = cart?.contents?.itemCount;
 
   return <span className="c-count-icon">{totalProducts}</span>;
 };

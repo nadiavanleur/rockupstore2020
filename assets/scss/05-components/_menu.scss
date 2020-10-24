@@ -15,6 +15,7 @@
   @include mq($from: $hamburger-breakpoint) {
     display: none;
     position: absolute;
+    z-index: 3;
     bottom: 0;
     left: $border-base-width;
     width: 100%;

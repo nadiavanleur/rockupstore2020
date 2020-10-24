@@ -28,27 +28,25 @@ const Menu = ({ menu, extraLayoutClasses }) => {
               >
                 {href === "/cart/" && <CartIcon />}
               </Button>
-              {menuItem.childItems &&
-                menuItem.childItems.nodes &&
-                !!menuItem.childItems.nodes.length && (
-                  <ul className="c-menu__submenu o-list-clean">
-                    {menuItem.childItems.nodes.map((subItem) => (
-                      <li key={subItem.id} className="c-menu__submenu-item">
-                        <Button
-                          label={subItem.label}
-                          tag="a"
-                          href={
-                            subItem.connectedNode
-                              ? subItem.connectedNode.node.uri
-                              : subItem.path || "/"
-                          }
-                          target={subItem.target}
-                          extraClasses="c-button--link"
-                        />
-                      </li>
-                    ))}
-                  </ul>
-                )}
+              {!!menuItem?.childItems?.nodes?.length && (
+                <ul className="c-menu__submenu o-list-clean">
+                  {menuItem.childItems.nodes.map((subItem) => (
+                    <li key={subItem.id} className="c-menu__submenu-item">
+                      <Button
+                        label={subItem.label}
+                        tag="a"
+                        href={
+                          subItem.connectedNode
+                            ? subItem.connectedNode.node.uri
+                            : subItem.path || "/"
+                        }
+                        target={subItem.target}
+                        extraClasses="c-button--link"
+                      />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </li>
           );
         })}

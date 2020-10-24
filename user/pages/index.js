@@ -298,15 +298,13 @@ Index.getInitialProps = async () => {
   });
 
   return {
-    products: productsResult && productsResult.data.products.nodes,
-    settings: settingsResult && settingsResult.data.allSettings,
+    products: productsResult?.data?.products.nodes,
+    settings: settingsResult?.data?.allSettings,
     menus: {
-      topMenu: topMenuResult && topMenuResult.data.menu.menuItems.nodes,
-      categoriesMenu:
-        categoriesMenuResult && categoriesMenuResult.data.menu.menuItems.nodes,
-      footerMenu:
-        footerMenuResult && footerMenuResult.data.menu.menuItems.nodes,
-      userMenu: userMenuResult && userMenuResult.data.menu.menuItems.nodes,
+      topMenu: topMenuResult?.data?.menu.menuItems.nodes,
+      categoriesMenu: categoriesMenuResult?.data?.menu.menuItems.nodes,
+      footerMenu: footerMenuResult?.data?.menu.menuItems.nodes,
+      userMenu: userMenuResult?.data?.menu.menuItems.nodes,
     },
   };
 };

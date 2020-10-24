@@ -4,7 +4,7 @@ import { Carousel } from "react-responsive-carousel";
 class Slider extends Component {
   render() {
     const { extraClasses, children } = this.props;
-    const moreThanOneSlide = children && children.length > 1;
+    const moreThanOneSlide = (children?.length || 0) > 1;
 
     return (
       <Carousel

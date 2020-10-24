@@ -20,8 +20,9 @@ const VariationSelect = ({
   const attributes = attributesProp.nodes;
 
   //   Filter attributes
-  const filteredAttributes =
-    attributes && attributes.filter((attribute) => attribute.variation);
+  const filteredAttributes = attributes?.filter?.(
+    (attribute) => attribute.variation
+  );
 
   const getMatchingVariation = (selectedAttributes) =>
     variations.find((variation) =>
@@ -51,7 +52,7 @@ const VariationSelect = ({
         const selectedAttribute = defaultSelectedVariation.attributes.nodes.find(
           (node) => node.name === attributeName
         );
-        const defaultSelected = selectedAttribute && selectedAttribute.value;
+        const defaultSelected = selectedAttribute?.value;
 
         return (
           <div
@@ -67,7 +68,10 @@ const VariationSelect = ({
                 id={attribute.id}
                 name={attributeName}
                 onChange={handleSelectionChange}
-                options={attribute.options}
+                options={attribute.options.map((option) => ({
+                  value: option,
+                  label: option,
+                }))}
                 defaultSelected={defaultSelected}
               />
             </div>

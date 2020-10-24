@@ -11,10 +11,12 @@ const Card = ({
   children,
 }) => {
   return (
-    <div className={`c-card ${extraClasses}`}>
-      {image && hoverImage && (
+    <div
+      className={`c-card ${extraClasses || ""}${cta?.href && " c-card--link"}`}
+    >
+      {(image || hoverImage) && (
         <div className="c-card__image-container">
-          {image && image.sourceUrl && (
+          {image?.sourceUrl && (
             <img
               src={image.sourceUrl}
               srcSet={image.srcSet}
@@ -22,7 +24,7 @@ const Card = ({
               className="c-card__image"
             />
           )}
-          {hoverImage && hoverImage.sourceUrl && (
+          {hoverImage?.sourceUrl && (
             <img
               src={hoverImage.sourceUrl}
               srcSet={hoverImage.srcSet}
@@ -35,13 +37,13 @@ const Card = ({
       <div className="c-card__content">
         {title && <h3 className="c-card__title">{title}</h3>}
         <div className="c-card__body">{children}</div>
-        {cta && cta.href && cta.label && (
+        {cta?.href && (
           <Link href={cta.href} as={cta.as}>
             <a className="c-card__cta u-umbrella">{cta.label}</a>
           </Link>
         )}
       </div>
-      {tags && !!tags.length && (
+      {!!tags?.length && (
         <ul className="o-list-clean c-card__tags">
           {tags.map((tag) => (
             <li

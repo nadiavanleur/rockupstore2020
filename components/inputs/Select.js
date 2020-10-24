@@ -13,11 +13,16 @@ const Select = ({ id, name, onChange, options, defaultSelected, ...attr }) => {
       >
         {options &&
           !!options.length &&
-          options.map((option) => (
-            <option value={option} key={option}>
-              {option}
-            </option>
-          ))}
+          options.map((option) => {
+            const label = option.label || option.value;
+            const value = option.value || option.label;
+
+            return (
+              <option value={value} key={value}>
+                {label}
+              </option>
+            );
+          })}
       </select>
     </div>
   );

@@ -27,16 +27,13 @@ import Button from "../../components/Button";
 const ProductPage = ({ product, menus, settings }) => {
   if (product.type === "GROUP") return null; //@TODO Group product
 
-  const defaultVariation = product.variations && product.variations.nodes[0];
+  const defaultVariation = product?.variations?.nodes[0];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);
 
-  const hasVariations =
-    !!product.variations && !!product.variations.nodes.length;
+  const hasVariations = !!product?.variations?.nodes?.length;
 
   const itemNotAvailable = hasVariations
-    ? !selectedVariation ||
-      !selectedVariation.variationId ||
-      !selectedVariation.purchasable
+    ? !selectedVariation?.variationId || !selectedVariation?.purchasable
     : !product.purchasable;
 
   let useProduct = { ...product };
@@ -60,7 +57,7 @@ const ProductPage = ({ product, menus, settings }) => {
           <div className="o-layout__cell o-layout__cell--fill@from-md">
             <Slider extraClasses="c-slider--product">
               {sliderImages.map((image) => {
-                if (image && image.sourceUrl)
+                if (image?.sourceUrl)
                   return (
                     <div key={image.sourceUrl}>
                       <img
@@ -159,15 +156,13 @@ ProductPage.getInitialProps = async (router) => {
   });
 
   return {
-    product: productResult && productResult.data.product,
-    settings: settingsResult && settingsResult.data.allSettings,
+    product: productResult?.data?.product,
+    settings: settingsResult?.data?.allSettings,
     menus: {
-      topMenu: topMenuResult && topMenuResult.data.menu.menuItems.nodes,
-      categoriesMenu:
-        categoriesMenuResult && categoriesMenuResult.data.menu.menuItems.nodes,
-      footerMenu:
-        footerMenuResult && footerMenuResult.data.menu.menuItems.nodes,
-      userMenu: userMenuResult && userMenuResult.data.menu.menuItems.nodes,
+      topMenu: topMenuResult?.data?.menu.menuItems.nodes,
+      categoriesMenu: categoriesMenuResult?.data?.menu.menuItems.nodes,
+      footerMenu: footerMenuResult?.data?.menu.menuItems.nodes,
+      userMenu: userMenuResult?.data?.menu.menuItems.nodes,
     },
   };
 };

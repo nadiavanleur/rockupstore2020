@@ -1,6 +1,13 @@
 import React from "react";
 
-const Section = ({ title, extraClasses, extraContainerClasses, children }) => {
+const Section = ({
+  title,
+  TitleTag = "h2",
+  extraClasses,
+  extraContainerClasses,
+  rightToTitle,
+  children,
+}) => {
   return (
     <section
       className={`o-retain o-retain--wall o-retain--no-padding ${
@@ -8,7 +15,19 @@ const Section = ({ title, extraClasses, extraContainerClasses, children }) => {
       }`}
     >
       <div className={`c-section ${extraClasses || ""}`}>
-        {title && <h2 className="c-section__title">{title}</h2>}
+        {(title || rightToTitle) && (
+          <div className="o-layout o-layout--gutter-base">
+            <div className="o-layout__cell o-layout__cell--fit">
+              {title && (
+                <TitleTag className="c-section__title">{title}</TitleTag>
+              )}
+            </div>
+            <div className="o-layout__cell o-layout__cell--fill"></div>
+            <div className="o-layout__cell o-layout__cell--fit">
+              {rightToTitle}
+            </div>
+          </div>
+        )}
         {children}
       </div>
     </section>
