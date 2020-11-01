@@ -1,7 +1,6 @@
 import client from "../components/ApolloClient";
 import Layout from "../components/Layout";
 import ProductsList from "../components/ProductsList";
-import gql from "graphql-tag";
 import Section from "../components/Section";
 import {
   TOP_MENU_QUERY,

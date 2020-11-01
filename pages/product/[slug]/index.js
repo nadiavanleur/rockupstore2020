@@ -1,11 +1,9 @@
 import client from "../../../components/ApolloClient";
 import Layout from "../../../components/Layout";
 import Section from "../../../components/Section";
-import gql from "graphql-tag";
 import { withRouter } from "next/router";
 import Slider from "../../../components/Slider";
 import AddToCard from "../../../components/mutationButtons/AddToCart";
-import Select from "../../../components/inputs/Select";
 import {
   TOP_MENU_QUERY,
   CATEGORIES_MENU_QUERY,
@@ -16,7 +14,6 @@ import SETTINGS_QUERY from "../../../graphql/queries/get-settings";
 import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-slug";
 import VariationSelect from "../../../components/VariationSelect";
 import { useState } from "react";
-import FlashMessage from "../../../components/Flashmessage";
 import Button from "../../../components/Button";
 
 // @TODO: fitfinder

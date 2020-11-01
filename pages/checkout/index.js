@@ -1,7 +1,6 @@
 import React, { useContext, useState } from "react";
 import client from "../../components/ApolloClient";
 import Layout from "../../components/Layout";
-import gql from "graphql-tag";
 import { CartContext } from "../../components/context/CartContext";
 import Section from "../../components/Section";
 import CartItems from "../../components/cart/CartItems";

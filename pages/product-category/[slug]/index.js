@@ -1,5 +1,4 @@
 import { withRouter } from "next/router";
-import gql from "graphql-tag";
 import client from "../../../components/ApolloClient";
 import Layout from "../../../components/Layout";
 import Section from "../../../components/Section";
