@@ -1,5 +1,3 @@
-import { getFloatValue } from "../helpers/getFloatValue";
-
 /**
  * Returns cart data in the required format.
  * @param {String} data Cart data

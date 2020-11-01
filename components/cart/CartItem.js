@@ -1,7 +1,5 @@
-import React, { useContext, useState } from "react";
-import PropTypes from "prop-types";
+import React from "react";
 import { addCartItem } from "../../helpers/addCartItem";
-import { removeCartItem } from "../../helpers/removeCartItem";
 import Link from "next/link";
 import RemoveFromCart from "../mutationButtons/RemoveFromCart";
 import UpdateItemQuantity from "../mutationButtons/UpdateItemQuantity";

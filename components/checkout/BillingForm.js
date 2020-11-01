@@ -1,5 +1,4 @@
 import React, { useContext } from "react";
-import PropTypes from "prop-types";
 import Button from "../Button";
 import FormError from "../FormError";
 import countryList from "../../helpers/countryList";

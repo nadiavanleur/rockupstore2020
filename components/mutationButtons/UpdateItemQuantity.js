@@ -1,7 +1,5 @@
 import React, { useState, useContext, useEffect } from "react";
-import PropTypes from "prop-types";
 import { CartContext } from "../context/CartContext";
-import { getFormattedCart } from "../../helpers/getFormattedCart";
 import { useQuery, useMutation } from "@apollo/react-hooks";
 import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";

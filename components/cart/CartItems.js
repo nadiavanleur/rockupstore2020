@@ -1,9 +1,7 @@
 import React, { useContext, useState } from "react";
-import PropTypes from "prop-types";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
 import Button from "../Button";
-import RestoreCartItems from "../mutationButtons/RestoreCartItems";
 import RemoveFromCart from "../mutationButtons/RemoveFromCart";
 
 const CartItems = ({ collapsed }) => {

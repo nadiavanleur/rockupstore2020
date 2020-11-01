@@ -1,9 +1,7 @@
 import React, { useContext, useState, useEffect } from "react";
-import PropTypes from "prop-types";
 import { CartContext } from "../context/CartContext";
 import { FlashMessageContext } from "../context/FlashMessageContext";
 import { BillingContext } from "../context/BillingContext";
-import { getFormattedCart } from "../../helpers/getFormattedCart";
 import { useQuery, useMutation } from "react-apollo";
 import GET_CART from "../../graphql/queries/get-cart";
 import CHECKOUT from "../../graphql/mutations/checkout";
