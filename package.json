@@ -9,6 +9,9 @@
     "start": "next start -p $PORT",
     "heroku-postbuild": "npm run build"
   },
+  "engines": {
+    "node": "10.15.3"
+  },
   "author": "Nadia van Leur <nadiavanleur@gmail.com>",
   "license": "ISC",
   "dependencies": {
