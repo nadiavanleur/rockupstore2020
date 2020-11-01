@@ -9,11 +9,9 @@ import RemoveFromCart from "../mutationButtons/RemoveFromCart";
 const CartItems = ({ collapsed }) => {
   const [cart, setCart] = useContext(CartContext);
   const cartEmpty =
-    !cart ||
-    !cart.contents ||
-    !cart.contents.itemCount ||
-    !cart.contents.nodes.length ||
-    !cart.cartItems;
+    !cart?.contents?.itemCount ||
+    !cart?.contents?.nodes?.length ||
+    !cart?.cartItems;
 
   if (cartEmpty) return <p>Cart is empty.</p>;
 
@@ -23,6 +21,7 @@ const CartItems = ({ collapsed }) => {
     (a, cartItem) => [...a, ...cartItem.keys],
     []
   );
+  console.log(cart);
 
   console.dir({ cartItems, allItemKeys });
 
@@ -55,7 +54,11 @@ const CartItems = ({ collapsed }) => {
       {/* Totals */}
       {!cartEmpty && (
         <div className="o-layout o-layout--align-right o-layout--gutter-base u-margin-top-base">
-          <div className="o-layout__cell u-fraction--6of12@from-lg">
+          <div
+            className={`o-layout__cell${
+              !collapsed ? " u-fraction--6of12@from-lg" : ""
+            }`}
+          >
             <table>
               <thead className="u-visually-hidden">
                 <tr>

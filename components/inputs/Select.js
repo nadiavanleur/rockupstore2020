@@ -1,7 +1,15 @@
 import React from "react";
 import PropTypes from "prop-types";
 
-const Select = ({ id, name, onChange, options, defaultSelected, ...attr }) => {
+const Select = ({
+  id,
+  name,
+  onChange,
+  options,
+  defaultSelected,
+  extraClasses,
+  ...attr
+}) => {
   return (
     <div className="e-select__container">
       <select
@@ -9,6 +17,7 @@ const Select = ({ id, name, onChange, options, defaultSelected, ...attr }) => {
         name={name}
         onChange={onChange}
         defaultValue={defaultSelected}
+        className={extraClasses}
         {...attr}
       >
         {options &&

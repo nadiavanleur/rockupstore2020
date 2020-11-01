@@ -11,6 +11,7 @@
 .c-menu__submenu {
   padding: 0 $supple-space-small;
   background-color: $color-septenary-500;
+  background-color: $color-white;
 
   @include mq($from: $hamburger-breakpoint) {
     display: none;

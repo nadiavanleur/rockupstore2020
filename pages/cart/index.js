@@ -1,18 +1,18 @@
-import client from "../components/ApolloClient";
-import Layout from "../components/Layout";
-import ProductsList from "../components/ProductsList";
+import client from "../../components/ApolloClient";
+import Layout from "../../components/Layout";
+import ProductsList from "../../components/ProductsList";
 import gql from "graphql-tag";
-import Section from "../components/Section";
-import CartItems from "../components/cart/CartItems";
-import Button from "../components/Button";
+import Section from "../../components/Section";
+import CartItems from "../../components/cart/CartItems";
+import Button from "../../components/Button";
 
 import {
   TOP_MENU_QUERY,
   CATEGORIES_MENU_QUERY,
   FOOTER_MENU_QUERY,
   USER_MENU_QUERY,
-} from "../graphql/queries/get-menus";
-import SETTINGS_QUERY from "../graphql/queries/get-settings";
+} from "../../graphql/queries/get-menus";
+import SETTINGS_QUERY from "../../graphql/queries/get-settings";
 
 /**
  * Cart
@@ -20,9 +20,11 @@ import SETTINGS_QUERY from "../graphql/queries/get-settings";
 const Cart = ({ menus, settings }) => {
   return (
     <Layout menus={menus} settings={settings} title="Cart">
-      <Section title="Cart">
-        <CartItems />
-      </Section>
+      <div className="o-retain o-retain--wall">
+        <Section title="Cart">
+          <CartItems />
+        </Section>
+      </div>
     </Layout>
   );
 };

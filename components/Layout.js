@@ -4,6 +4,7 @@ import Footer from "./Footer";
 import Metadata from "./Metadata";
 import { CartProvider } from "./context/CartContext";
 import { FlashMessageProvider } from "./context/FlashMessageContext";
+import { BillingProvider } from "./context/BillingContext";
 import { ApolloProvider } from "react-apollo";
 import client from "./ApolloClient";
 import { ApolloProvider as ApolloHooksProvider } from "@apollo/react-hooks";
@@ -13,24 +14,26 @@ const Layout = ({ children, extraClasses, menus, settings, title }) => {
   const { topMenu, categoriesMenu, footerMenu } = menus || {};
 
   return (
-    <FlashMessageProvider>
-      <CartProvider>
-        <ApolloProvider client={client}>
-          <ApolloHooksProvider client={client}>
-            <Metadata settings={settings} title={title} />
-            <FlashMessages />
-            <Header
-              topMenu={topMenu}
-              categoriesMenu={categoriesMenu}
-              settings={settings}
-              categoriesMenu={categoriesMenu}
-            />
-            <main className={extraClasses}>{children}</main>
-            <Footer footerMenu={footerMenu} />
-          </ApolloHooksProvider>
-        </ApolloProvider>
-      </CartProvider>
-    </FlashMessageProvider>
+    <BillingProvider>
+      <FlashMessageProvider>
+        <CartProvider>
+          <ApolloProvider client={client}>
+            <ApolloHooksProvider client={client}>
+              <Metadata settings={settings} title={title} />
+              <FlashMessages />
+              <Header
+                topMenu={topMenu}
+                categoriesMenu={categoriesMenu}
+                settings={settings}
+                categoriesMenu={categoriesMenu}
+              />
+              <main className={extraClasses}>{children}</main>
+              <Footer footerMenu={footerMenu} />
+            </ApolloHooksProvider>
+          </ApolloProvider>
+        </CartProvider>
+      </FlashMessageProvider>
+    </BillingProvider>
   );
 };
 

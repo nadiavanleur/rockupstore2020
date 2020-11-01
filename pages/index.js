@@ -26,23 +26,29 @@ const Index = ({
     <Layout menus={menus} settings={settings}>
       {/* Popular products */}
       {!!popularProducts?.length && (
-        <Section title="Popular" extraClasses="c-section--quinary">
-          <ProductsList products={popularProducts} />
-        </Section>
+        <div className="o-retain o-retain--wall">
+          <Section title="Popular" extraClasses="c-section--quinary">
+            <ProductsList products={popularProducts} />
+          </Section>
+        </div>
       )}
 
       {/* Sale products */}
       {!!saleProducts?.length && (
-        <Section title="Sale" extraClasses="c-section--quinary">
-          <ProductsList products={saleProducts} />
-        </Section>
+        <div className="o-retain o-retain--wall">
+          <Section title="Sale" extraClasses="c-section--quinary">
+            <ProductsList products={saleProducts} />
+          </Section>
+        </div>
       )}
 
       {/* Featured products */}
       {!!featuredProducts?.length && (
-        <Section title="Featured" extraClasses="c-section--quinary">
-          <ProductsList products={featuredProducts} />
-        </Section>
+        <div className="o-retain o-retain--wall">
+          <Section title="Featured" extraClasses="c-section--quinary">
+            <ProductsList products={featuredProducts} />
+          </Section>
+        </div>
       )}
     </Layout>
   );

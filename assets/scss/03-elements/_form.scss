@@ -1,5 +1,6 @@
 input {
   &[type="text"],
+  &[type="email"],
   &[type="number"] {
     padding: $supple-space-tiny;
   }

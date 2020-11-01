@@ -7,10 +7,8 @@ import { getFloatValue } from "../helpers/getFloatValue";
  */
 export const getFormattedCart = (data) => {
   let formattedCart = null;
-  if (data === undefined || !data.cart.contents.nodes.length)
-    return formattedCart;
+  if (!data?.cart?.contents?.nodes?.length) return formattedCart;
 
-  console.log(data);
   const { cart } = data;
   formattedCart = cart;
 

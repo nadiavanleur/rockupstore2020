@@ -28,12 +28,7 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
     notifyOnNetworkStatusChange: true,
     onCompleted: () => {
       console.info("completed GET_CART");
-
-      const updatedCart = getFormattedCart(data);
-      // Update cart in the localStorage.
-      localStorage.setItem("cart", JSON.stringify(updatedCart));
-      // Update cart data in React Context.
-      setCart(updatedCart);
+      setCart(data);
     },
   });
 
