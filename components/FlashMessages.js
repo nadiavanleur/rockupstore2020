@@ -1,6 +1,6 @@
 import React, { useContext } from "react";
 import { FlashMessageContext } from "./context/FlashMessageContext";
-import FlashMessage from "./Flashmessage";
+import FlashMessage from "./FlashMessage";
 
 const FlashMessages = () => {
   const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
