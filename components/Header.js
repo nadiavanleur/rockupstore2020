@@ -27,12 +27,20 @@ class Header extends Component {
             <Section
               title={
                 <>
-                  {settings?.generalSettingsTitle || ""}
-                  {settings?.generalSettingsDescription && (
-                    <>
-                      <br></br>
-                      <small>{settings.generalSettingsDescription}</small>
-                    </>
+                  {settings?.logo ? (
+                    <div className="u-fraction--6of12@from-md">
+                      <span className="u-visually-hidden">
+                        {settings?.generalSettingsTitle || ""}
+                      </span>
+                      <img
+                        src={settings.logo.sourceUrl}
+                        srcSet={settings.logo.srcSet}
+                        alt={settings.logo.altText || settings.logo.title || ""}
+                        style={{ background: "none" }}
+                      />
+                    </div>
+                  ) : (
+                    settings?.generalSettingsTitle || ""
                   )}
                 </>
               }

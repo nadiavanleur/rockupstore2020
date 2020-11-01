@@ -24,7 +24,7 @@ const CategoryPage = ({ categories, menus, settings }) => (
     {/* Categories */}
     <div className="o-retain o-retain--wall">
       <Section title="Categories" extraClasses="c-section--black">
-        {categories?.length ? (
+        {!!categories?.length ? (
           <ul className="o-layout o-layout--gutter-base">
             {categories.map((category) => (
               <li className="o-layout__cell u-fraction--6of12 u-fraction--3of12@from-md u-margin-bottom-base">
@@ -76,7 +76,10 @@ CategoryPage.getInitialProps = async (router) => {
 
   return {
     categories: categoriesResult?.data?.productCategories.nodes,
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:

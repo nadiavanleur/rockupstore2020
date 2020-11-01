@@ -113,10 +113,11 @@ OrderReceived.getInitialProps = async () => {
     query: USER_MENU_QUERY,
   });
 
-  // @TODO order ophalen
-
   return {
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:

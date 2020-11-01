@@ -27,10 +27,12 @@ h5,
 h6,
 dt {
   font-family: $font-family-heading;
+  font-weight: 700;
   text-transform: uppercase;
   line-height: 1;
   word-wrap: break-word;
   hyphens: auto;
+  letter-spacing: 1px;
 }
 
 h1 {

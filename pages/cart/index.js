@@ -48,7 +48,10 @@ Cart.getInitialProps = async () => {
   });
 
   return {
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:

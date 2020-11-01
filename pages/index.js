@@ -104,7 +104,10 @@ Index.getInitialProps = async () => {
     popularProducts: popularProductsResult?.data?.products?.nodes,
     saleProducts: saleProductsResult?.data?.products?.nodes,
     featuredProducts: featuredProductsResult?.data?.products?.nodes,
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:

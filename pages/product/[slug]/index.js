@@ -42,7 +42,7 @@ const ProductPage = ({ product, menus, settings }) => {
   const sliderImages = [
     ...(useProduct.galleryImages &&
       useProduct.galleryImages.nodes &&
-      useProduct.galleryImages.nodes.length &&
+      !!useProduct.galleryImages.nodes.length &&
       useProduct.galleryImages.nodes),
     ...(useProduct.image ? [useProduct.image] : []),
   ];
@@ -158,7 +158,10 @@ ProductPage.getInitialProps = async (router) => {
 
   return {
     product: productResult?.data?.product,
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:

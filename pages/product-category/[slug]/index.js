@@ -22,7 +22,7 @@ import PRODUCTS_QUERY from "../../../graphql/queries/get-products";
 const CategoryPage = ({ category, products, sortby, menus, settings }) => (
   <Layout menus={menus} settings={settings} title={category.name}>
     {/* Subcategories */}
-    {category?.children?.nodes?.length && (
+    {!!category?.children?.nodes?.length && (
       <div className="o-retain o-retain--wall">
         <Section title="Subcategories" extraClasses="c-section--black">
           <ul className="o-layout o-layout--gutter-base">
@@ -122,7 +122,10 @@ CategoryPage.getInitialProps = async (router) => {
     category: categoryResult?.data?.productCategory,
     products: productsResult?.data?.products,
     sortby,
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:

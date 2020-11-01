@@ -102,7 +102,10 @@ Checkout.getInitialProps = async () => {
 
   return {
     paymentMethods: paymentMethodsResult?.data?.paymentGateways.nodes,
-    settings: settingsResult?.data?.allSettings,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
       topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:
