@@ -21,7 +21,7 @@ const Product = ({
       title={title}
       tags={[
         {
-          label: price?.replaceAll?.(".00", ""),
+          label: price?.replaceAll?.(",00", ""),
           extraClasses: "c-tag--price",
         },
       ]}

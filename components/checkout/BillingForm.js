@@ -201,7 +201,7 @@ const BillingForm = ({
       </div>
 
       {/* Payment method */}
-      <div className="form-group">
+      <div className="form-group u-margin-bottom-base">
         <label htmlFor="country-select">
           Payment method
           <abbr className="required" title="required">

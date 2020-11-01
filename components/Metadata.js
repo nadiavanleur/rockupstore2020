@@ -6,9 +6,9 @@ const Metadata = ({ settings, title, children }) => {
     <Head>
       <title>
         {title ? `${title} | ` : ""}
-        {settings.generalSettingsTitle}
+        {settings?.generalSettingsTitle}
       </title>
-      <meta name="description" content={settings.generalSettingsDescription} />
+      <meta name="description" content={settings?.generalSettingsDescription} />
       <meta
         name="viewport"
         content="width=device-width, initial-scale=1.0"

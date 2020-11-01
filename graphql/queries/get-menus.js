@@ -3,8 +3,10 @@ import MENU_FRAGMENT from "../fragments/menu";
 
 export const TOP_MENU_QUERY = gql`
   query TopMenuQuery {
-    menu(idType: NAME, id: "Top menu") {
-      ...MenuFragment
+    menus(where: { location: PRIMARY }) {
+      nodes {
+        ...MenuFragment
+      }
     }
   }
   ${MENU_FRAGMENT}
@@ -12,8 +14,10 @@ export const TOP_MENU_QUERY = gql`
 
 export const CATEGORIES_MENU_QUERY = gql`
   query CategoriesMenuQuery {
-    menu(idType: NAME, id: "Categories") {
-      ...MenuFragment
+    menus(where: { location: EXPANDED }) {
+      nodes {
+        ...MenuFragment
+      }
     }
   }
   ${MENU_FRAGMENT}
@@ -21,8 +25,10 @@ export const CATEGORIES_MENU_QUERY = gql`
 
 export const FOOTER_MENU_QUERY = gql`
   query FooterMenuQuery {
-    menu(idType: NAME, id: "Footer menu") {
-      ...MenuFragment
+    menus(where: { location: FOOTER }) {
+      nodes {
+        ...MenuFragment
+      }
     }
   }
   ${MENU_FRAGMENT}
@@ -30,8 +36,10 @@ export const FOOTER_MENU_QUERY = gql`
 
 export const USER_MENU_QUERY = gql`
   query UserMenuQuery {
-    menu(idType: NAME, id: "User menu") {
-      ...MenuFragment
+    menus(where: { location: SOCIAL }) {
+      nodes {
+        ...MenuFragment
+      }
     }
   }
   ${MENU_FRAGMENT}

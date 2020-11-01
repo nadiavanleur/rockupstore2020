@@ -21,14 +21,16 @@ const Layout = ({ children, extraClasses, menus, settings, title }) => {
             <ApolloHooksProvider client={client}>
               <Metadata settings={settings} title={title} />
               <FlashMessages />
-              <Header
-                topMenu={topMenu}
-                categoriesMenu={categoriesMenu}
-                settings={settings}
-                categoriesMenu={categoriesMenu}
-              />
+              {menus && settings && (
+                <Header
+                  topMenu={topMenu}
+                  categoriesMenu={categoriesMenu}
+                  settings={settings}
+                  categoriesMenu={categoriesMenu}
+                />
+              )}
               <main className={extraClasses}>{children}</main>
-              <Footer footerMenu={footerMenu} />
+              {footerMenu && <Footer footerMenu={footerMenu} />}
             </ApolloHooksProvider>
           </ApolloProvider>
         </CartProvider>

@@ -9,6 +9,7 @@ const MENU_FRAGMENT = gql`
         parentId
         label
         target
+        path
         connectedNode {
           node {
             id

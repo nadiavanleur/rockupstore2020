@@ -50,10 +50,11 @@ Cart.getInitialProps = async () => {
   return {
     settings: settingsResult?.data?.allSettings,
     menus: {
-      topMenu: topMenuResult?.data?.menu.menuItems.nodes,
-      categoriesMenu: categoriesMenuResult?.data?.menu.menuItems.nodes,
-      footerMenu: footerMenuResult?.data?.menu.menuItems.nodes,
-      userMenu: userMenuResult?.data?.menu.menuItems.nodes,
+      topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
+      categoriesMenu:
+        categoriesMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
+      footerMenu: footerMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
+      userMenu: userMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
     },
   };
 };
