@@ -1,12 +1,26 @@
 import React from "react";
 
-const Section = ({ title, extraClasses, children }) => {
+const Section = ({
+  title,
+  TitleTag = "h2",
+  extraClasses,
+  rightToTitle,
+  children,
+}) => {
   return (
-    <section className="o-retain o-retain--wall">
-      <div className={`c-section ${extraClasses}`}>
-        {title && <h2 className="c-section__title">{title}</h2>}
-        {children}
-      </div>
+    <section className={`c-section ${extraClasses || ""}`}>
+      {(title || rightToTitle) && (
+        <div className="o-layout o-layout--gutter-base">
+          <div className="o-layout__cell o-layout__cell--fit">
+            {title && <TitleTag className="c-section__title">{title}</TitleTag>}
+          </div>
+          <div className="o-layout__cell o-layout__cell--fill"></div>
+          <div className="o-layout__cell o-layout__cell--fit">
+            {rightToTitle}
+          </div>
+        </div>
+      )}
+      {children}
     </section>
   );
 };

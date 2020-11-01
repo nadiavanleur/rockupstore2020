@@ -1,281 +1,83 @@
 import client from "../components/ApolloClient";
 import Layout from "../components/Layout";
 import ProductsList from "../components/ProductsList";
-import gql from "graphql-tag";
 import Section from "../components/Section";
-
-const MENU_FRAGMENT = gql`
-  fragment MenuFragment on Menu {
-    id
-    menuItems {
-      nodes {
-        id
-        parentId
-        label
-        target
-        connectedNode {
-          node {
-            id
-            uri
-          }
-        }
-        childItems {
-          nodes {
-            id
-            parentId
-            label
-            target
-            path
-            connectedNode {
-              node {
-                id
-                uri
-              }
-            }
-          }
-        }
-      }
-    }
-  }
-`;
-
-const TOP_MENU_QUERY = gql`
-  query TopMenuQuery {
-    menu(idType: NAME, id: "Top menu") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const CATEGORIES_MENU_QUERY = gql`
-  query CategoriesMenuQuery {
-    menu(idType: NAME, id: "Categories") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const FOOTER_MENU_QUERY = gql`
-  query FooterMenuQuery {
-    menu(idType: NAME, id: "Footer menu") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const USER_MENU_QUERY = gql`
-  query UserMenuQuery {
-    menu(idType: NAME, id: "User menu") {
-      ...MenuFragment
-    }
-  }
-  ${MENU_FRAGMENT}
-`;
-
-const SETTINGS_QUERY = gql`
-  query SettingsQuery {
-    allSettings {
-      generalSettingsTitle
-      generalSettingsDescription
-    }
-  }
-`;
-
-const PRODUCTS_QUERY = gql`
-  query ProductsQuery {
-    products(first: 24) {
-      nodes {
-        ... on VariableProduct {
-          name
-          price
-          salePrice
-          galleryImages {
-            edges {
-              node {
-                altText
-                srcSet
-                sizes
-                id
-                uri
-                title
-                sourceUrl
-              }
-            }
-          }
-          image {
-            altText
-            srcSet
-            sizes
-            id
-            uri
-            title
-            sourceUrl
-          }
-          attributes {
-            edges {
-              node {
-                name
-                id
-                options
-                variation
-              }
-            }
-          }
-          featured
-          id
-          onSale
-          productId
-          slug
-        }
-        ... on SimpleProduct {
-          name
-          price
-          salePrice
-          galleryImages {
-            edges {
-              node {
-                altText
-                srcSet
-                sizes
-                id
-                uri
-                title
-                sourceUrl
-              }
-            }
-          }
-          image {
-            altText
-            srcSet
-            sizes
-            id
-            uri
-            title
-            sourceUrl
-          }
-          attributes {
-            edges {
-              node {
-                name
-                id
-                options
-                variation
-              }
-            }
-          }
-          featured
-          id
-          onSale
-          productId
-          slug
-        }
-        ... on GroupProduct {
-          name
-          galleryImages {
-            edges {
-              node {
-                altText
-                srcSet
-                sizes
-                id
-                uri
-                title
-                sourceUrl
-              }
-            }
-          }
-          image {
-            altText
-            srcSet
-            sizes
-            id
-            uri
-            title
-            sourceUrl
-          }
-          attributes {
-            edges {
-              node {
-                name
-                id
-                options
-                variation
-              }
-            }
-          }
-          featured
-          id
-          onSale
-          productId
-          slug
-        }
-        ... on ExternalProduct {
-          name
-          price
-          salePrice
-          galleryImages {
-            edges {
-              node {
-                altText
-                srcSet
-                sizes
-                id
-                uri
-                title
-                sourceUrl
-              }
-            }
-          }
-          image {
-            altText
-            srcSet
-            sizes
-            id
-            uri
-            title
-            sourceUrl
-          }
-          attributes {
-            edges {
-              node {
-                name
-                id
-                options
-                variation
-              }
-            }
-          }
-          featured
-          id
-          onSale
-          productId
-          slug
-        }
-      }
-    }
-  }
-`;
+import {
+  TOP_MENU_QUERY,
+  CATEGORIES_MENU_QUERY,
+  FOOTER_MENU_QUERY,
+  USER_MENU_QUERY,
+} from "../graphql/queries/get-menus";
+import SETTINGS_QUERY from "../graphql/queries/get-settings";
+import PRODUCTS_QUERY from "../graphql/queries/get-products";
 
 /**
  * Index
  */
-const Index = ({ products, menus, settings, ...other }) => {
-  console.log({ products, menus, settings, ...other });
+const Index = ({
+  popularProducts,
+  saleProducts,
+  featuredProducts,
+  menus,
+  settings,
+}) => {
   return (
     <Layout menus={menus} settings={settings}>
-      <Section title="Popular" extraClasses="c-section--quinary">
-        <ProductsList products={products} />
-      </Section>
+      {/* Popular products */}
+      {!!popularProducts?.length && (
+        <div className="o-retain o-retain--wall">
+          <Section title="Popular" extraClasses="c-section--quinary">
+            <ProductsList products={popularProducts} />
+          </Section>
+        </div>
+      )}
+
+      {/* Sale products */}
+      {!!saleProducts?.length && (
+        <div className="o-retain o-retain--wall">
+          <Section title="Sale" extraClasses="c-section--quinary">
+            <ProductsList products={saleProducts} />
+          </Section>
+        </div>
+      )}
+
+      {/* Featured products */}
+      {!!featuredProducts?.length && (
+        <div className="o-retain o-retain--wall">
+          <Section title="Featured" extraClasses="c-section--quinary">
+            <ProductsList products={featuredProducts} />
+          </Section>
+        </div>
+      )}
     </Layout>
   );
 };
 
 Index.getInitialProps = async () => {
-  const productsResult = await client.query({
+  const popularProductsResult = await client.query({
     query: PRODUCTS_QUERY,
+    variables: {
+      first: 3,
+      orderby: "TOTAL_SALES",
+    },
+  });
+
+  const saleProductsResult = await client.query({
+    query: PRODUCTS_QUERY,
+    variables: {
+      first: 3,
+      orderby: "DATE",
+      onSale: true,
+    },
+  });
+
+  const featuredProductsResult = await client.query({
+    query: PRODUCTS_QUERY,
+    variables: {
+      first: 3,
+      orderby: "DATE",
+      featured: true,
+    },
   });
 
   const settingsResult = await client.query({
@@ -299,15 +101,19 @@ Index.getInitialProps = async () => {
   });
 
   return {
-    products: productsResult && productsResult.data.products.nodes,
-    settings: settingsResult && settingsResult.data.allSettings,
+    popularProducts: popularProductsResult?.data?.products?.nodes,
+    saleProducts: saleProductsResult?.data?.products?.nodes,
+    featuredProducts: featuredProductsResult?.data?.products?.nodes,
+    settings: {
+      ...settingsResult?.data?.allSettings,
+      logo: settingsResult?.data?.logo,
+    },
     menus: {
-      topMenu: topMenuResult && topMenuResult.data.menu.menuItems.nodes,
+      topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
       categoriesMenu:
-        categoriesMenuResult && categoriesMenuResult.data.menu.menuItems.nodes,
-      footerMenu:
-        footerMenuResult && footerMenuResult.data.menu.menuItems.nodes,
-      userMenu: userMenuResult && userMenuResult.data.menu.menuItems.nodes,
+        categoriesMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
+      footerMenu: footerMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
+      userMenu: userMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
     },
   };
 };

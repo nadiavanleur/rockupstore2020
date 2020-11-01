@@ -1,0 +1,92 @@
+// @TODO: Fix fade-out animation
+
+// Block
+.c-flashmessage {
+  background: $color-white;
+  border: $border-base;
+  padding: 0 $supple-space-small;
+  font-weight: 600;
+  transform: translateY(0%);
+  opacity: 1;
+  max-height: 100px;
+  margin-top: $supple-space-tiny;
+  overflow: hidden;
+  // transition: all $base-animation-duration;
+  // transition-delay: $base-animation-duration;
+  animation-name: fade-out;
+  animation-duration: $base-animation-duration;
+  animation-fill-mode: backwards;
+
+  &,
+  & > * {
+    color: $color-black;
+  }
+}
+
+// Elements
+//
+
+// Modifiers
+.c-flashmessage--error {
+  background: $color-error;
+}
+
+.c-flashmessage--success {
+  background: $color-success;
+}
+
+.c-flashmessage--warning {
+  background: $color-warning;
+}
+
+.c-flashmessage--info {
+  background: $color-info;
+}
+
+.c-flashmessage--hidden {
+  animation-name: fade-out;
+  animation-duration: $base-animation-duration;
+  animation-fill-mode: forwards;
+  // transform: translateY(200%);
+  // opacity: 0;
+  // max-height: 0;
+  // margin-top: 0;
+  // border-width: 0;
+}
+
+// Keyframes
+@keyframes fade-in {
+  from {
+    transform: translateY(-200%);
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    border-width: 0;
+  }
+
+  to {
+    transform: translateY(0%);
+    opacity: 1;
+    max-height: 100px;
+    margin-top: $supple-space-tiny;
+    border-width: $border-base-width;
+  }
+}
+
+@keyframes fade-out {
+  from {
+    transform: translateY(0%);
+    opacity: 1;
+    max-height: 100px;
+    margin-top: $supple-space-tiny;
+    border-width: $border-base-width;
+  }
+
+  to {
+    transform: translateY(200%);
+    opacity: 0;
+    max-height: 0;
+    margin-top: 0;
+    border-width: 0;
+  }
+}

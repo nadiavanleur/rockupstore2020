@@ -1,0 +1,65 @@
+@import "node_modules/react-responsive-carousel/lib/styles/carousel";
+
+// Block
+.c-slider {
+  .carousel-slider {
+    border: $border-base;
+  }
+
+  .control-arrow {
+    opacity: 1 !important;
+    background: transparentize($color-white, 0.75) !important;
+
+    &::before {
+      border-right-color: $color-black !important;
+      border-left-color: $color-black !important;
+    }
+
+    &:hover,
+    &:focus {
+      background: transparentize($color-black, 0.75) !important;
+
+      &::before {
+        border-right-color: $color-white !important;
+        border-left-color: $color-white !important;
+      }
+    }
+  }
+
+  .thumbs-wrapper {
+    margin: $supple-space-base 0;
+
+    .control-arrow {
+      top: 50% !important;
+      transform: translateY(-25%) !important;
+
+      &.control-disabled {
+        pointer-events: none;
+        display: block !important;
+        opacity: 0.25 !important;
+      }
+    }
+  }
+
+  .thumbs {
+    padding: 0 $a11y-size;
+  }
+}
+
+// Modifiers
+.c-slider--product {
+  .slide {
+    & > * {
+      width: 100%;
+      height: 100%;
+    }
+
+    img {
+      width: 100%;
+      height: 100%;
+      object-fit: cover;
+      object-position: center center;
+      font-family: "object-fit: cover; object-position: center center;";
+    }
+  }
+}

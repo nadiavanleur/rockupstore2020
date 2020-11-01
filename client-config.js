@@ -1,6 +1,6 @@
 const clientConfig = {
   url: "http://localhost:3000",
-  graphqlUrl: "http://rockup.store/graphql/",
+  graphqlUrl: "https://admin.subflow.nl/graphql/",
 };
 
 export default clientConfig;

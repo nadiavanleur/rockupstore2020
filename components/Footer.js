@@ -1,18 +1,8 @@
 import React from "react";
 
+// @TODO: Footer
 const Footer = () => {
-  return (
-    <footer className="o-retain o-retain--wall">
-      <mark>[@TODO: footer]</mark>
-      <nav>
-        <ul>
-          <li>
-            <a href="/">Home</a>
-          </li>
-        </ul>
-      </nav>
-    </footer>
-  );
+  return <footer className="o-retain o-retain--wall"></footer>;
 };
 
 export default Footer;

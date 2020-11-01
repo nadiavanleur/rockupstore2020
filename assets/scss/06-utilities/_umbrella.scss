@@ -13,3 +13,8 @@
 .u-umbrella__container {
   position: relative;
 }
+
+.u-umbrella__overlay {
+  position: relative;
+  z-index: 10;
+}

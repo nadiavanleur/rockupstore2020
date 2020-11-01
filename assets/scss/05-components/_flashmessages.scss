@@ -1,0 +1,14 @@
+// Block
+.c-flashmessages {
+  position: fixed;
+  z-index: 1000;
+  left: $border-base-width; // Match html border
+  right: $border-base-width; // Match html border
+  bottom: 1.5rem; // Match retain padding
+  // max-height: 70px; // Flashmessage height
+  overflow-y: auto;
+
+  @include mq($from: md) {
+    max-height: 30vh;
+  }
+}

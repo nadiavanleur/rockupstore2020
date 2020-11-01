@@ -28,11 +28,15 @@
     flex-direction: column-reverse;
     justify-content: flex-end;
     border: $border-base;
-    background: $color-septenary-500;
+    background: $color-white;
     padding-top: $supple-space-small;
 
     & > * {
       flex: 0 0 auto;
+
+      &:first-child {
+        flex: 0 1 auto;
+      }
     }
   }
 }

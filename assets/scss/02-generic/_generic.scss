@@ -1,17 +1,16 @@
+$background-color: $color-white;
+
 html {
   overflow-x: hidden;
   border: $border-base;
-  background-color: $color-tertiary-500;
+  background-color: $background-color;
   background: linear-gradient(
         90deg,
-        $color-tertiary-500 ($border-base-width * 3),
+        $background-color ($border-base-width * 3),
         transparent 1%
       )
       center,
-    linear-gradient(
-        $color-tertiary-500 ($border-base-width * 3),
-        transparent 1%
-      )
+    linear-gradient($background-color ($border-base-width * 3), transparent 1%)
       center,
     $color-black;
   background-size: ($border-base-width * 4) ($border-base-width * 4);
@@ -19,6 +18,10 @@ html {
   @include mq($until: $hamburger-breakpoint) {
     padding-top: $a11y-size;
   }
+}
+
+body {
+  margin: 0;
 }
 
 figure {
@@ -60,9 +63,12 @@ button {
   font-size: $font-size-small;
 }
 
-input[type="text"] {
+input[type="text"],
+input[type="email"],
+select {
   border: none;
-  border-bottom: $border-base;
+  border-bottom: 1px solid $color-black;
+  width: 100%;
 }
 
 .e-select__container {
@@ -85,7 +91,6 @@ input[type="text"] {
 
 select {
   border: none;
-  appearance: none;
   background: none;
 }
 
@@ -109,4 +114,9 @@ button {
     color: $color-gray-700;
     cursor: not-allowed;
   }
+}
+
+img {
+  background: $color-gray-300;
+  border: none;
 }

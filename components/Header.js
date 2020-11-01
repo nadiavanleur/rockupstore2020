@@ -20,37 +20,40 @@ class Header extends Component {
           extraClasses="c-menus__toggle"
         />
         <div className="c-menus__container">
-          <header className="o-retain o-retain--wall u-margin-none@until-md u-margin-bottom-base">
+          <header className="u-margin-bottom-base">
             <Menu menu={topMenu} />
           </header>
-          <Section extraClasses="u-margin-bottom-base">
-            <div className="o-layout o-layout--gutter-base o-layout--align-right u-margin-bottom-base">
-              {settings &&
-                (settings.generalSettingsTitle ||
-                  settings.generalSettingsDescription) && (
-                  <div className="o-layout__cell o-layout__cell--fill@from-md u-margin-bottom-base@until-md">
-                    <h1>
-                      {settings.generalSettingsTitle || ""}
-                      {settings.generalSettingsDescription && (
-                        <>
-                          <br></br>
-                          <small>{settings.generalSettingsDescription}</small>
-                        </>
-                      )}
-                    </h1>
-                  </div>
-                )}
-              <div className="o-layout__cell o-layout__cell--fit@from-md">
-                <mark>[@TODO: search]</mark>
-              </div>
-            </div>
-            {categoriesMenu && !!categoriesMenu.length && (
-              <Menu
-                menu={categoriesMenu}
-                extraLayoutClasses="o-layout--gutter-small"
-              />
-            )}
-          </Section>
+          <div className="o-retain o-retain--wall u-margin-bottom-base">
+            <Section
+              title={
+                <>
+                  {settings?.logo ? (
+                    <div className="u-fraction--6of12@from-md">
+                      <span className="u-visually-hidden">
+                        {settings?.generalSettingsTitle || ""}
+                      </span>
+                      <img
+                        src={settings.logo.sourceUrl}
+                        srcSet={settings.logo.srcSet}
+                        alt={settings.logo.altText || settings.logo.title || ""}
+                        style={{ background: "none" }}
+                      />
+                    </div>
+                  ) : (
+                    settings?.generalSettingsTitle || ""
+                  )}
+                </>
+              }
+              TitleTag="h1"
+            >
+              {!!categoriesMenu?.length && (
+                <Menu
+                  menu={categoriesMenu}
+                  extraLayoutClasses="o-layout--gutter-small"
+                />
+              )}
+            </Section>
+          </div>
         </div>
       </div>
     );

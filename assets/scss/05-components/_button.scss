@@ -1,8 +1,9 @@
+// Block
 .c-button {
   min-height: $a11y-size;
   min-width: $a11y-size;
   padding: 0 $supple-space-base;
-  display: flex;
+  display: inline-flex;
   align-items: center;
   justify-content: center;
   background: $color-black;
@@ -13,6 +14,9 @@
   font-weight: $font-weight-bold;
   text-decoration: none;
   transition: all $base-animation-duration;
+  position: relative;
+  font-size: $font-size-base;
+  width: auto;
 
   &:hover,
   &:focus {
@@ -26,6 +30,7 @@
   }
 }
 
+// Modifiers
 .c-button--link {
   color: $color-black;
   background: none;
@@ -36,4 +41,42 @@
     @include no-backdrop;
     text-decoration: underline;
   }
+}
+
+@keyframes fade-out {
+  from {
+    opacity: 1;
+  }
+
+  to {
+    opacity: 0;
+  }
+}
+
+.c-button--ghost {
+  background: $color-white;
+  border: $border-base;
+  color: $color-black;
+}
+
+.c-button--done {
+  &::before {
+    content: attr(data-done);
+    position: absolute;
+    top: 50%;
+    right: -$supple-space-base;
+    transform: translate(100%, -50%);
+    color: $color-black;
+    animation-name: fade-out;
+    animation-duration: 1s;
+    animation-iteration-count: 1;
+    animation-fill-mode: forwards;
+  }
+}
+
+.c-button--fill {
+  display: flex;
+  justify-content: center;
+  text-align: center;
+  width: 100%;
 }

@@ -1,9 +1,9 @@
-# RockUpStore template
+# Subflow template
 
-This is a wordpress template create for Rock Up Store.
+This is a wordpress template create for Subflow.
 
 ## Optimized for
 
-- Rock Up Store
+- Subflow
 - Glitch.com
 - Wordpress

@@ -1,9 +1,8 @@
 import React from "react";
 import Card from "./Card";
-import Variants from "./Variants";
+import Variables from "./Variables";
 
 const Product = ({ image, hoverImage, title, price, url, attributes }) => {
-  //   console.dir({ image, hoverImage, title, price, url, attributes });
   return (
     <Card
       image={image}
@@ -15,7 +14,7 @@ const Product = ({ image, hoverImage, title, price, url, attributes }) => {
       cta={{ label: "View product", url: url }}
       extraClasses="c-card--link"
     >
-      <Variants attributes={attributes} />
+      <Variables attributes={attributes} />
     </Card>
   );
 };

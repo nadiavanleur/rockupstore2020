@@ -1,4 +1,10 @@
 {
   "version": 2,
-  "alias": "rockupstore2020"
+  "alias": "subflow2020",
+  "builds": [
+    {
+      "src": "package.json",
+      "use": "@now/next"
+    }
+  ]
 }

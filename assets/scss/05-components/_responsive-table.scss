@@ -1,0 +1,51 @@
+$responsive-table-breakpoint: md;
+
+// Block
+.c-responsive-table {
+  @include mq($until: $responsive-table-breakpoint) {
+    display: block;
+  }
+
+  & > tbody {
+    @include mq($until: $responsive-table-breakpoint) {
+      display: block;
+    }
+
+    & > .c-responsive-table__row {
+      @include mq($until: $responsive-table-breakpoint) {
+        display: flex;
+        flex-direction: row;
+        flex-wrap: wrap;
+        width: 100% !important;
+      }
+    }
+  }
+}
+// Elements
+.c-responsive-table__row > td {
+  @include mq($until: $responsive-table-breakpoint) {
+    flex: 0 0 100%;
+    padding: $supple-space-tiny;
+  }
+}
+
+// Modifiers
+td.c-responsive-table__cell--right {
+  @include mq($until: $responsive-table-breakpoint) {
+    text-align: right;
+  }
+}
+
+td.c-responsive-table__cell--fixed-top-right {
+  @include mq($until: $responsive-table-breakpoint) {
+    position: absolute;
+    top: 0;
+    right: 0;
+  }
+}
+
+td.c-responsive-table__cell--fit {
+  @include mq($until: $responsive-table-breakpoint) {
+    flex: 0 0 auto;
+  }
+}

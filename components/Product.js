@@ -1,21 +1,33 @@
 import React from "react";
 import Card from "./Card";
-import Variants from "./Variants";
+import Variables from "./Variables";
 
-const Product = ({ image, hoverImage, title, price, url, attributes }) => {
-  //   console.dir({ image, hoverImage, title, price, url, attributes });
+const Product = ({
+  image,
+  hoverImage,
+  title,
+  price,
+  href,
+  as,
+  attributes,
+  type,
+}) => {
+  if (type === "GROUP") return null; //@TODO Group product
+
   return (
     <Card
       image={image}
       hoverImage={hoverImage}
       title={title}
       tags={[
-        { label: price.replace(".00", ".-"), extraClasses: "c-tag--price" },
+        {
+          label: price?.replaceAll?.(",00", ""),
+          extraClasses: "c-tag--price",
+        },
       ]}
-      cta={{ label: "View product", url: url }}
-      extraClasses="c-card--link"
+      cta={{ label: "View product", href, as }}
     >
-      <Variants attributes={attributes} />
+      <Variables attributes={attributes} />
     </Card>
   );
 };

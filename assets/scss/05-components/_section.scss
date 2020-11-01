@@ -3,6 +3,11 @@
   background: $color-white;
   border: $border-base;
   padding: $supple-space-base;
+  margin-bottom: $supple-space-base;
+
+  @include mq($until: lg) {
+    padding: $supple-space-small;
+  }
 }
 
 // Elements
@@ -13,4 +18,9 @@
 // Modifiers
 .c-section--quinary {
   background: $color-quinary-500;
+}
+
+.c-section--black {
+  background: $color-black;
+  color: $color-white;
 }
