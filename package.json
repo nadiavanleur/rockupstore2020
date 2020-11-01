@@ -5,8 +5,9 @@
   "scripts": {
     "dev": "now dev",
     "build": "npm run build-fragment && next build",
-    "start": "next start",
-    "build-fragment": "node schemaQuery.js"
+    "build-fragment": "node schemaQuery.js",
+    "start": "next start -p $PORT",
+    "heroku-postbuild": "npm run build"
   },
   "author": "Nadia van Leur <nadiavanleur@gmail.com>",
   "license": "ISC",
