@@ -3,7 +3,7 @@
   "version": "1.0.0",
   "description": "This is a wordpress template created for Rock Up Store.",
   "scripts": {
-    "dev": "now dev",
+    "dev": "next dev",
     "build": "npm run build-fragment && next build",
     "build-fragment": "node schemaQuery.js",
     "start": "next start -p $PORT",
