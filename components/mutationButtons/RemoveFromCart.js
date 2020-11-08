@@ -45,7 +45,9 @@ const RemoveFromCart = ({ keys, children }) => {
       if (removeFromCartError) {
         addFlashMessage({
           type: "error",
-          message: removeFromCartError.graphQLErrors[0].message,
+          message:
+            removeFromCarterror?.graphQLErrors[0]?.message ||
+            "Something went wrong",
         });
       } else {
         addFlashMessage({
@@ -78,7 +80,7 @@ const RemoveFromCart = ({ keys, children }) => {
       if (error) {
         addFlashMessage({
           type: "error",
-          message: error.graphQLErrors[0].message,
+          message: error?.graphQLErrors[0]?.message || "Something went wrong",
         });
       }
     },

@@ -48,8 +48,6 @@ export const getFormattedCart = (data) => {
     }
   });
 
-  console.log(cartItems);
-
   formattedCart.cartItems = cartItems;
 
   return formattedCart;

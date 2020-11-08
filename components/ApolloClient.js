@@ -4,7 +4,6 @@ import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
 import clientConfig from "../client-config";
 import { ApolloLink } from "apollo-link";
-
 import { IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
 import introspectionQueryResultData from "../fragmentTypes.json";
 
@@ -57,7 +56,7 @@ export const afterware = new ApolloLink((operation, forward) => {
         localStorage.removeItem("woocommerce-session");
 
         // Update session new data if changed.
-      } else if (session !== localStorage.getItem("woocommerce-session")) {
+      } else {
         localStorage.setItem(
           "woocommerce-session",
           headers.get("woocommerce-session")

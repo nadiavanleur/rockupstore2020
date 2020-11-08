@@ -19,9 +19,6 @@ const CartItems = ({ collapsed }) => {
     (a, cartItem) => [...a, ...cartItem.keys],
     []
   );
-  console.log(cart);
-
-  console.dir({ cartItems, allItemKeys });
 
   return (
     <div>

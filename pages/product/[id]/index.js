@@ -4,20 +4,13 @@ import Section from "../../../components/Section";
 import { withRouter } from "next/router";
 import Slider from "../../../components/Slider";
 import AddToCard from "../../../components/mutationButtons/AddToCart";
-import {
-  TOP_MENU_QUERY,
-  CATEGORIES_MENU_QUERY,
-  FOOTER_MENU_QUERY,
-  USER_MENU_QUERY,
-} from "../../../graphql/queries/get-menus";
-import SETTINGS_QUERY from "../../../graphql/queries/get-settings";
-import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
 import VariationSelect from "../../../components/VariationSelect";
 import { useState } from "react";
 import Button from "../../../components/Button";
 import Link from "next/link";
-
-// @TODO: fitfinder
+import { defaultInitialProps } from "../../../helpers/defaultInitialProps";
+import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
+import Upsells from "../../../components/upsells";
 
 /**
  * ProductPage
@@ -100,49 +93,11 @@ const ProductPage = ({ product, menus, settings }) => {
                 updateSelectedVariation={setSelectedVariation}
               />
 
-              {/* @TODO move upsells to component */}
               {!!product?.upsell?.nodes?.length && (
-                <ul className="o-layout o-layout--gutter-tiny">
-                  <li className="o-layout__cell o-layout__cell--fit">
-                    <img
-                      src={sliderImages?.[0]?.sourceUrl}
-                      srcSet={sliderImages?.[0]?.srcSet}
-                      alt={
-                        sliderImages?.[0]?.altText ||
-                        sliderImages?.[0]?.title ||
-                        ""
-                      }
-                      width="50"
-                      height="50"
-                      className="u-border-small"
-                    />
-                  </li>
-
-                  {product.upsell.nodes.map((upsell) => {
-                    const image =
-                      upsell.galleryImages?.nodes?.[0] || upsell.image;
-
-                    return (
-                      <li className="o-layout__cell o-layout__cell--fit">
-                        <Link
-                          href="/product/[id]"
-                          as={`/product/${upsell.sku}`}
-                        >
-                          <a>
-                            <img
-                              src={image.sourceUrl}
-                              srcSet={image.srcSet}
-                              alt={image.altText || image.title || ""}
-                              width="50"
-                              height="50"
-                              className="u-border-small-white"
-                            />
-                          </a>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <Upsells
+                  currentProductImage={sliderImages?.[0]}
+                  products={product.upsell.nodes}
+                />
               )}
 
               <AddToCard product={product} variation={selectedVariation}>
@@ -182,39 +137,11 @@ ProductPage.getInitialProps = async (router) => {
     },
   });
 
-  const settingsResult = await client.query({
-    query: SETTINGS_QUERY,
-  });
-
-  const topMenuResult = await client.query({
-    query: TOP_MENU_QUERY,
-  });
-
-  const categoriesMenuResult = await client.query({
-    query: CATEGORIES_MENU_QUERY,
-  });
-
-  const footerMenuResult = await client.query({
-    query: FOOTER_MENU_QUERY,
-  });
-
-  const userMenuResult = await client.query({
-    query: USER_MENU_QUERY,
-  });
+  const settingsProps = await defaultInitialProps();
 
   return {
+    ...settingsProps,
     product: productResult?.data?.product,
-    settings: {
-      ...settingsResult?.data?.allSettings,
-      logo: settingsResult?.data?.logo,
-    },
-    menus: {
-      topMenu: topMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
-      categoriesMenu:
-        categoriesMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
-      footerMenu: footerMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
-      userMenu: userMenuResult?.data?.menus?.nodes?.[0]?.menuItems?.nodes,
-    },
   };
 };
 

@@ -8,7 +8,7 @@
   font-weight: 600;
   transform: translateY(0%);
   opacity: 1;
-  max-height: 100px;
+  max-height: 1000px;
   margin-top: $supple-space-tiny;
   overflow: hidden;
   // transition: all $base-animation-duration;
@@ -20,6 +20,10 @@
   &,
   & > * {
     color: $color-black;
+  }
+
+  @include mq($from: md) {
+    max-height: 100px;
   }
 }
 

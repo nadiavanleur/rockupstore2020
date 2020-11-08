@@ -23,7 +23,7 @@ const FlashMessage = ({ type, message, cta, children }) => {
         <div className="o-layout__cell o-layout__cell--fill">
           {message && <p className="c-flashmessage__message">{message}</p>}
         </div>
-        <div className="o-layout__cell o-layout__cell--fit">
+        <div className="o-layout__cell o-layout__cell--fit u-hidden@until-sm">
           {cta?.onClick && (
             <Button
               label={cta.label}

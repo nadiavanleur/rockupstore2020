@@ -6,14 +6,21 @@ const SETTINGS_QUERY = gql`
       generalSettingsTitle
       generalSettingsDescription
     }
-    logo: mediaItemBy(slug: "logo") {
-      id
-      altText
-      srcSet
-      sizes
-      uri
-      title
-      sourceUrl
+    page(id: "website-info", idType: URI) {
+      websiteInfo {
+        fieldGroupName
+        subtitle
+        title
+        logo {
+          id
+          altText
+          srcSet
+          sizes
+          uri
+          title
+          sourceUrl
+        }
+      }
     }
   }
 `;

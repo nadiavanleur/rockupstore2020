@@ -42,7 +42,8 @@ const AddToCart = ({ product, variation, children }) => {
       if (addToCartError) {
         addFlashMessage({
           type: "error",
-          message: addToCartError.graphQLErrors[0].message,
+          message:
+            addToCarterror?.graphQLErrors[0]?.message || "Something went wrong",
         });
       } else {
         addFlashMessage({
@@ -71,7 +72,7 @@ const AddToCart = ({ product, variation, children }) => {
       if (error) {
         addFlashMessage({
           type: "error",
-          message: error.graphQLErrors[0].message,
+          message: error?.graphQLErrors[0]?.message || "Something went wrong",
         });
       }
     },

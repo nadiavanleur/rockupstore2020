@@ -6,7 +6,6 @@ import GET_CART from "../../graphql/queries/get-cart";
 import UPDATE_ITEM_QUANTITY from "../../graphql/mutations/update-item-quantity";
 import { FlashMessageContext } from "../context/FlashMessageContext";
 
-// @TODO: check all mutation flashmessages
 const UpdateItemQuantity = ({ key, quantity, children }) => {
   const productQueryInput = {
     clientMutationId: v4(),
@@ -49,7 +48,9 @@ const UpdateItemQuantity = ({ key, quantity, children }) => {
       if (updateItemQuantityError) {
         addFlashMessage({
           type: "error",
-          message: updateItemQuantityError.graphQLErrors[0].message,
+          message:
+            updateItemQuantityerror?.graphQLErrors[0]?.message ||
+            "Something went wrong",
         });
       }
 
@@ -65,7 +66,7 @@ const UpdateItemQuantity = ({ key, quantity, children }) => {
       if (error) {
         addFlashMessage({
           type: "error",
-          message: error.graphQLErrors[0].message,
+          message: error?.graphQLErrors[0]?.message || "Something went wrong",
         });
       }
     },
