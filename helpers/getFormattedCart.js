@@ -48,7 +48,7 @@ export const getFormattedCart = (data) => {
     }
   });
 
-s  formattedCart.cartItems = cartItems;
+  formattedCart.cartItems = cartItems;
 
   return formattedCart;
 };
