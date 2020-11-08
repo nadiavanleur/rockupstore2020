@@ -108,7 +108,7 @@ $hamburger-breakpoint: md;
  * right corner of your site during development, add the breakpoints
  * to this list, ordered by width, e.g. (mobile, tablet, desktop).
  */
-$mq-show-breakpoints: (sm, md, lg, xl);
+$mq-show-breakpoints: ();
 
 /*  Selectors
     Variables for common selector types like: :hover, :active, etc.
