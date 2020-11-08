@@ -14,10 +14,6 @@ html {
       center,
     $color-black;
   background-size: ($border-base-width * 4) ($border-base-width * 4);
-
-  @include mq($until: $hamburger-breakpoint) {
-    padding-top: $a11y-size;
-  }
 }
 
 body {

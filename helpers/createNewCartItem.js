@@ -6,6 +6,7 @@ export const createNewCartItem = ({
 }) => {
   return {
     slug: product.slug,
+    sku: product.sku,
     image: product.image,
     name: product.name,
     price: price,

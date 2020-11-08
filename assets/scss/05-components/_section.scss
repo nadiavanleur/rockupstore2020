@@ -11,8 +11,8 @@
 }
 
 // Elements
-.c-section__title {
-  margin-bottom: $supple-space-base;
+.c-section div:not(:last-child) .c-section__title {
+  margin-bottom: $supple-space-small;
 }
 
 // Modifiers

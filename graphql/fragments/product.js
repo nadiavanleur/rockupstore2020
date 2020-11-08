@@ -5,6 +5,7 @@ const PRODUCT_FRAGMENT = gql`
   fragment ProductFragment on Product {
     id
     productId
+    sku
     slug
     type
     name
@@ -40,6 +41,34 @@ const PRODUCT_FRAGMENT = gql`
         id
         options
         variation
+      }
+    }
+    upsell {
+      nodes {
+        id
+        productId
+        sku
+        name
+        galleryImages {
+          nodes {
+            altText
+            srcSet
+            sizes
+            id
+            uri
+            title
+            sourceUrl
+          }
+        }
+        image {
+          altText
+          srcSet
+          sizes
+          id
+          uri
+          title
+          sourceUrl
+        }
       }
     }
     ...VariableProductFragment

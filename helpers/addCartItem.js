@@ -5,7 +5,7 @@ import { updateCartItem } from "./updateCartItem";
 /**
  * addCartItem
  *
- * @param {*} product { price, slug, image, name }
+ * @param {*} product { price, sku, slug, image, name }
  * @param {*} variables example: [{ name: 'size', value: 's' }]
  */
 export const addCartItem = ({
@@ -33,7 +33,7 @@ export const addCartItem = ({
 
   // If product exists add to quantity otherwise add new product
   const existingCartItem = cart.products.find(
-    (cartItem) => cartItem.slug === product.slug
+    (cartItem) => cartItem.sku === product.sku
   );
 
   if (existingCartItem) {

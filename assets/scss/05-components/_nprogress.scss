@@ -1,0 +1,15 @@
+// Block
+#nprogress {
+  // Empty for reference
+}
+
+// Elements
+#nprogress .bar {
+  height: $border-small-width;
+  background: $color-quinary-500;
+}
+
+#nprogress .spinner-icon {
+  border-top-color: $color-quinary-500;
+  border-left-color: $color-quinary-500;
+}

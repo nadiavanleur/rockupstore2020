@@ -14,10 +14,14 @@ const Section = ({
           <div className="o-layout__cell o-layout__cell--fit">
             {title && <TitleTag className="c-section__title">{title}</TitleTag>}
           </div>
-          <div className="o-layout__cell o-layout__cell--fill"></div>
-          <div className="o-layout__cell o-layout__cell--fit">
-            {rightToTitle}
-          </div>
+          {rightToTitle && (
+            <>
+              <div className="o-layout__cell o-layout__cell--fill"></div>
+              <div className="o-layout__cell o-layout__cell--fit">
+                {rightToTitle}
+              </div>
+            </>
+          )}
         </div>
       )}
       {children}
