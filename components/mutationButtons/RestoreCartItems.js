@@ -45,7 +45,9 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
       if (restoreCartItemsError) {
         addFlashMessage({
           type: "error",
-          message: restoreCartItemsError.graphQLErrors[0].message,
+          message:
+            restoreCartItemserror?.graphQLErrors[0]?.message ||
+            "Something went wrong",
         });
       } else {
         addFlashMessage({
@@ -69,7 +71,7 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
       if (error) {
         addFlashMessage({
           type: "error",
-          message: error.graphQLErrors[0].message,
+          message: error?.graphQLErrors[0]?.message || "Something went wrong",
         });
       }
     },

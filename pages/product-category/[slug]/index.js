@@ -5,7 +5,7 @@ import Section from "../../../components/Section";
 import Card from "../../../components/Card";
 import ProductsList from "../../../components/ProductsList";
 import Select from "../../../components/inputs/Select";
-import { defaultInitialProps } from "../helpers/defaultInitialProps";
+import { defaultInitialProps } from "../../../helpers/defaultInitialProps";
 import CATEGORY_QUERY from "../../../graphql/queries/get-category-by-slug";
 import PRODUCTS_QUERY from "../../../graphql/queries/get-products";
 

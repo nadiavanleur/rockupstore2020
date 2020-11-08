@@ -1,10 +1,9 @@
 import { withRouter } from "next/router";
 import { useContext } from "react";
 import { BillingContext } from "../../../../components/context/BillingContext";
-import client from "../../../../components/ApolloClient";
 import Layout from "../../../../components/Layout";
 import Section from "../../../../components/Section";
-import { defaultInitialProps } from "../helpers/defaultInitialProps";
+import { defaultInitialProps } from "../../../../helpers/defaultInitialProps";
 
 /**
  * OrderReceived
@@ -19,7 +18,6 @@ const OrderReceived = ({ menus, settings }) => {
 
 const OrderReceivedContent = () => {
   const [billingInfo, setBillingInfo] = useContext(BillingContext);
-  console.log(billingInfo);
 
   return (
     <div className="o-retain o-retain--wall">

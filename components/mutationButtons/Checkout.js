@@ -127,8 +127,6 @@ const Checkout = ({ children }) => {
     }
   }, [orderData]);
 
-  console.dir({ checkoutResponse, orderData });
-
   return (
     <>
       {children({

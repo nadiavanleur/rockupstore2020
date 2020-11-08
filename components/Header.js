@@ -12,8 +12,6 @@ class Header extends Component {
     const MENU_OPEN_CLASS = "c-menus--open";
     const { topMenu, categoriesMenu, settings } = this.props;
 
-    console.log(settings);
-
     const sectionTitle = (
       <div className="u-fraction--6of12@from-md u-fraction--4of12@from-lg">
         {settings?.logo ? (

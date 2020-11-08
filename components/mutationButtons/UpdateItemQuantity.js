@@ -49,7 +49,9 @@ const UpdateItemQuantity = ({ key, quantity, children }) => {
       if (updateItemQuantityError) {
         addFlashMessage({
           type: "error",
-          message: updateItemQuantityError.graphQLErrors[0].message,
+          message:
+            updateItemQuantityerror?.graphQLErrors[0]?.message ||
+            "Something went wrong",
         });
       }
 
@@ -65,7 +67,7 @@ const UpdateItemQuantity = ({ key, quantity, children }) => {
       if (error) {
         addFlashMessage({
           type: "error",
-          message: error.graphQLErrors[0].message,
+          message: error?.graphQLErrors[0]?.message || "Something went wrong",
         });
       }
     },

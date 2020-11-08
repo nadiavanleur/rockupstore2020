@@ -1,12 +1,9 @@
 import { withRouter } from "next/router";
-import gql from "graphql-tag";
 import client from "../../components/ApolloClient";
 import Layout from "../../components/Layout";
 import Section from "../../components/Section";
 import Card from "../../components/Card";
-import ProductsList from "../../components/ProductsList";
-import Select from "../../components/inputs/Select";
-import { defaultInitialProps } from "../helpers/defaultInitialProps";
+import { defaultInitialProps } from "../../helpers/defaultInitialProps";
 import CATEGORIES_QUERY from "../../graphql/queries/get-categories";
 
 /**

@@ -6,7 +6,7 @@ import Section from "../../components/Section";
 import CartItems from "../../components/cart/CartItems";
 import BillingForm from "../../components/checkout/BillingForm";
 import { default as CheckoutMutation } from "../../components/mutationButtons/Checkout";
-import { defaultInitialProps } from "../helpers/defaultInitialProps";
+import { defaultInitialProps } from "../../helpers/defaultInitialProps";
 import PAYMENT_METHODS_QUERY from "../../graphql/queries/get-payment-methods";
 
 /**

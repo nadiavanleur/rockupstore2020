@@ -8,6 +8,7 @@ import VariationSelect from "../../../components/VariationSelect";
 import { useState } from "react";
 import Button from "../../../components/Button";
 import Link from "next/link";
+import { defaultInitialProps } from "../../../helpers/defaultInitialProps";
 import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
 
 // @TODO: fitfinder

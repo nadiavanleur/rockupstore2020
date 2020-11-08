@@ -1,8 +1,7 @@
-import client from "../../components/ApolloClient";
 import Layout from "../../components/Layout";
 import Section from "../../components/Section";
 import CartItems from "../../components/cart/CartItems";
-import { defaultInitialProps } from "../helpers/defaultInitialProps";
+import { defaultInitialProps } from "../../helpers/defaultInitialProps";
 
 /**
  * Cart
