@@ -11,10 +11,11 @@ import {
   USER_MENU_QUERY,
 } from "../../../graphql/queries/get-menus";
 import SETTINGS_QUERY from "../../../graphql/queries/get-settings";
-import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-slug";
+import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
 import VariationSelect from "../../../components/VariationSelect";
 import { useState } from "react";
 import Button from "../../../components/Button";
+import Link from "next/link";
 
 // @TODO: fitfinder
 
@@ -99,6 +100,51 @@ const ProductPage = ({ product, menus, settings }) => {
                 updateSelectedVariation={setSelectedVariation}
               />
 
+              {/* @TODO move upsells to component */}
+              {!!product?.upsell?.nodes?.length && (
+                <ul className="o-layout o-layout--gutter-tiny">
+                  <li className="o-layout__cell o-layout__cell--fit">
+                    <img
+                      src={sliderImages?.[0]?.sourceUrl}
+                      srcSet={sliderImages?.[0]?.srcSet}
+                      alt={
+                        sliderImages?.[0]?.altText ||
+                        sliderImages?.[0]?.title ||
+                        ""
+                      }
+                      width="50"
+                      height="50"
+                      className="u-border-small"
+                    />
+                  </li>
+
+                  {product.upsell.nodes.map((upsell) => {
+                    const image =
+                      upsell.galleryImages?.nodes?.[0] || upsell.image;
+
+                    return (
+                      <li className="o-layout__cell o-layout__cell--fit">
+                        <Link
+                          href="/product/[id]"
+                          as={`/product/${upsell.sku}`}
+                        >
+                          <a>
+                            <img
+                              src={image.sourceUrl}
+                              srcSet={image.srcSet}
+                              alt={image.altText || image.title || ""}
+                              width="50"
+                              height="50"
+                              className="u-border-small-white"
+                            />
+                          </a>
+                        </Link>
+                      </li>
+                    );
+                  })}
+                </ul>
+              )}
+
               <AddToCard product={product} variation={selectedVariation}>
                 {({ addToCart, addToCartLoading }) => (
                   <Button
@@ -127,12 +173,12 @@ const ProductPage = ({ product, menus, settings }) => {
 };
 
 ProductPage.getInitialProps = async (router) => {
-  const { slug } = router.query;
+  const { id } = router.query;
 
   const productResult = await client.query({
     query: PRODUCT_QUERY,
     variables: {
-      id: slug,
+      id,
     },
   });
 

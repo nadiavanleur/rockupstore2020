@@ -41,7 +41,7 @@ const Menu = ({ menu, extraLayoutClasses }) => {
                             : subItem.path || "/"
                         }
                         target={subItem.target}
-                        extraClasses="c-button--link"
+                        extraClasses="c-button--link c-button--fill-left"
                       />
                     </li>
                   ))}

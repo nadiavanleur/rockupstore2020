@@ -31,7 +31,7 @@ const CategoryPage = ({ categories, menus, settings }) => (
                 <Card
                   image={category?.products?.nodes?.[0]?.image}
                   cta={{
-                    href: "/product-category/slug",
+                    href: "/product-category/[slug]",
                     as: `/product-category/${category.slug}`,
                     label: category.name,
                   }}

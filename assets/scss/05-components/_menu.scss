@@ -12,6 +12,8 @@
   padding: 0 $supple-space-small;
   background-color: $color-septenary-500;
   background-color: $color-white;
+  border: $border-small;
+  border-top: 0;
 
   @include mq($from: $hamburger-breakpoint) {
     display: none;

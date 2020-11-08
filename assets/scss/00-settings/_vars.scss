@@ -148,7 +148,10 @@ $supple-breakpoint-has-spacing: (
  * Border
  */
 $border-base-width: $supple-space-tiny;
+$border-small-width: $supple-space-tiny / 2;
+
 $border-base: $border-base-width solid $color-black;
+$border-small: $border-small-width solid $color-black;
 
 /**
  * A11y

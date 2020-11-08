@@ -20,7 +20,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
 
   return (
     <tr
-      key={cartItem.product.slug}
+      key={cartItem.product.sku}
       className="c-responsive-table__row u-umbrella__container"
     >
       {/* Delete */}
@@ -59,7 +59,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
       {/* Name + url */}
       <td>
         {cartItem.product.name}
-        <Link href="/product/[slug]" as={`/product/${cartItem.product.slug}`}>
+        <Link href="/product/[id]" as={`/product/${cartItem.product.sku}`}>
           <a className="u-umbrella">
             <span className="u-visually-hidden">Go to product page</span>
           </a>
@@ -97,7 +97,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
                                   min="1"
                                   max={variation.stockQuantity}
                                   defaultValue={variation.quantity}
-                                  name={`${cartItem.product.slug}-${variationString}`}
+                                  name={`${cartItem.product.sku}-${variationString}`}
                                   onChange={({ target }) => {
                                     clearTimeout(timer);
 
@@ -127,7 +127,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
                   })}
                 </>
               ) : (
-                <tr key={`${cartItem.product.slug}`}>
+                <tr key={`${cartItem.product.sku}`}>
                   <td></td>
                   <td>
                     <small>{cartItem.product.price}</small>
@@ -143,7 +143,7 @@ const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
                             min="1"
                             max={cartItem.product.stockQuantity}
                             defaultValue={cartItem.quantity}
-                            name={`${cartItem.product.slug}`}
+                            name={`${cartItem.product.sku}`}
                             disabled={disabled}
                             onChange={({ target }) => {
                               clearTimeout(timer);
