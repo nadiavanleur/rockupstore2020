@@ -10,8 +10,7 @@ import Button from "../../../components/Button";
 import Link from "next/link";
 import { defaultInitialProps } from "../../../helpers/defaultInitialProps";
 import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
-
-// @TODO: fitfinder
+import Upsells from "../../../components/upsells";
 
 /**
  * ProductPage
@@ -94,49 +93,11 @@ const ProductPage = ({ product, menus, settings }) => {
                 updateSelectedVariation={setSelectedVariation}
               />
 
-              {/* @TODO move upsells to component */}
               {!!product?.upsell?.nodes?.length && (
-                <ul className="o-layout o-layout--gutter-tiny">
-                  <li className="o-layout__cell o-layout__cell--fit">
-                    <img
-                      src={sliderImages?.[0]?.sourceUrl}
-                      srcSet={sliderImages?.[0]?.srcSet}
-                      alt={
-                        sliderImages?.[0]?.altText ||
-                        sliderImages?.[0]?.title ||
-                        ""
-                      }
-                      width="50"
-                      height="50"
-                      className="u-border-small"
-                    />
-                  </li>
-
-                  {product.upsell.nodes.map((upsell) => {
-                    const image =
-                      upsell.galleryImages?.nodes?.[0] || upsell.image;
-
-                    return (
-                      <li className="o-layout__cell o-layout__cell--fit">
-                        <Link
-                          href="/product/[id]"
-                          as={`/product/${upsell.sku}`}
-                        >
-                          <a>
-                            <img
-                              src={image.sourceUrl}
-                              srcSet={image.srcSet}
-                              alt={image.altText || image.title || ""}
-                              width="50"
-                              height="50"
-                              className="u-border-small-white"
-                            />
-                          </a>
-                        </Link>
-                      </li>
-                    );
-                  })}
-                </ul>
+                <Upsells
+                  currentProductImage={sliderImages?.[0]}
+                  products={product.upsell.nodes}
+                />
               )}
 
               <AddToCard product={product} variation={selectedVariation}>

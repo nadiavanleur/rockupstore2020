@@ -77,7 +77,6 @@ const RestoreCartItems = ({ keys, onCompleted, children }) => {
     },
   });
 
-  // @TODO flashmessage
   return (
     <>
       {children({

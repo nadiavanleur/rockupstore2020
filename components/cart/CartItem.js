@@ -5,19 +5,7 @@ import RemoveFromCart from "../mutationButtons/RemoveFromCart";
 import UpdateItemQuantity from "../mutationButtons/UpdateItemQuantity";
 import { v4 } from "uuid";
 
-const CartItem = ({ cartItem, setCart, setRestoreKeys, collapsed }) => {
-  const handleQuantityUpdate = (attributes, newQuantity) => {
-    /**
-     * @TODO
-     * Mutations:
-     * - updateItemQuantities
-     */
-    if (!process.browser) return;
-
-    const newCart = addCartItem({ product: cartItem, attributes, newQuantity });
-    setCart(newCart);
-  };
-
+const CartItem = ({ cartItem, collapsed }) => {
   return (
     <tr
       key={cartItem.product.sku}
