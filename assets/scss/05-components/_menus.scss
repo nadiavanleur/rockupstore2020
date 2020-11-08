@@ -40,7 +40,8 @@
       flex: 0 0 auto;
 
       &:first-child {
-        flex: 0 1 auto;
+        margin-top: auto;
+        margin-bottom: 0 !important;
       }
     }
   }

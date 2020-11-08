@@ -12,24 +12,24 @@ class Header extends Component {
     const MENU_OPEN_CLASS = "c-menus--open";
     const { topMenu, categoriesMenu, settings } = this.props;
 
+    console.log(settings);
+
     const sectionTitle = (
-      <>
+      <div className="u-fraction--6of12@from-md u-fraction--4of12@from-lg">
         {settings?.logo ? (
-          <div className="u-fraction--6of12@from-md u-fraction--4of12@from-lg">
-            <span className="u-visually-hidden">
-              {settings?.generalSettingsTitle || ""}
-            </span>
+          <>
+            <span className="u-visually-hidden">{settings?.title || ""}</span>
             <img
               src={settings.logo.sourceUrl}
               srcSet={settings.logo.srcSet}
               alt={settings.logo.altText || settings.logo.title || ""}
               style={{ background: "none" }}
             />
-          </div>
+          </>
         ) : (
-          settings?.generalSettingsTitle || ""
+          settings?.title || ""
         )}
-      </>
+      </div>
     );
 
     return (
@@ -45,7 +45,16 @@ class Header extends Component {
               <Menu menu={topMenu} />
             </header>
             <div className="o-retain o-retain--wall u-margin-bottom-base">
-              <Section title={sectionTitle} TitleTag="h1">
+              <Section
+                title={
+                  <>
+                    {sectionTitle}
+                    {settings?.subtitle && <small>{settings.subtitle}</small>}
+                  </>
+                }
+                subtitle={settings?.subtitle}
+                TitleTag="h1"
+              >
                 {!!categoriesMenu?.length && (
                   <Menu
                     menu={categoriesMenu}
@@ -56,6 +65,8 @@ class Header extends Component {
             </div>
           </div>
         </div>
+
+        {/* Mobile title section */}
         <div className="o-retain o-retain--wall u-margin-bottom-base">
           <Section
             title={sectionTitle}
