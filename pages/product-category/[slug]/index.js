@@ -20,7 +20,10 @@ const CategoryPage = ({ category, products, sortby, menus, settings }) => (
         <Section title="Subcategories" extraClasses="c-section--black">
           <ul className="o-layout o-layout--gutter-base">
             {category.children.nodes.map((subcategory) => (
-              <li className="o-layout__cell u-fraction--6of12 u-fraction--3of12@from-md u-margin-bottom-base">
+              <li
+                className="o-layout__cell u-fraction--6of12 u-fraction--3of12@from-md u-margin-bottom-base"
+                key={subcategory.slug}
+              >
                 <Card
                   image={subcategory?.products?.nodes?.[0]?.image}
                   cta={{
