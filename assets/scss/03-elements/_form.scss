@@ -8,6 +8,5 @@ input {
   &[type="number"] {
     padding-right: 0;
     width: calc(5ch + #{$supple-space-tiny * 2});
-    border: none;
   }
 }

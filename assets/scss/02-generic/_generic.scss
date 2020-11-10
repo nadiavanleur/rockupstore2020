@@ -60,6 +60,7 @@ button {
 
 input[type="text"],
 input[type="email"],
+input[type="number"],
 select {
   border: none;
   border-bottom: 1px solid $color-black;
@@ -70,13 +71,14 @@ select {
   position: relative;
 
   &::before {
-    content: "⇵";
+    content: "▾";
     position: absolute;
     right: 0;
     z-index: 0;
   }
 
   select {
+    border: $border-small;
     position: relative;
     z-index: 10;
     width: 100%;
