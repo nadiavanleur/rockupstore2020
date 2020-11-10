@@ -10,9 +10,9 @@ const Menu = ({ menu, extraLayoutClasses }) => {
       <ul className={`o-layout ${extraLayoutClasses || ""}`}>
         {menu.map((menuItem) => {
           if (menuItem.parentId) return null;
-          const href = menuItem.connectedNode
-            ? menuItem.connectedNode.node.uri
-            : menuItem.path || "/";
+          let href = menuItem?.connectedNode?.node?.uri || menuItem.path || "/";
+          if (href.split("/product-category/").length > 1)
+            href = `/product-category/${menuItem?.connectedNode?.node?.slug}`;
 
           return (
             <li
@@ -28,23 +28,27 @@ const Menu = ({ menu, extraLayoutClasses }) => {
               >
                 {href === "/cart/" && <CartIcon />}
               </Button>
+
               {!!menuItem?.childItems?.nodes?.length && (
                 <ul className="c-menu__submenu o-list-clean">
-                  {menuItem.childItems.nodes.map((subItem) => (
-                    <li key={subItem.id} className="c-menu__submenu-item">
-                      <Button
-                        label={subItem.label}
-                        tag="a"
-                        href={
-                          subItem.connectedNode
-                            ? subItem.connectedNode.node.uri
-                            : subItem.path || "/"
-                        }
-                        target={subItem.target}
-                        extraClasses="c-button--link c-button--fill-left"
-                      />
-                    </li>
-                  ))}
+                  {menuItem.childItems.nodes.map((subItem) => {
+                    let subHref =
+                      subItem?.connectedNode?.node?.uri || subItem.path || "/";
+                    if (subHref.split("/product-category/").length > 1)
+                      subHref = `/product-category/${subItem?.connectedNode?.node?.slug}`;
+
+                    return (
+                      <li key={subItem.id} className="c-menu__submenu-item">
+                        <Button
+                          label={subItem.label}
+                          tag="a"
+                          href={subHref}
+                          target={subItem.target}
+                          extraClasses="c-button--link c-button--fill-left"
+                        />
+                      </li>
+                    );
+                  })}
                 </ul>
               )}
             </li>

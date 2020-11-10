@@ -14,6 +14,9 @@ const MENU_FRAGMENT = gql`
           node {
             id
             uri
+            ... on ProductCategory {
+              slug
+            }
           }
         }
         childItems {
@@ -27,6 +30,9 @@ const MENU_FRAGMENT = gql`
               node {
                 id
                 uri
+                ... on ProductCategory {
+                  slug
+                }
               }
             }
           }
