@@ -1,12 +1,67 @@
-input {
-  &[type="text"],
-  &[type="email"],
-  &[type="number"] {
-    padding: $supple-space-tiny;
+label,
+input,
+select,
+button {
+  font-size: $font-size-small;
+}
+
+input[type="text"],
+input[type="email"],
+input[type="number"],
+select {
+  border: none;
+  border-bottom: 1px solid $color-black;
+  width: 100%;
+  padding: $supple-space-tiny;
+}
+
+input[type="number"] {
+  padding-right: 0;
+  width: calc(5ch + #{$supple-space-tiny * 2});
+}
+
+.e-select__container {
+  position: relative;
+
+  &::before {
+    content: "▾";
+    position: absolute;
+    right: 0;
+    z-index: 0;
   }
 
-  &[type="number"] {
-    padding-right: 0;
-    width: calc(5ch + #{$supple-space-tiny * 2});
+  select {
+    border: $border-small;
+    position: relative;
+    z-index: 10;
+    width: 100%;
+    padding-right: 2ch;
+  }
+}
+
+select {
+  border: none;
+  background: none;
+}
+
+button {
+  min-height: $a11y-size;
+  min-width: $a11y-size;
+  padding: 0;
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  background: transparent;
+  color: $color-black;
+  cursor: pointer;
+
+  &:hover,
+  &:focus {
+    text-decoration: underline;
+  }
+
+  &:disabled {
+    color: $color-gray-700;
+    cursor: not-allowed;
   }
 }
