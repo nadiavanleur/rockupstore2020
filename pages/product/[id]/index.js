@@ -10,13 +10,14 @@ import Button from "../../../components/Button";
 import Link from "next/link";
 import { defaultInitialProps } from "../../../helpers/defaultInitialProps";
 import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
-import Upsells from "../../../components/upsells";
+import Upsells from "../../../components/Upsells";
 
 /**
  * ProductPage
  */
 const ProductPage = ({ product, menus, settings }) => {
   if (product.type === "GROUP") return null; //@TODO Group product
+  console.log(product);
 
   const defaultVariation = product?.variations?.nodes[0];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);

@@ -1,6 +1,9 @@
 import gql from "graphql-tag";
 import PRODUCT_FRAGMENT from "../fragments/product";
 
+// where: {
+//   status: "publish"
+// }
 /**
  * $first: Int
  * $after: String
