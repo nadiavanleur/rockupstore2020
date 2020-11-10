@@ -16,8 +16,16 @@ import Upsells from "../../../components/Upsells";
  * ProductPage
  */
 const ProductPage = ({ product, menus, settings }) => {
-  if (product.type === "GROUP") return null; //@TODO Group product
-  console.log(product);
+  if (!product)
+    return (
+      <Layout menus={menus} settings={settings} title="Product not found">
+        <div className="o-retain o-retain--wall">
+          <Section>Product not found</Section>
+        </div>
+      </Layout>
+    );
+
+  if (product?.type === "GROUP") return null; //@TODO Group product
 
   const defaultVariation = product?.variations?.nodes[0];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);
@@ -35,10 +43,7 @@ const ProductPage = ({ product, menus, settings }) => {
     );
 
   const sliderImages = [
-    ...(useProduct.galleryImages &&
-      useProduct.galleryImages.nodes &&
-      !!useProduct.galleryImages.nodes.length &&
-      useProduct.galleryImages.nodes),
+    ...(useProduct?.galleryImages?.nodes || []),
     ...(useProduct.image ? [useProduct.image] : []),
   ];
 
@@ -49,7 +54,7 @@ const ProductPage = ({ product, menus, settings }) => {
           <div className="o-layout o-layout--gutter-base">
             <div className="o-layout__cell o-layout__cell--fill@from-md">
               <Slider extraClasses="c-slider--product">
-                {sliderImages.map((image) => {
+                {sliderImages?.map((image) => {
                   if (image?.sourceUrl)
                     return (
                       <div key={image.sourceUrl}>
