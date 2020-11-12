@@ -53,7 +53,7 @@ const AddToCart = ({ product, variation, children }) => {
             <Button
               label="Go to cart"
               tag="a"
-              href="/cart"
+              href="/checkout"
               extraClasses="c-flashmessage__button c-button--link"
             />
           ),
