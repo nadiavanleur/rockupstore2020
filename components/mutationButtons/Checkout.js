@@ -54,6 +54,9 @@ const Checkout = ({ children }) => {
           ),
         });
 
+        // Empty cart
+        setCart(null);
+
         window.location.href = data.checkout.redirect;
       } else if (data?.checkout?.result === "fail") {
         console.error("Checkout failed");
@@ -72,6 +75,7 @@ const Checkout = ({ children }) => {
     },
     onError: (error) => {
       console.error(error);
+
       if (error) {
         addFlashMessage({
           type: "error",

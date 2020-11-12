@@ -10,7 +10,15 @@ import client from "./ApolloClient";
 import { ApolloProvider as ApolloHooksProvider } from "@apollo/react-hooks";
 import FlashMessages from "./FlashMessages";
 
-const Layout = ({ children, extraClasses, menus, settings, title }) => {
+const Layout = ({
+  children,
+  extraClasses,
+  menus,
+  settings,
+  title,
+  parent,
+  hideCategoryMenu,
+}) => {
   const { topMenu, categoriesMenu, footerMenu } = menus || {};
 
   return (
@@ -27,6 +35,9 @@ const Layout = ({ children, extraClasses, menus, settings, title }) => {
                   categoriesMenu={categoriesMenu}
                   settings={settings}
                   categoriesMenu={categoriesMenu}
+                  hideCategoryMenu={hideCategoryMenu}
+                  title={title}
+                  parent={parent}
                 />
               )}
               <main className={extraClasses}>{children}</main>

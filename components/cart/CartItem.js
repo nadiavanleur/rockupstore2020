@@ -8,7 +8,7 @@ import { v4 } from "uuid";
 const CartItem = ({ cartItem, collapsed }) => {
   return (
     <tr
-      key={cartItem.product.sku}
+      key={cartItem.product.slug}
       className="c-responsive-table__row u-umbrella__container"
     >
       {/* Delete */}
@@ -47,7 +47,7 @@ const CartItem = ({ cartItem, collapsed }) => {
       {/* Name + url */}
       <td>
         {cartItem.product.name}
-        <Link href="/product/[id]" as={`/product/${cartItem.product.sku}`}>
+        <Link href="/product/[id]" as={`/product/${cartItem.product.slug}`}>
           <a className="u-umbrella">
             <span className="u-visually-hidden">Go to product page</span>
           </a>
@@ -75,7 +75,7 @@ const CartItem = ({ cartItem, collapsed }) => {
                           <small>{variation.price}</small>
                         </td>
                         <td className="u-text-right u-text-bottom">
-                          <UpdateItemQuantity key={cartItem.keys[0]}>
+                          <UpdateItemQuantity itemKey={cartItem.keys[0]}>
                             {({ updateItemQuantity, disabled }) => {
                               let timer;
 
@@ -85,7 +85,7 @@ const CartItem = ({ cartItem, collapsed }) => {
                                   min="1"
                                   max={variation.stockQuantity}
                                   defaultValue={variation.quantity}
-                                  name={`${cartItem.product.sku}-${variationString}`}
+                                  name={`${cartItem.product.slug}-${variationString}`}
                                   onChange={({ target }) => {
                                     clearTimeout(timer);
 
@@ -115,13 +115,13 @@ const CartItem = ({ cartItem, collapsed }) => {
                   })}
                 </>
               ) : (
-                <tr key={`${cartItem.product.sku}`}>
+                <tr key={`${cartItem.product.slug}`}>
                   <td></td>
                   <td>
                     <small>{cartItem.product.price}</small>
                   </td>
                   <td className="u-text-right u-text-bottom">
-                    <UpdateItemQuantity key={cartItem.keys[0]}>
+                    <UpdateItemQuantity itemKey={cartItem.keys[0]}>
                       {({ updateItemQuantity, disabled }) => {
                         let timer;
 
@@ -131,7 +131,7 @@ const CartItem = ({ cartItem, collapsed }) => {
                             min="1"
                             max={cartItem.product.stockQuantity}
                             defaultValue={cartItem.quantity}
-                            name={`${cartItem.product.sku}`}
+                            name={`${cartItem.product.slug}`}
                             disabled={disabled}
                             onChange={({ target }) => {
                               clearTimeout(timer);

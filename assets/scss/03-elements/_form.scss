@@ -31,17 +31,11 @@ input[type="number"] {
   }
 
   select {
-    border: $border-small;
     position: relative;
     z-index: 10;
     width: 100%;
     padding-right: 2ch;
   }
-}
-
-select {
-  border: none;
-  background: none;
 }
 
 button {
@@ -64,4 +58,13 @@ button {
     color: $color-gray-700;
     cursor: not-allowed;
   }
+}
+
+fieldset {
+  border: 1px solid black;
+  padding: $supple-space-small;
+}
+
+legend {
+  margin-bottom: $supple-space-small;
 }

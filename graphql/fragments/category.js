@@ -9,12 +9,21 @@ const CATEGORY_FRAGMENT = gql`
     uri
     description
     count
+    image {
+      altText
+      srcSet
+      sizes
+      id
+      uri
+      title
+      sourceUrl
+    }
     products {
       nodes {
         ...ProductFragment
       }
     }
-    children {
+    children(where: { hideEmpty: true, parent: $parent }) {
       nodes {
         id
         name
@@ -22,6 +31,15 @@ const CATEGORY_FRAGMENT = gql`
         uri
         description
         count
+        image {
+          altText
+          srcSet
+          sizes
+          id
+          uri
+          title
+          sourceUrl
+        }
         products(first: 1) {
           nodes {
             ...ProductFragment

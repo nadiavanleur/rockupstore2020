@@ -5,7 +5,7 @@ import { updateCartItem } from "./updateCartItem";
 /**
  * removeCartItem
  *
- * @param {*} product { price, sku, slug, image, name }
+ * @param {*} product { price, slug, slug, image, name }
  */
 export const removeCartItem = ({ product }) => {
   const existingCart = localStorage.getItem("cart");
@@ -20,13 +20,13 @@ export const removeCartItem = ({ product }) => {
       };
 
   const existingProduct = cart.products.find(
-    (cartItem) => cartItem.sku === product.sku
+    (cartItem) => cartItem.slug === product.slug
   );
 
   if (!existingProduct) return;
 
   cart.products = cart.products.filter(
-    (cartItem) => cartItem.sku !== product.sku
+    (cartItem) => cartItem.slug !== product.slug
   );
 
   cart.totalProducts = cart.products.reduce(

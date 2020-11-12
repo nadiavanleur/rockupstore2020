@@ -15,6 +15,14 @@ export const CartProvider = ({ children }) => {
   }, []);
 
   const setCart = (updatedCart) => {
+    console.log(updatedCart);
+
+    if (updatedCart === null) {
+      setCartState(null);
+      if (process.browser) localStorage.removeItem("cart");
+      return;
+    }
+
     const formattedCart = getFormattedCart(updatedCart);
     if (!formattedCart) return;
     // Update cart data in React Context.

@@ -5,17 +5,31 @@ import { withRouter } from "next/router";
 import Slider from "../../../components/Slider";
 import AddToCard from "../../../components/mutationButtons/AddToCart";
 import VariationSelect from "../../../components/VariationSelect";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import Button from "../../../components/Button";
 import Link from "next/link";
 import { defaultInitialProps } from "../../../helpers/defaultInitialProps";
-import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-sku";
+import PRODUCT_QUERY from "../../../graphql/queries/get-product-by-slug";
 import Upsells from "../../../components/Upsells";
+import Designer from "../../../components/Designer";
 
 /**
  * ProductPage
  */
-const ProductPage = ({ product, menus, settings }) => {
+const ProductPage = ({
+  product,
+  menus,
+  settings,
+  // authToken,
+}) => {
+  // Login user
+  // useEffect(() => {
+  //   console.log(authToken);
+  //   if (authToken) {
+  //     localStorage.setItem("authToken", authToken);
+  //   }
+  // }, []);
+
   if (!product)
     return (
       <Layout menus={menus} settings={settings} title="Product not found">
@@ -24,6 +38,8 @@ const ProductPage = ({ product, menus, settings }) => {
         </div>
       </Layout>
     );
+
+  console.dir(product);
 
   if (product?.type === "GROUP") return null; //@TODO Group product
 
@@ -53,6 +69,7 @@ const ProductPage = ({ product, menus, settings }) => {
         <Section>
           <div className="o-layout o-layout--gutter-base">
             <div className="o-layout__cell o-layout__cell--fill@from-md">
+              {/* Image slider */}
               <Slider extraClasses="c-slider--product">
                 {sliderImages?.map((image) => {
                   if (image?.sourceUrl)
@@ -68,8 +85,12 @@ const ProductPage = ({ product, menus, settings }) => {
                 })}
               </Slider>
             </div>
+
             <div className="o-layout__cell o-layout__cell--fill@from-md">
+              {/* Product name */}
               <h2 className="u-margin-bottom-small">{useProduct.name}</h2>
+
+              {/* Short description */}
               {useProduct.shortDescription && (
                 <div className="u-margin-bottom-small">
                   <small
@@ -79,6 +100,8 @@ const ProductPage = ({ product, menus, settings }) => {
                   />
                 </div>
               )}
+
+              {/* Price */}
               <div
                 className={`c-price${
                   useProduct.onSale ? " c-price--on-sale" : ""
@@ -92,6 +115,7 @@ const ProductPage = ({ product, menus, settings }) => {
                 )}
               </div>
 
+              {/* Select variation */}
               <VariationSelect
                 variations={product.variations}
                 attributes={product.attributes}
@@ -99,6 +123,7 @@ const ProductPage = ({ product, menus, settings }) => {
                 updateSelectedVariation={setSelectedVariation}
               />
 
+              {/* Similar products */}
               {!!product?.upsell?.nodes?.length && (
                 <Upsells
                   currentProductImage={sliderImages?.[0]}
@@ -106,21 +131,47 @@ const ProductPage = ({ product, menus, settings }) => {
                 />
               )}
 
-              <AddToCard product={product} variation={selectedVariation}>
-                {({ addToCart, addToCartLoading }) => (
-                  <Button
-                    label="Add to cart"
-                    onClick={addToCart}
-                    disabled={itemNotAvailable || addToCartLoading}
-                    extraClasses="c-button--fill"
-                  />
-                )}
-              </AddToCard>
+              {/* Product button */}
+              {product.type === "EXTERNAL" ? (
+                // Go to product
+                <a
+                  target="_blank"
+                  href={product.externalUrl}
+                  disabled={!product.externalUrl}
+                  className="c-button c-button--fill"
+                >
+                  {product.buttonText || "View on designers' website"}
+                </a>
+              ) : (
+                // Add to cart
+                <AddToCard product={product} variation={selectedVariation}>
+                  {({ addToCart, addToCartLoading }) => (
+                    <Button
+                      label="Add to cart"
+                      onClick={addToCart}
+                      disabled={itemNotAvailable || addToCartLoading}
+                      extraClasses="c-button--fill"
+                    />
+                  )}
+                </AddToCard>
+              )}
+              {/* List designers */}
+              {!!product.designer?.designer?.length && (
+                <ul className="o-list-clean u-margin-none u-margin-top-base">
+                  {product.designer.designer.map((designer) => (
+                    <li className={designer.name}>
+                      <Designer designer={designer} />
+                    </li>
+                  ))}
+                </ul>
+              )}
             </div>
           </div>
         </Section>
+
         {useProduct.description && (
           <Section>
+            {/* Product description */}
             {useProduct.description && (
               <div
                 dangerouslySetInnerHTML={{ __html: useProduct.description }}
@@ -136,6 +187,8 @@ const ProductPage = ({ product, menus, settings }) => {
 ProductPage.getInitialProps = async (router) => {
   const { id } = router.query;
 
+  const settingsProps = await defaultInitialProps();
+
   const productResult = await client.query({
     query: PRODUCT_QUERY,
     variables: {
@@ -143,11 +196,11 @@ ProductPage.getInitialProps = async (router) => {
     },
   });
 
-  const settingsProps = await defaultInitialProps();
-
   return {
     ...settingsProps,
     product: productResult?.data?.product,
+    users: productResult?.data?.users,
+    viewer: productResult?.data?.viewer,
   };
 };
 

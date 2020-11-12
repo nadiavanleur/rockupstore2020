@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import Menu from "./Menu";
 import Button from "./Button";
 import Section from "./Section";
+import Link from "next/link";
 
 class Header extends Component {
   constructor(props) {
@@ -10,10 +11,17 @@ class Header extends Component {
   }
   render() {
     const MENU_OPEN_CLASS = "c-menus--open";
-    const { topMenu, categoriesMenu, settings } = this.props;
+    const {
+      topMenu,
+      categoriesMenu,
+      settings,
+      hideCategoryMenu,
+      title,
+      parent,
+    } = this.props;
 
     const sectionTitle = (
-      <div className="u-fraction--6of12@from-md u-fraction--4of12@from-lg">
+      <div>
         {settings?.logo ? (
           <>
             <span className="u-visually-hidden">{settings?.title || ""}</span>
@@ -28,6 +36,20 @@ class Header extends Component {
           settings?.title || ""
         )}
       </div>
+    );
+
+    const breadcrumb = title && (
+      <>
+        {parent?.title && parent?.url && (
+          <>
+            <Link href={parent.url}>
+              <a>{parent.title}</a>
+            </Link>
+          </>
+        )}
+        {" > "}
+        <b>{title}</b>
+      </>
     );
 
     return (
@@ -52,8 +74,10 @@ class Header extends Component {
                 }
                 subtitle={settings?.subtitle}
                 TitleTag="h1"
+                breadcrumb={breadcrumb}
+                extraClasses="c-section--header"
               >
-                {!!categoriesMenu?.length && (
+                {!hideCategoryMenu && !!categoriesMenu?.length && (
                   <Menu
                     menu={categoriesMenu}
                     extraLayoutClasses="o-layout--gutter-small"
@@ -70,6 +94,7 @@ class Header extends Component {
             title={sectionTitle}
             TitleTag="h2"
             extraClasses="u-hidden@from-md"
+            breadcrumb={breadcrumb}
           />
         </div>
       </>

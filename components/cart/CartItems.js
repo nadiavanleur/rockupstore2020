@@ -1,4 +1,4 @@
-import React, { useContext, useState } from "react";
+import React, { Fragment, useContext, useState } from "react";
 import { CartContext } from "../context/CartContext";
 import CartItem from "./CartItem";
 import Button from "../Button";
@@ -40,7 +40,7 @@ const CartItems = ({ collapsed }) => {
               cartItem={cartItem}
               setCart={setCart}
               collapsed={collapsed}
-              key={cartItem.id}
+              key={`${cartItem.id}${cartItem.product.slug}`}
             />
           ))}
         </tbody>
@@ -111,7 +111,7 @@ const CartItems = ({ collapsed }) => {
                   <Button
                     label="Checkout"
                     tag="a"
-                    href="/checkout"
+                    href="/checkout#checkout"
                     extraClasses="c-button--fill"
                   />
                 </div>

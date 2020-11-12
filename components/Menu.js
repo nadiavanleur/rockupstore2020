@@ -26,7 +26,7 @@ const Menu = ({ menu, extraLayoutClasses }) => {
                 target={menuItem.target}
                 extraClasses="c-menu__link c-button--fill"
               >
-                {href === "/cart/" && <CartIcon />}
+                {(href === "/cart/" || href === "/checkout/") && <CartIcon />}
               </Button>
 
               {!!menuItem?.childItems?.nodes?.length && (

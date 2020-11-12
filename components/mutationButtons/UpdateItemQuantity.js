@@ -6,7 +6,7 @@ import GET_CART from "../../graphql/queries/get-cart";
 import UPDATE_ITEM_QUANTITY from "../../graphql/mutations/update-item-quantity";
 import { FlashMessageContext } from "../context/FlashMessageContext";
 
-const UpdateItemQuantity = ({ key, quantity, children }) => {
+const UpdateItemQuantity = ({ itemKey: key, quantity, children }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     items: [

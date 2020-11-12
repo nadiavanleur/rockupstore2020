@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 import CATEGORY_FRAGMENT from "../fragments/category";
 
 const CATEGORY_QUERY = gql`
-  query CategoryQuery($id: ID!) {
+  query CategoryQuery($id: ID!, $parent: Int) {
     productCategory(id: $id, idType: SLUG) {
       ...CategoryFragment
     }
