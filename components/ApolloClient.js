@@ -22,11 +22,13 @@ export const middleware = new ApolloLink((operation, forward) => {
   const session = process.browser
     ? localStorage.getItem("woocommerce-session")
     : null;
+  // const authToken = process.browser ? localStorage.getItem("authToken") : null;
 
   if (session) {
     operation.setContext(({ headers = {} }) => ({
       headers: {
-        "woocommerce-session": `Session ${session}`,
+        ...(session ? { "woocommerce-session": `Session ${session}` } : {}),
+        // ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
       },
     }));
   }

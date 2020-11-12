@@ -48,6 +48,7 @@ const PRODUCT_FRAGMENT = gql`
         id
         productId
         sku
+        slug
         name
         galleryImages {
           nodes {
@@ -71,6 +72,18 @@ const PRODUCT_FRAGMENT = gql`
         }
       }
     }
+    designer {
+      designer {
+        username
+        name
+        isRestricted
+        description
+        url
+        avatar {
+          url
+        }
+      }
+    }
     ...VariableProductFragment
     ... on SimpleProduct {
       id
@@ -83,6 +96,7 @@ const PRODUCT_FRAGMENT = gql`
       price
       salePrice
       externalUrl
+      buttonText
     }
     ... on GroupProduct {
       id

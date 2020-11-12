@@ -14,13 +14,19 @@ import PAYMENT_METHODS_QUERY from "../../graphql/queries/get-payment-methods";
  */
 const Checkout = ({ paymentMethods, menus, settings }) => {
   return (
-    <Layout menus={menus} settings={settings} title="Checkout">
+    <Layout
+      menus={menus}
+      settings={settings}
+      title="Checkout"
+      parent={{ title: "Cart", url: "/cart" }}
+      hideCategoryMenu
+    >
       <CheckoutContent paymentMethods={paymentMethods} />
     </Layout>
   );
 };
 
-const CheckoutContent = ({ paymentMethods, menus, settings }) => {
+const CheckoutContent = ({ paymentMethods }) => {
   const [cart, setCart] = useContext(CartContext);
   const cartEmpty =
     !cart?.contents?.itemCount ||
@@ -37,32 +43,22 @@ const CheckoutContent = ({ paymentMethods, menus, settings }) => {
         </div>
       ) : (
         <div className="o-retain o-retain--wall">
-          <Section
-            title="Checkout"
-            extraClasses="u-margin-bottom-base u-padding-bottom-none"
-          />
-          <div className="o-layout o-layout--gutter-base">
-            <div className="o-layout__cell u-fraction--6of12@from-md">
-              <Section title="Billing details">
-                <CheckoutMutation>
-                  {({ input, onSubmit, onChange, checkoutLoading }) => (
-                    <BillingForm
-                      input={input}
-                      onSubmit={onSubmit}
-                      onChange={onChange}
-                      checkoutLoading={checkoutLoading}
-                      paymentMethods={paymentMethods}
-                    />
-                  )}
-                </CheckoutMutation>
-              </Section>
-            </div>
-            <div className="o-layout__cell u-fraction--6of12@from-md">
-              <Section title="Your order">
-                <CartItems collapsed />
-              </Section>
-            </div>
-          </div>
+          <Section title="Your cart">
+            <CartItems />
+          </Section>
+          <Section title="Billing details" id="checkout">
+            <CheckoutMutation>
+              {({ input, onSubmit, onChange, checkoutLoading }) => (
+                <BillingForm
+                  input={input}
+                  onSubmit={onSubmit}
+                  onChange={onChange}
+                  checkoutLoading={checkoutLoading}
+                  paymentMethods={paymentMethods}
+                />
+              )}
+            </CheckoutMutation>
+          </Section>
         </div>
       )}
     </>
@@ -78,7 +74,8 @@ Checkout.getInitialProps = async () => {
 
   return {
     ...settingsProps,
-    paymentMethods: paymentMethodsResult?.data?.paymentGateways.nodes,
+    paymentMethods: paymentMethodsResult?.data?.paymentGateways?.nodes,
+    paymentMethodsResult,
   };
 };
 

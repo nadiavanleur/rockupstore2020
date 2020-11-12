@@ -1,6 +1,7 @@
 import { withRouter } from "next/router";
-import { useContext } from "react";
+import { useContext, useEffect } from "react";
 import { BillingContext } from "../../../../components/context/BillingContext";
+import { CartContext } from "../../../../components/context/CartContext";
 import Layout from "../../../../components/Layout";
 import Section from "../../../../components/Section";
 import { defaultInitialProps } from "../../../../helpers/defaultInitialProps";

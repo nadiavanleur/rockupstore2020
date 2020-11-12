@@ -13,7 +13,7 @@ const ProductsList = ({ products }) => {
               image,
               price,
               id,
-              sku,
+              slug,
               attributes,
               type,
             }) => (
@@ -28,7 +28,7 @@ const ProductsList = ({ products }) => {
                     hoverImage={image}
                     price={price}
                     href="/product/[id]"
-                    as={sku && `/product/${sku}`}
+                    as={slug && `/product/${slug}`}
                     attributes={attributes}
                     type={type}
                   />

@@ -6,8 +6,13 @@ import {
   USER_MENU_QUERY,
 } from "../graphql/queries/get-menus";
 import SETTINGS_QUERY from "../graphql/queries/get-settings";
+// import LOGIN_GUEST from "../graphql/mutations/login-guest";
 
 export const defaultInitialProps = async () => {
+  // const loginGuestResult = await client.mutate({
+  //   mutation: LOGIN_GUEST,
+  // });
+
   const settingsResult = await client.query({
     query: SETTINGS_QUERY,
   });
@@ -29,6 +34,8 @@ export const defaultInitialProps = async () => {
   });
 
   return {
+    // authToken: loginGuestResult?.data?.login.authToken,
+    // refreshToken: loginGuestResult?.data?.login.refreshToken,
     settings: {
       ...settingsResult?.data?.allSettings,
       ...settingsResult?.data?.page?.websiteInfo,

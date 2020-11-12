@@ -24,8 +24,8 @@ const Upsells = ({ currentProductImage, products }) => {
         const image = product.galleryImages?.nodes?.[0] || product.image;
 
         return (
-          <li className="o-layout__cell o-layout__cell--fit" key={product.sku}>
-            <Link href="/product/[id]" as={`/product/${product.sku}`}>
+          <li className="o-layout__cell o-layout__cell--fit" key={product.slug}>
+            <Link href="/product/[id]" as={`/product/${product.slug}`}>
               <a>
                 <img
                   src={image.sourceUrl}
