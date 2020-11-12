@@ -45,15 +45,19 @@ const Card = ({
       </div>
       {!!tags?.length && (
         <ul className="o-list-clean c-card__tags">
-          {tags.map((tag) => (
-            <li
-              className={tag.extraClasses}
-              key={`${tag.label}`}
-              className="c-tag"
-            >
-              {tag.label}
-            </li>
-          ))}
+          {tags.map((tag) => {
+            if (!tag.label) return null;
+
+            return (
+              <li
+                className={tag.extraClasses}
+                key={`${tag.label}`}
+                className="c-tag"
+              >
+                {tag.label}
+              </li>
+            );
+          })}
         </ul>
       )}
     </div>
