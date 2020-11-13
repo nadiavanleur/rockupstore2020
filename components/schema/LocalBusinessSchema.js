@@ -10,7 +10,7 @@ const LocalBusinessSchema = ({ settings }) => {
       dangerouslySetInnerHTML={{
         __html: JSON.stringify({
           "@context": "https://schema.org",
-          "@type": "Restaurant",
+          "@type": "Organization",
           image: settings.logo.sourceUrl,
           "@id": clientConfig.liveUrl,
           name: settings.title,

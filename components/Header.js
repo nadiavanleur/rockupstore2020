@@ -4,6 +4,7 @@ import Button from "./Button";
 import Section from "./Section";
 import Link from "next/link";
 import Breadcrumb from "./Breadcrumb";
+import LogoSchema from "./schema/LogoSchema";
 
 class Header extends Component {
   constructor(props) {
@@ -32,6 +33,7 @@ class Header extends Component {
               alt={settings.logo.altText || settings.logo.title || ""}
               style={{ background: "none" }}
             />
+            <LogoSchema logo={settings.logo?.sourceUrl} />
           </>
         ) : (
           settings?.title || ""
