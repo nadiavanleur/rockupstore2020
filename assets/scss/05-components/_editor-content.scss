@@ -1,0 +1,12 @@
+// Block
+.c-editor-content {
+  .pp-multiple-authors-wrapper {
+    display: none;
+  }
+
+  p {
+    &:not(:last-child) {
+      margin-bottom: $supple-space-base;
+    }
+  }
+}

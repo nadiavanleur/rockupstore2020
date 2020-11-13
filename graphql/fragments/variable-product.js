@@ -7,6 +7,7 @@ const VARIABLE_PRODUCT_FRAGMENT = gql`
     onSale
     salePrice
     stockQuantity
+    backordersAllowed
     variations {
       nodes {
         id

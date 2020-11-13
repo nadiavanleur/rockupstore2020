@@ -4,6 +4,7 @@ import "nprogress/nprogress.css";
 import objectFitImages from "object-fit-images";
 import "../assets/scss/styles.scss";
 
+NProgress.configure({ minimum: 0.8 });
 Router.events.on("routeChangeStart", () => NProgress.start());
 Router.events.on("routeChangeComplete", () => NProgress.done());
 Router.events.on("routeChangeError", () => NProgress.done());
