@@ -9,6 +9,7 @@ import { ApolloProvider } from "react-apollo";
 import client from "./ApolloClient";
 import { ApolloProvider as ApolloHooksProvider } from "@apollo/react-hooks";
 import FlashMessages from "./FlashMessages";
+import LocalBusinessSchema from "./schema/LocalBusinessSchema";
 
 const Layout = ({
   children,
@@ -42,6 +43,7 @@ const Layout = ({
               )}
               <main className={extraClasses}>{children}</main>
               {footerMenu && <Footer footerMenu={footerMenu} />}
+              <LocalBusinessSchema settings={settings} />
             </ApolloHooksProvider>
           </ApolloProvider>
         </CartProvider>

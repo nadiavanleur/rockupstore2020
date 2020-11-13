@@ -12,6 +12,7 @@ const PRODUCT_FRAGMENT = gql`
     featured
     onSale
     averageRating
+    reviewCount
     purchasable
     description
     shortDescription
@@ -72,15 +73,18 @@ const PRODUCT_FRAGMENT = gql`
         }
       }
     }
-    designer {
-      designer {
-        username
+    designers: productCategories(where: { parent: 44 }) {
+      nodes {
         name
-        isRestricted
         description
-        url
-        avatar {
-          url
+        image {
+          altText
+          srcSet
+          sizes
+          id
+          uri
+          title
+          sourceUrl
         }
       }
     }
@@ -90,6 +94,7 @@ const PRODUCT_FRAGMENT = gql`
       price
       salePrice
       stockQuantity
+      backordersAllowed
     }
     ... on ExternalProduct {
       id
@@ -100,7 +105,7 @@ const PRODUCT_FRAGMENT = gql`
     }
     ... on GroupProduct {
       id
-      products {
+      products(where: { minPrice: 0.01 }) {
         nodes {
           ...VariableProductFragment
           ... on SimpleProduct {
@@ -108,6 +113,7 @@ const PRODUCT_FRAGMENT = gql`
             price
             salePrice
             stockQuantity
+            backordersAllowed
           }
           ... on ExternalProduct {
             id

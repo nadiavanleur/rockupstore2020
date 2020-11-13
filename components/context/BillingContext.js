@@ -7,7 +7,7 @@ export const BillingProvider = ({ children }) => {
     firstName: "",
     lastName: "",
     company: "",
-    country: "",
+    country: "NL",
     address1: "",
     address2: "",
     city: "",

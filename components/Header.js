@@ -3,6 +3,7 @@ import Menu from "./Menu";
 import Button from "./Button";
 import Section from "./Section";
 import Link from "next/link";
+import Breadcrumb from "./Breadcrumb";
 
 class Header extends Component {
   constructor(props) {
@@ -38,19 +39,7 @@ class Header extends Component {
       </div>
     );
 
-    const breadcrumb = title && (
-      <>
-        {parent?.title && parent?.url && (
-          <>
-            <Link href={parent.url}>
-              <a>{parent.title}</a>
-            </Link>
-          </>
-        )}
-        {" > "}
-        <b>{title}</b>
-      </>
-    );
+    const breadcrumb = <Breadcrumb title={title} parent={parent} />;
 
     return (
       <>
@@ -89,13 +78,8 @@ class Header extends Component {
         </div>
 
         {/* Mobile title section */}
-        <div className="o-retain o-retain--wall u-margin-bottom-base">
-          <Section
-            title={sectionTitle}
-            TitleTag="h2"
-            extraClasses="u-hidden@from-md"
-            breadcrumb={breadcrumb}
-          />
+        <div className="o-retain o-retain--wall u-margin-bottom-base u-hidden@from-md">
+          <Section title={sectionTitle} TitleTag="h2" breadcrumb={breadcrumb} />
         </div>
       </>
     );

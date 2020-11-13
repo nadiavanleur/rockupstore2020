@@ -30,6 +30,7 @@
 
 .c-card__image,
 .c-card__hover-image {
+  background: $color-gray-300;
   width: 100%;
   pointer-events: none;
   position: absolute;

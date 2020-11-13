@@ -4,11 +4,19 @@ import PRODUCT_FRAGMENT from "./product";
 const CATEGORY_FRAGMENT = gql`
   fragment CategoryFragment on ProductCategory {
     id
+    databaseId
     name
     slug
     uri
     description
     count
+    parentDatabaseId
+    parent {
+      node {
+        name
+        slug
+      }
+    }
     image {
       altText
       srcSet
@@ -18,7 +26,7 @@ const CATEGORY_FRAGMENT = gql`
       title
       sourceUrl
     }
-    products {
+    products(where: { minPrice: 0.01 }) {
       nodes {
         ...ProductFragment
       }
