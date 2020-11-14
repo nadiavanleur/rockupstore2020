@@ -202,7 +202,10 @@ const ProductPage = ({
         )}
       </div>
 
-      <ProductSchema product={product} images={sliderImages} />
+      <ProductSchema
+        product={product}
+        images={sliderImages.map((image) => image.sourceUrl)}
+      />
     </Layout>
   );
 };
