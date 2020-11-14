@@ -2,7 +2,7 @@ import React from "react";
 import clientConfig from "../../client-config";
 
 const LocalBusinessSchema = ({ settings }) => {
-  console.log(settings);
+  if (!settings) return null;
 
   return (
     <script
@@ -11,9 +11,9 @@ const LocalBusinessSchema = ({ settings }) => {
         __html: JSON.stringify({
           "@context": "https://schema.org",
           "@type": "Organization",
-          image: settings.logo.sourceUrl,
+          image: settings?.logo?.sourceUrl,
           "@id": clientConfig.liveUrl,
-          name: settings.title,
+          name: settings?.title,
           address: {
             "@type": "PostalAddress",
             streetAddress: clientConfig.address?.street,

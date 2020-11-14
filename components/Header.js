@@ -28,12 +28,12 @@ class Header extends Component {
           <>
             <span className="u-visually-hidden">{settings?.title || ""}</span>
             <img
-              src={settings.logo.sourceUrl}
-              srcSet={settings.logo.srcSet}
-              alt={settings.logo.altText || settings.logo.title || ""}
+              src={settings?.logo?.sourceUrl}
+              srcSet={settings?.logo?.srcSet}
+              alt={settings?.logo?.altText || settings?.logo?.title || ""}
               style={{ background: "none" }}
             />
-            <LogoSchema logo={settings.logo?.sourceUrl} />
+            <LogoSchema logo={settings?.logo?.sourceUrl} />
           </>
         ) : (
           settings?.title || ""
@@ -60,7 +60,7 @@ class Header extends Component {
                 title={
                   <>
                     {sectionTitle}
-                    {settings?.subtitle && <small>{settings.subtitle}</small>}
+                    {settings?.subtitle && <small>{settings?.subtitle}</small>}
                   </>
                 }
                 subtitle={settings?.subtitle}
