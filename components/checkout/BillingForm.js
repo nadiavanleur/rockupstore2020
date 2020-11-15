@@ -3,6 +3,7 @@ import Button from "../Button";
 import FormError from "../FormError";
 import countryList from "../../helpers/countryList";
 import Select from "../inputs/Select";
+import Link from "next/link";
 
 const BillingForm = ({
   input,
@@ -214,6 +215,7 @@ const BillingForm = ({
 
       <fieldset>
         <legend className="u-visually-hidden">Payment</legend>
+
         {/* Payment method */}
         <div className="c-form__row u-margin-none">
           <label htmlFor="country-select">
@@ -246,7 +248,20 @@ const BillingForm = ({
         </div>
       </fieldset>
 
-      <div className="o-layout o-layout--align-right">
+      <div className="o-layout o-layout--gutter-small o-layout--align-right o-layout--align-middle">
+        <div className="o-layout__cell o-layout__cell--fit">
+          <small>
+            By clicking "checkout" you agree to the{" "}
+            <Link href="/page/[slug]" as="/page/terms-and-conditions">
+              <a target="_blank">terms and conditions</a>
+            </Link>{" "}
+            and have read the{" "}
+            <Link href="/page/[slug]" as="/page/return-policy">
+              <a target="_blank">return policy</a>
+            </Link>
+            .
+          </small>
+        </div>
         <div className="o-layout__cell o-layout__cell--fit">
           <Button label="Checkout" type="submit" disabled={checkoutLoading} />
         </div>

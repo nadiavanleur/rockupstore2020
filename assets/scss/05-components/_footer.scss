@@ -1,0 +1,9 @@
+// Block
+.c-footer {
+  background: $color-black;
+
+  &,
+  & * {
+    color: $color-white;
+  }
+}

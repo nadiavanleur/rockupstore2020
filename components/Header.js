@@ -23,22 +23,24 @@ class Header extends Component {
     } = this.props;
 
     const sectionTitle = (
-      <div>
-        {settings?.logo ? (
-          <>
-            <span className="u-visually-hidden">{settings?.title || ""}</span>
-            <img
-              src={settings?.logo?.sourceUrl}
-              srcSet={settings?.logo?.srcSet}
-              alt={settings?.logo?.altText || settings?.logo?.title || ""}
-              style={{ background: "none" }}
-            />
-            <LogoSchema logo={settings?.logo?.sourceUrl} />
-          </>
-        ) : (
-          settings?.title || ""
-        )}
-      </div>
+      <Link href="/">
+        <a>
+          {settings?.logo ? (
+            <>
+              <span className="u-visually-hidden">{settings?.title || ""}</span>
+              <img
+                src={settings?.logo?.sourceUrl}
+                srcSet={settings?.logo?.srcSet}
+                alt={settings?.logo?.altText || settings?.logo?.title || ""}
+                style={{ background: "none" }}
+              />
+              <LogoSchema logo={settings?.logo?.sourceUrl} />
+            </>
+          ) : (
+            settings?.title || ""
+          )}
+        </a>
+      </Link>
     );
 
     const breadcrumb = <Breadcrumb title={title} parent={parent} />;

@@ -83,7 +83,10 @@ const CartItem = ({ cartItem, collapsed }) => {
                                 <input
                                   type="number"
                                   min="1"
-                                  max={variation.stockQuantity}
+                                  max={
+                                    !variation.backordersAllowed &&
+                                    variation.stockQuantity
+                                  }
                                   defaultValue={variation.quantity}
                                   name={`${cartItem.product.slug}-${variationString}`}
                                   onChange={({ target }) => {
@@ -110,6 +113,23 @@ const CartItem = ({ cartItem, collapsed }) => {
                             }}
                           </UpdateItemQuantity>
                         </td>
+                        {variation.quantity > variation.stockQuantity &&
+                          variation.backordersAllowed && (
+                            <td className="u-padding-left-tiny">
+                              <Link href="/page/[slug]" as="/page/backorder">
+                                <a
+                                  extraClasses="u-cursor--help"
+                                  target="_blank"
+                                  title="Backorder"
+                                >
+                                  <small>⚠️</small>
+                                  <span className="u-visually-hidden">
+                                    Backorder
+                                  </span>
+                                </a>
+                              </Link>
+                            </td>
+                          )}
                       </tr>
                     );
                   })}
@@ -129,7 +149,10 @@ const CartItem = ({ cartItem, collapsed }) => {
                           <input
                             type="number"
                             min="1"
-                            max={cartItem.product.stockQuantity}
+                            max={
+                              !cartItem.product.backordersAllowed &&
+                              cartItem.product.stockQuantity
+                            }
                             defaultValue={cartItem.quantity}
                             name={`${cartItem.product.slug}`}
                             disabled={disabled}
@@ -157,6 +180,21 @@ const CartItem = ({ cartItem, collapsed }) => {
                       }}
                     </UpdateItemQuantity>
                   </td>
+                  {cartItem.quantity > cartItem.product.stockQuantity &&
+                    cartItem.product.backordersAllowed && (
+                      <td className="u-padding-left-tiny">
+                        <Link href="/page/[slug]" as="/page/backorder">
+                          <a
+                            extraClasses="u-cursor--help"
+                            target="_blank"
+                            title="Backorder"
+                          >
+                            <small>⚠️</small>
+                            <span className="u-visually-hidden">Backorder</span>
+                          </a>
+                        </Link>
+                      </td>
+                    )}
                 </tr>
               )}
             </tbody>

@@ -1,11 +1,12 @@
 import React from "react";
 import PropTypes from "prop-types";
+import Link from "next/link";
 
 const Designer = ({ designer }) => {
   if (!designer?.name) return null;
 
   return (
-    <div className="o-layout o-layout--gutter-base">
+    <div className="o-layout o-layout--gutter-base u-umbrella__container">
       {designer.image?.sourceUrl && (
         <div className="o-layout__cell o-layout__cell--fit">
           <img
@@ -19,7 +20,14 @@ const Designer = ({ designer }) => {
         </div>
       )}
       <div className="o-layout__cell o-layout__cell--fill">
-        <h4>{designer.name}</h4>
+        <Link
+          href="/product-category/[slug]"
+          as={`/product-category/${designer.slug}`}
+        >
+          <a className="u-umbrella">
+            <h4>{designer.name}</h4>
+          </a>
+        </Link>
         {designer.description && (
           <div
             dangerouslySetInnerHTML={{ __html: designer.description }}

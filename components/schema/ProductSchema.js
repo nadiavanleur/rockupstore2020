@@ -2,7 +2,7 @@ import React from "react";
 
 const ProductSchema = ({ product, images }) => {
   if (!product) return null;
-  console.log(product);
+
   return (
     <script
       type="application/ld+json"

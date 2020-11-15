@@ -32,8 +32,6 @@ const ProductPage = ({
   //   }
   // }, []);
 
-  console.dir(product);
-
   if (!product || product?.type === "GROUP")
     return <PageNotFound menus={menus} settings={settings} />; //@TODO Group product
 
@@ -57,8 +55,20 @@ const ProductPage = ({
     ...(useProduct.image ? [useProduct.image] : []),
   ];
 
+  const firstDesigner = product.designers?.nodes?.[0];
+
   return (
-    <Layout menus={menus} settings={settings} title={useProduct.name}>
+    <Layout
+      menus={menus}
+      settings={settings}
+      title={useProduct.name}
+      parent={
+        firstDesigner && {
+          title: firstDesigner.name,
+          url: `/product-category/${firstDesigner.slug}`,
+        }
+      }
+    >
       <div className="o-retain o-retain--wall">
         <Section>
           <div className="o-layout o-layout--gutter-base">
@@ -83,18 +93,6 @@ const ProductPage = ({
             <div className="o-layout__cell o-layout__cell--fill@from-md">
               {/* Product name */}
               <h2 className="u-margin-bottom-small">{useProduct.name}</h2>
-
-              {/* Short description */}
-              {useProduct.shortDescription && (
-                <div className="u-margin-bottom-small">
-                  <small
-                    dangerouslySetInnerHTML={{
-                      __html: useProduct.shortDescription,
-                    }}
-                    className="c-editor-content"
-                  />
-                </div>
-              )}
 
               {/* Price */}
               <div
@@ -124,6 +122,18 @@ const ProductPage = ({
                   <Upsells
                     currentProductImage={sliderImages?.[0]}
                     products={product.upsell.nodes}
+                  />
+                </div>
+              )}
+
+              {/* Short description */}
+              {useProduct.shortDescription && (
+                <div className="u-margin-bottom-small">
+                  <small
+                    dangerouslySetInnerHTML={{
+                      __html: useProduct.shortDescription,
+                    }}
+                    className="c-editor-content"
                   />
                 </div>
               )}
@@ -159,27 +169,29 @@ const ProductPage = ({
                 {/* On backorder */}
                 {useProduct?.stockQuantity <= 0 && (
                   <div className="o-layout__cell o-layout__cell--fit">
-                    <small>
-                      {"⚠️ "}
-                      {useProduct.backordersAllowed ? (
-                        <Link href="/page/[slug]" as="/page/backorder">
-                          <a extraClasses="u-cursor--help" target="_blank">
-                            Backorder
-                          </a>
-                        </Link>
-                      ) : (
-                        <span className="u-text-error">Out of stock</span>
-                      )}
-                    </small>
+                    {useProduct.backordersAllowed ? (
+                      <Link href="/page/[slug]" as="/page/backorder">
+                        <a
+                          extraClasses="u-cursor--help"
+                          target="_blank"
+                          title="⚠️ Backorder"
+                        >
+                          <small>⚠️</small>
+                          <span className="u-visually-hidden">Backorder</span>
+                        </a>
+                      </Link>
+                    ) : (
+                      <small>⚠️ Out of stock</small>
+                    )}
                   </div>
                 )}
               </div>
 
               {/* List designers */}
-              {!!product.designers?.nodes?.length && (
+              {firstDesigner && (
                 <ul className="o-list-clean u-margin-none u-margin-top-small">
                   {product.designers.nodes.map((designer) => (
-                    <li className={designer.name}>
+                    <li key={designer.name}>
                       <Designer designer={designer} />
                     </li>
                   ))}

@@ -29,20 +29,22 @@ const Layout = ({
           <ApolloProvider client={client}>
             <ApolloHooksProvider client={client}>
               <Metadata settings={settings} title={title} />
-              <FlashMessages />
-              {menus && settings && (
-                <Header
-                  topMenu={topMenu}
-                  categoriesMenu={categoriesMenu}
-                  settings={settings}
-                  categoriesMenu={categoriesMenu}
-                  hideCategoryMenu={hideCategoryMenu}
-                  title={title}
-                  parent={parent}
-                />
-              )}
-              <main className={extraClasses}>{children}</main>
-              {footerMenu && <Footer footerMenu={footerMenu} />}
+              <div className="o-body">
+                <FlashMessages />
+                {menus && settings && (
+                  <Header
+                    topMenu={topMenu}
+                    categoriesMenu={categoriesMenu}
+                    settings={settings}
+                    categoriesMenu={categoriesMenu}
+                    hideCategoryMenu={hideCategoryMenu}
+                    title={title}
+                    parent={parent}
+                  />
+                )}
+                <main className={extraClasses}>{children}</main>
+                {footerMenu && <Footer footerMenu={footerMenu} />}
+              </div>
               <LocalBusinessSchema settings={settings} />
             </ApolloHooksProvider>
           </ApolloProvider>
