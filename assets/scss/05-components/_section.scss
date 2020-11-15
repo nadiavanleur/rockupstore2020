@@ -25,8 +25,32 @@
 }
 
 // Modifiers
+.c-section--primary {
+  background: $color-primary-500;
+}
+
+.c-section--secondary {
+  background: $color-secondary-500;
+}
+
+.c-section--tertiary {
+  background: $color-tertiary-500;
+}
+
+.c-section--quaternary {
+  background: $color-quaternary-500;
+}
+
 .c-section--quinary {
   background: $color-quinary-500;
+}
+
+.c-section--senary {
+  background: $color-senary-500;
+}
+
+.c-section--septenary {
+  background: $color-septenary-500;
 }
 
 .c-section--black {

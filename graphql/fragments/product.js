@@ -77,6 +77,7 @@ const PRODUCT_FRAGMENT = gql`
       nodes {
         name
         description
+        slug
         image {
           altText
           srcSet

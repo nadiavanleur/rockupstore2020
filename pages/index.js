@@ -17,11 +17,11 @@ const Index = ({
 }) => {
   return (
     <Layout menus={menus} settings={settings}>
-      {/* Popular products */}
-      {!!popularProducts?.length && (
+      {/* Featured products */}
+      {!!featuredProducts?.length && (
         <div className="o-retain o-retain--wall">
-          <Section title="Popular" extraClasses="c-section--quinary">
-            <ProductsList products={popularProducts} />
+          <Section title="Featured" extraClasses="c-section--secondary">
+            <ProductsList products={featuredProducts} />
           </Section>
         </div>
       )}
@@ -29,17 +29,17 @@ const Index = ({
       {/* Sale products */}
       {!!saleProducts?.length && (
         <div className="o-retain o-retain--wall">
-          <Section title="Sale" extraClasses="c-section--quinary">
+          <Section title="Sale" extraClasses="c-section--tertiary">
             <ProductsList products={saleProducts} />
           </Section>
         </div>
       )}
 
-      {/* Featured products */}
-      {!!featuredProducts?.length && (
+      {/* Popular products */}
+      {!!popularProducts?.length && (
         <div className="o-retain o-retain--wall">
-          <Section title="Featured" extraClasses="c-section--quinary">
-            <ProductsList products={featuredProducts} />
+          <Section title="Popular" extraClasses="c-section--quinary">
+            <ProductsList products={popularProducts} />
           </Section>
         </div>
       )}
