@@ -159,18 +159,20 @@ const ProductPage = ({
                 {/* On backorder */}
                 {useProduct?.stockQuantity <= 0 && (
                   <div className="o-layout__cell o-layout__cell--fit">
-                    <small>
-                      {"⚠️ "}
-                      {useProduct.backordersAllowed ? (
-                        <Link href="/page/[slug]" as="/page/backorder">
-                          <a extraClasses="u-cursor--help" target="_blank">
-                            Backorder
-                          </a>
-                        </Link>
-                      ) : (
-                        <span className="u-text-error">Out of stock</span>
-                      )}
-                    </small>
+                    {useProduct.backordersAllowed ? (
+                      <Link href="/page/[slug]" as="/page/backorder">
+                        <a
+                          extraClasses="u-cursor--help"
+                          target="_blank"
+                          title="⚠️ Backorder"
+                        >
+                          <small>⚠️</small>
+                          <span className="u-visually-hidden">Backorder</span>
+                        </a>
+                      </Link>
+                    ) : (
+                      <small>⚠️ Out of stock</small>
+                    )}
                   </div>
                 )}
               </div>
