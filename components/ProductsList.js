@@ -24,8 +24,8 @@ const ProductsList = ({ products }) => {
                 {
                   <Product
                     title={name}
-                    image={galleryImages?.nodes?.[0]}
-                    hoverImage={image}
+                    image={image}
+                    hoverImage={galleryImages?.nodes?.[0]}
                     price={price}
                     href="/product/[id]"
                     as={slug && `/product/${slug}`}

@@ -150,6 +150,25 @@ const BillingForm = ({
               />
             </div>
 
+            {/* Post Code */}
+            <div className="form-group">
+              <label htmlFor="post-code">
+                Postcode
+                <abbr className="required" title="required">
+                  *
+                </abbr>
+              </label>
+              <input
+                onChange={onChange}
+                value={input.postcode}
+                type="text"
+                name="postcode"
+                className="form-control woo-next-checkout-input"
+                id="post-code"
+              />
+              <FormError errors={input.errors} fieldName={"postcode"} />
+            </div>
+
             {/* Town/City */}
             <div className="c-form__row">
               <label htmlFor="city">

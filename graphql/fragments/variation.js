@@ -11,6 +11,7 @@ const VARIATION_FRAGMENT = gql`
     purchasable
     description
     stockQuantity
+    backordersAllowed
     attributes {
       nodes {
         id

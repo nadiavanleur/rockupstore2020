@@ -20,6 +20,7 @@ const GET_CART = gql`
             purchasable
             description
             stockQuantity
+            backordersAllowed
             attributes {
               nodes {
                 id

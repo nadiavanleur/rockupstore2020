@@ -11,7 +11,7 @@ const FlashMessages = () => {
     <div className="c-flashmessages">
       <ul className="o-retain o-retain--wall o-list-clean">
         {flashMessages.map((flashMessage) => (
-          <li>
+          <li key={flashMessage.message}>
             <FlashMessage
               type={flashMessage.type}
               message={flashMessage.message}

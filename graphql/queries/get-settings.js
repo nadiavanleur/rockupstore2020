@@ -11,6 +11,7 @@ const SETTINGS_QUERY = gql`
         fieldGroupName
         subtitle
         title
+        keywords
         logo {
           id
           altText
