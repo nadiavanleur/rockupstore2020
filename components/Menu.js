@@ -9,10 +9,25 @@ const Menu = ({ menu, extraLayoutClasses }) => {
     <nav className="c-menu">
       <ul className={`o-layout ${extraLayoutClasses || ""}`}>
         {menu.map((menuItem) => {
-          if (menuItem.parentId) return null;
-          let href = menuItem?.connectedNode?.node?.uri || menuItem.path || "/";
+          if (menuItem.parentId) return;
+
+          let href =
+            menuItem?.connectedNode?.node?.uri ||
+            menuItem.path ||
+            menuItem.uri ||
+            "/";
+
           if (href.split("/product-category/").length > 1)
-            href = `/product-category/${menuItem?.connectedNode?.node?.slug}`;
+            href = `/product-category/${
+              menuItem.connectedNode?.node?.slug || menuItem.slug
+            }`;
+
+          const label = menuItem.label || menuItem.name;
+
+          if (!href || !label) return;
+
+          const subItems =
+            menuItem.childItems?.nodes || menuItem.children?.nodes;
 
           return (
             <li
@@ -20,8 +35,8 @@ const Menu = ({ menu, extraLayoutClasses }) => {
               key={menuItem.id}
             >
               <Button
-                label={menuItem.label}
                 tag="a"
+                label={label}
                 href={href}
                 target={menuItem.target}
                 extraClasses="c-menu__link c-button--fill"
@@ -29,19 +44,29 @@ const Menu = ({ menu, extraLayoutClasses }) => {
                 {(href === "/cart/" || href === "/checkout/") && <CartIcon />}
               </Button>
 
-              {!!menuItem?.childItems?.nodes?.length && (
+              {!!subItems.length && (
                 <ul className="c-menu__submenu o-list-clean">
-                  {menuItem.childItems.nodes.map((subItem) => {
+                  {subItems.map((subItem) => {
                     let subHref =
-                      subItem?.connectedNode?.node?.uri || subItem.path || "/";
+                      subItem?.connectedNode?.node?.uri ||
+                      subItem.path ||
+                      subItem.uri ||
+                      "/";
+
                     if (subHref.split("/product-category/").length > 1)
-                      subHref = `/product-category/${subItem?.connectedNode?.node?.slug}`;
+                      subHref = `/product-category/${
+                        subItem?.connectedNode?.node?.slug || subItem.slug
+                      }`;
+
+                    const subLabel = subItem.label || subItem.name;
+
+                    if (!subHref || !subLabel) return;
 
                     return (
                       <li key={subItem.id} className="c-menu__submenu-item">
                         <Button
-                          label={subItem.label}
                           tag="a"
+                          label={subLabel}
                           href={subHref}
                           target={subItem.target}
                           extraClasses="c-button--link c-button--fill-left"

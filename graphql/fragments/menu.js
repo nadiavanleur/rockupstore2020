@@ -3,7 +3,7 @@ import gql from "graphql-tag";
 const MENU_FRAGMENT = gql`
   fragment MenuFragment on Menu {
     id
-    menuItems {
+    menuItems(first: 100, where: { parentId: "0" }) {
       nodes {
         id
         parentId
@@ -19,7 +19,7 @@ const MENU_FRAGMENT = gql`
             }
           }
         }
-        childItems {
+        childItems(first: 100) {
           nodes {
             id
             parentId

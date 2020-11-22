@@ -6,20 +6,22 @@ const VARIABLE_PRODUCT_FRAGMENT = gql`
     price
     onSale
     salePrice
+    regularPrice
     stockQuantity
     backordersAllowed
-    variations {
+    variations(first: 100) {
       nodes {
         id
         variationId
         price
         onSale
         salePrice
+        regularPrice
         purchasable
         description
         stockQuantity
         backordersAllowed
-        attributes {
+        attributes(first: 100) {
           nodes {
             id
             name

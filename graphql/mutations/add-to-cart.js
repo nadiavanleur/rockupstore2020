@@ -20,7 +20,7 @@ const ADD_TO_CART = gql`
             sourceUrl
             altText
           }
-          galleryImages {
+          galleryImages(first: 100) {
             nodes {
               id
               sourceUrl
@@ -34,16 +34,16 @@ const ADD_TO_CART = gql`
           name
           description
           type
-          onSale
           price
-          regularPrice
+          onSale
           salePrice
+          regularPrice
           image {
             id
             sourceUrl
             altText
           }
-          attributes {
+          attributes(first: 100) {
             nodes {
               id
               attributeId

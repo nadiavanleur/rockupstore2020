@@ -15,9 +15,10 @@ class Header extends Component {
     const MENU_OPEN_CLASS = "c-menus--open";
     const {
       topMenu,
-      categoriesMenu,
-      settings,
+      // categoriesMenu,
       hideCategoryMenu,
+      categories,
+      settings,
       title,
       parent,
     } = this.props;
@@ -55,6 +56,7 @@ class Header extends Component {
           />
           <div className="c-menus__container">
             <header className="u-margin-bottom-base">
+              {/* Top menu */}
               <Menu menu={topMenu} />
             </header>
             <div className="o-retain o-retain--wall u-margin-bottom-base">
@@ -70,9 +72,16 @@ class Header extends Component {
                 breadcrumb={breadcrumb}
                 extraClasses="c-section--header"
               >
-                {!hideCategoryMenu && !!categoriesMenu?.length && (
+                {/* Categories menu */}
+                {/* {!hideCategoryMenu && !!categoriesMenu?.length && (
                   <Menu
                     menu={categoriesMenu}
+                    extraLayoutClasses="o-layout--gutter-small"
+                  />
+                )} */}
+                {!hideCategoryMenu && !!categories?.length && (
+                  <Menu
+                    menu={categories}
                     extraLayoutClasses="o-layout--gutter-small"
                   />
                 )}

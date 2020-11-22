@@ -13,7 +13,7 @@ import PRODUCT_FRAGMENT from "../fragments/product";
  */
 const PRODUCTS_QUERY = gql`
   query ProductsQuery(
-    $first: Int
+    $first: Int = 100
     $after: String
     $orderby: ProductsOrderByEnum!
     $orderbyDirection: OrderEnum

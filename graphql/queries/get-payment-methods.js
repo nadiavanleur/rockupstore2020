@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 const PAYMENT_METHODS_QUERY = gql`
   query PaymentMethodsQuery {
-    paymentGateways {
+    paymentGateways(first: 100) {
       nodes {
         id
         title

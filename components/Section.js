@@ -1,3 +1,4 @@
+import Link from "next/link";
 import React from "react";
 
 const Section = ({
@@ -8,6 +9,7 @@ const Section = ({
   breadcrumb,
   children,
   id,
+  cta,
 }) => {
   return (
     <section className={`c-section ${extraClasses || ""}`} id={id}>
@@ -42,6 +44,16 @@ const Section = ({
         </div>
       )}
       {children}
+      {cta?.href && (
+        <div className="o-layout o-layout--align-right">
+          <div className="o-layout__cell o-layout__cell--fit">
+            <Link href={cta.href}>
+              <a>{cta.label || "View"}</a>
+            </Link>
+            &emsp;→
+          </div>
+        </div>
+      )}
     </section>
   );
 };

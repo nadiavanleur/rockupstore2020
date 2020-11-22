@@ -23,24 +23,40 @@ const GET_INITIAL_DATA_QUERY = gql`
         }
       }
     }
-    topMenu: menus(where: { location: PRIMARY }) {
+    topMenu: menus(first: 1, where: { location: PRIMARY }) {
       nodes {
         ...MenuFragment
       }
     }
-    categoriesMenu: menus(where: { location: EXPANDED }) {
+    categoriesMenu: menus(first: 1, where: { location: EXPANDED }) {
       nodes {
         ...MenuFragment
       }
     }
-    footerMenu: menus(where: { location: FOOTER }) {
+    footerMenu: menus(first: 1, where: { location: FOOTER }) {
       nodes {
         ...MenuFragment
       }
     }
-    userMenu: menus(where: { location: SOCIAL }) {
+    userMenu: menus(first: 1, where: { location: SOCIAL }) {
       nodes {
         ...MenuFragment
+      }
+    }
+    productCategories(where: { parent: 0, hideEmpty: true }) {
+      nodes {
+        id
+        name
+        slug
+        uri
+        children(where: { hideEmpty: false }) {
+          nodes {
+            id
+            name
+            slug
+            uri
+          }
+        }
       }
     }
   }

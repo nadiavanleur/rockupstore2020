@@ -18,7 +18,7 @@ const CHECKOUT = gql`
           firstName
           lastName
         }
-        refunds {
+        refunds(first: 100) {
           nodes {
             amount
           }

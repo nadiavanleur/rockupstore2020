@@ -16,12 +16,12 @@ const PRODUCT_FRAGMENT = gql`
     purchasable
     description
     shortDescription
-    productTags {
+    productTags(first: 100) {
       nodes {
         name
       }
     }
-    galleryImages {
+    galleryImages(first: 100) {
       nodes {
         altText
         srcSet
@@ -41,7 +41,7 @@ const PRODUCT_FRAGMENT = gql`
       title
       sourceUrl
     }
-    attributes {
+    attributes(first: 100) {
       nodes {
         name
         id
@@ -49,14 +49,14 @@ const PRODUCT_FRAGMENT = gql`
         variation
       }
     }
-    upsell {
+    upsell(first: 100) {
       nodes {
         id
         productId
         sku
         slug
         name
-        galleryImages {
+        galleryImages(first: 100) {
           nodes {
             altText
             srcSet
@@ -78,7 +78,7 @@ const PRODUCT_FRAGMENT = gql`
         }
       }
     }
-    designers: productCategories(where: { parent: 44 }) {
+    designers: productCategories(first: 100, where: { parent: 44 }) {
       nodes {
         name
         description
@@ -98,33 +98,41 @@ const PRODUCT_FRAGMENT = gql`
     ... on SimpleProduct {
       id
       price
+      onSale
       salePrice
+      regularPrice
       stockQuantity
       backordersAllowed
     }
     ... on ExternalProduct {
       id
       price
+      onSale
       salePrice
+      regularPrice
       externalUrl
       buttonText
     }
     ... on GroupProduct {
       id
-      products(where: { minPrice: 0.01 }) {
+      products(first: 100, where: { minPrice: 0.01 }) {
         nodes {
           ...VariableProductFragment
           ... on SimpleProduct {
             id
             price
+            onSale
             salePrice
+            regularPrice
             stockQuantity
             backordersAllowed
           }
           ... on ExternalProduct {
             id
             price
+            onSale
             salePrice
+            regularPrice
             externalUrl
           }
         }
