@@ -49,7 +49,7 @@ class Header extends Component {
       <>
         <div className="c-menus" ref={(el) => (this.menuContainer = el)}>
           <Button
-            label="..."
+            label="Menu"
             onClick={() => this.menuContainer.classList.toggle(MENU_OPEN_CLASS)}
             extraClasses="c-menus__toggle"
           />

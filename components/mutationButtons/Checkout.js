@@ -46,7 +46,10 @@ const Checkout = ({ children }) => {
             <>
               You are being redirected to{" "}
               <a href={data.checkout.redirect}>
-                {data.checkout.redirect.split(".com/")?.[0]}.com
+                {!!data.checkout.redirect.split(".com/")?.[1] &&
+                  `${data.checkout.redirect.split(".com/")?.[0]}.com`}
+                {!!data.checkout.redirect.split(".nl/")?.[1] &&
+                  `${data.checkout.redirect.split(".nl/")?.[0]}.nl`}
               </a>{" "}
               to complete your order. Order no: {data?.checkout?.order?.orderId}
               . Status: {data?.checkout?.order?.status}.
@@ -94,6 +97,7 @@ const Checkout = ({ children }) => {
   const onSubmit = (event) => {
     event.preventDefault();
     const result = validateAndSanitizeCheckoutForm(billingInfo);
+    console.log(result);
     if (!result.isValid) {
       setBillingInfo({ ...billingInfo, errors: result.errors });
       return;

@@ -84,8 +84,9 @@ const CartItem = ({ cartItem, collapsed }) => {
                                   type="number"
                                   min="1"
                                   max={
-                                    !variation.backordersAllowed &&
-                                    variation.stockQuantity
+                                    (!variation.backordersAllowed &&
+                                      variation.stockQuantity) ||
+                                    null
                                   }
                                   defaultValue={variation.quantity}
                                   name={`${cartItem.product.slug}-${variationString}`}
@@ -150,8 +151,9 @@ const CartItem = ({ cartItem, collapsed }) => {
                             type="number"
                             min="1"
                             max={
-                              !cartItem.product.backordersAllowed &&
-                              cartItem.product.stockQuantity
+                              (!cartItem.product.backordersAllowed &&
+                                cartItem.product.stockQuantity) ||
+                              null
                             }
                             defaultValue={cartItem.quantity}
                             name={`${cartItem.product.slug}`}

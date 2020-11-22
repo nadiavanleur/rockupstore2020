@@ -70,7 +70,7 @@ const OrderReceivedContent = () => {
                       payment instructions.
                       <br />
                       <small>
-                        If you don't receive this email 15 minutes, please check
+                        If you don't receive this email in 1 hour, please check
                         your spam folder or contact us.
                       </small>
                     </td>

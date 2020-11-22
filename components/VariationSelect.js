@@ -48,7 +48,7 @@ const VariationSelect = ({
     <div>
       {filteredAttributes.map((attribute) => {
         const attributeName = (attribute.name || "").toLowerCase();
-        const selectedAttribute = defaultSelectedVariation.attributes.nodes.find(
+        const selectedAttribute = defaultSelectedVariation?.attributes?.nodes?.find?.(
           (node) => node.name === attributeName
         );
         const defaultSelected = selectedAttribute?.value;

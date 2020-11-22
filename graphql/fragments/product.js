@@ -16,6 +16,11 @@ const PRODUCT_FRAGMENT = gql`
     purchasable
     description
     shortDescription
+    productTags {
+      nodes {
+        name
+      }
+    }
     galleryImages {
       nodes {
         altText

@@ -35,7 +35,8 @@ const ProductPage = ({
   if (!product || product?.type === "GROUP")
     return <PageNotFound menus={menus} settings={settings} />; //@TODO Group product
 
-  const defaultVariation = product?.variations?.nodes[0];
+  const defaultVariation =
+    product?.variations?.nodes?.[product?.variations?.nodes?.length - 1];
   const [selectedVariation, setSelectedVariation] = useState(defaultVariation);
 
   const hasVariations = !!product?.variations?.nodes?.length;
@@ -57,11 +58,20 @@ const ProductPage = ({
 
   const firstDesigner = product.designers?.nodes?.[0];
 
+  const isBackorder =
+    useProduct?.stockQuantity <= 0 && useProduct.backordersAllowed;
+
+  const keywords =
+    useProduct.productTags?.nodes?.length &&
+    useProduct.productTags.nodes.map((tag) => tag.name)?.join(", ");
+
   return (
     <Layout
       menus={menus}
       settings={settings}
       title={useProduct.name}
+      keywords={keywords}
+      description={useProduct.shortDescription}
       parent={
         firstDesigner && {
           title: firstDesigner.name,
@@ -129,12 +139,26 @@ const ProductPage = ({
               {/* Short description */}
               {useProduct.shortDescription && (
                 <div className="u-margin-bottom-small">
-                  <small
+                  <div
                     dangerouslySetInnerHTML={{
                       __html: useProduct.shortDescription,
                     }}
                     className="c-editor-content"
                   />
+                </div>
+              )}
+
+              {/* On backorder */}
+              {isBackorder && (
+                <div className="u-margin-bottom-small">
+                  <small>
+                    This product is available for{" "}
+                    <Link href="/page/[slug]" as="/page/backorder">
+                      <a extraClasses="u-cursor--help" target="_blank">
+                        backorder
+                      </a>
+                    </Link>
+                  </small>
                 </div>
               )}
 
@@ -166,23 +190,10 @@ const ProductPage = ({
                   )}
                 </div>
 
-                {/* On backorder */}
-                {useProduct?.stockQuantity <= 0 && (
+                {/* Out of stock */}
+                {useProduct?.stockQuantity <= 0 && !isBackorder && (
                   <div className="o-layout__cell o-layout__cell--fit">
-                    {useProduct.backordersAllowed ? (
-                      <Link href="/page/[slug]" as="/page/backorder">
-                        <a
-                          extraClasses="u-cursor--help"
-                          target="_blank"
-                          title="⚠️ Backorder"
-                        >
-                          <small>⚠️</small>
-                          <span className="u-visually-hidden">Backorder</span>
-                        </a>
-                      </Link>
-                    ) : (
-                      <small>⚠️ Out of stock</small>
-                    )}
+                    <small>⚠️ Out of stock</small>
                   </div>
                 )}
               </div>

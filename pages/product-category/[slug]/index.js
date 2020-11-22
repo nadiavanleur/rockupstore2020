@@ -22,6 +22,7 @@ const CategoryPage = ({ category, products, sortby, menus, settings }) => {
       menus={menus}
       settings={settings}
       title={category.name}
+      description={category.description}
       parent={{
         title: category?.parent?.node?.name,
         url: `/product-category/${category?.parent?.node?.slug}`,

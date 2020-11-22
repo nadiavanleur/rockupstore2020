@@ -2,11 +2,14 @@ import fetch from "node-fetch";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
+import { onError } from "apollo-link-error";
 import clientConfig from "../client-config";
 import { ApolloLink } from "apollo-link";
 import { IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
 import introspectionQueryResultData from "../fragmentTypes.json";
+import Router from "next/router";
 
+// Fragment matcher.
 const fragmentMatcher = new IntrospectionFragmentMatcher({
   introspectionQueryResultData,
 });
@@ -19,16 +22,12 @@ export const middleware = new ApolloLink((operation, forward) => {
   /**
    * If session data exist in local storage, set value as session header.
    */
-  const session = process.browser
-    ? localStorage.getItem("woocommerce-session")
-    : null;
-  // const authToken = process.browser ? localStorage.getItem("authToken") : null;
+  const session = process.browser ? localStorage.getItem("woo-session") : null;
 
   if (session) {
     operation.setContext(({ headers = {} }) => ({
       headers: {
-        ...(session ? { "woocommerce-session": `Session ${session}` } : {}),
-        // ...(authToken ? { Authorization: `Bearer ${authToken}` } : {}),
+        "woocommerce-session": `Session ${session}`,
       },
     }));
   }
@@ -55,14 +54,12 @@ export const afterware = new ApolloLink((operation, forward) => {
     if (session) {
       // Remove session data if session destroyed.
       if (session === "false") {
-        localStorage.removeItem("woocommerce-session");
+        localStorage.removeItem("woo-session");
 
         // Update session new data if changed.
-      } else {
-        localStorage.setItem(
-          "woocommerce-session",
-          headers.get("woocommerce-session")
-        );
+      } else if (localStorage.getItem("woo-session") !== session) {
+        localStorage.setItem("woo-session", headers.get("woocommerce-session"));
+        Router.reload();
       }
     }
 

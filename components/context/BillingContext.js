@@ -17,7 +17,7 @@ export const BillingProvider = ({ children }) => {
     email: "",
     createAccount: false,
     orderNotes: "",
-    paymentMethod: "",
+    paymentMethod: "bacs",
     errors: null,
     order: null,
   };

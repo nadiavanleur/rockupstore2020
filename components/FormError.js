@@ -1,7 +1,7 @@
 const FormError = ({ errors, fieldName }) => {
   if (!errors?.hasOwnProperty?.(fieldName)) return null;
 
-  return <div className="invalid-feedback d-block">{errors[fieldName]}</div>;
+  return <small className="u-text-error">{errors[fieldName]}</small>;
 };
 
 export default FormError;
