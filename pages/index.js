@@ -29,7 +29,11 @@ const Index = ({
       {/* Sale products */}
       {!!saleProducts?.length && (
         <div className="o-retain o-retain--wall">
-          <Section title="Sale" extraClasses="c-section--tertiary">
+          <Section
+            title="Sale"
+            extraClasses="c-section--tertiary"
+            cta={{ href: "/product-category/sale", label: "View all sale" }}
+          >
             <ProductsList products={saleProducts} />
           </Section>
         </div>

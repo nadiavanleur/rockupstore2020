@@ -26,12 +26,12 @@ const CATEGORY_FRAGMENT = gql`
       title
       sourceUrl
     }
-    products(where: { minPrice: 0.01 }) {
+    products(first: 100, where: { minPrice: 0.01 }) {
       nodes {
         ...ProductFragment
       }
     }
-    children(where: { hideEmpty: true, parent: $parent }) {
+    children(first: 100, where: { hideEmpty: true, parent: $parent }) {
       nodes {
         id
         name

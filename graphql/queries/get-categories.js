@@ -4,7 +4,7 @@ import CATEGORY_FRAGMENT from "../fragments/category";
 // Get top level categories
 const CATEGORIES_QUERY = gql`
   query CategoriesQuery($parent: Int) {
-    productCategories(where: { hideEmpty: true, parent: 0 }) {
+    productCategories(first: 100, where: { hideEmpty: true, parent: 0 }) {
       nodes {
         ...CategoryFragment
       }

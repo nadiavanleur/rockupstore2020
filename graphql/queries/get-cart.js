@@ -4,7 +4,7 @@ import PRODUCT_FRAGMENT from "../fragments/product";
 const GET_CART = gql`
   query GET_CART {
     cart {
-      contents {
+      contents(first: 100) {
         itemCount
         nodes {
           key
@@ -17,11 +17,12 @@ const GET_CART = gql`
             price
             onSale
             salePrice
+            regularPrice
             purchasable
             description
             stockQuantity
             backordersAllowed
-            attributes {
+            attributes(first: 100) {
               nodes {
                 id
                 name
@@ -35,19 +36,19 @@ const GET_CART = gql`
           subtotalTax
         }
       }
-      appliedCoupons {
+      appliedCoupons(first: 100) {
         nodes {
           id
           couponId
           discountType
           amount
           dateExpiry
-          products {
+          products(first: 100) {
             nodes {
               id
             }
           }
-          productCategories {
+          productCategories(first: 100) {
             nodes {
               id
             }

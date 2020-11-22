@@ -19,10 +19,10 @@ const Layout = ({
   title,
   parent,
   hideCategoryMenu,
-  keywords,
-  description,
+  metaKeywords,
+  metaDescription,
 }) => {
-  const { topMenu, categoriesMenu, footerMenu } = menus || {};
+  const { topMenu, categoriesMenu, categories, footerMenu } = menus || {};
 
   return (
     <BillingProvider>
@@ -33,18 +33,18 @@ const Layout = ({
               <Metadata
                 settings={settings}
                 title={title}
-                keywords={keywords}
-                description={description}
+                metaKeywords={metaKeywords}
+                metaDescription={metaDescription}
               />
               <div className="o-body">
                 <FlashMessages />
                 {menus && settings && (
                   <Header
                     topMenu={topMenu}
-                    categoriesMenu={categoriesMenu}
-                    settings={settings}
-                    categoriesMenu={categoriesMenu}
                     hideCategoryMenu={hideCategoryMenu}
+                    categoriesMenu={categoriesMenu}
+                    categories={categories}
+                    settings={settings}
                     title={title}
                     parent={parent}
                   />

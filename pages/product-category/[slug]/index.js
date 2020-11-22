@@ -22,21 +22,20 @@ const CategoryPage = ({ category, products, sortby, menus, settings }) => {
       menus={menus}
       settings={settings}
       title={category.name}
-      description={category.description}
+      metaDescription={category.description}
       parent={{
         title: category?.parent?.node?.name,
         url: `/product-category/${category?.parent?.node?.slug}`,
       }}
     >
       {/* About category */}
-      {isDesigner ||
-        (category?.description && (
-          <div className="o-retain o-retain--wall">
-            <Section>
-              <Designer designer={category} />
-            </Section>
-          </div>
-        ))}
+      {category.description && (
+        <div className="o-retain o-retain--wall">
+          <Section>
+            <Designer designer={category} />
+          </Section>
+        </div>
+      )}
 
       {/* Subcategories */}
       {!!category?.children?.nodes?.length && (

@@ -1,7 +1,13 @@
 import React from "react";
 import Head from "next/head";
 
-const Metadata = ({ settings, title, children, keywords, description }) => {
+const Metadata = ({
+  settings,
+  title,
+  children,
+  metaKeywords,
+  metaDescription,
+}) => {
   return (
     <Head>
       <meta name="viewport" content="width=device-width, initial-scale=1.0" />
@@ -34,18 +40,18 @@ const Metadata = ({ settings, title, children, keywords, description }) => {
       </title>
 
       {/* Description */}
-      {(description || settings?.generalSettingsDescription) && (
+      {(metaDescription || settings?.generalSettingsDescription) && (
         <meta
           name="description"
-          content={description || settings.generalSettingsDescription}
+          content={metaDescription || settings.generalSettingsDescription}
         />
       )}
 
       {/* Keywords */}
-      {(keywords || settings?.page?.websiteInfo?.keywords) && (
+      {(metaKeywords || settings?.page?.websiteInfo?.keywords) && (
         <meta
           name="keywords"
-          content={keywords || settings.page.websiteInfo.keywords}
+          content={metaKeywords || settings.page.websiteInfo.keywords}
         />
       )}
 

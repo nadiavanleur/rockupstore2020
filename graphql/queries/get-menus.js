@@ -3,7 +3,7 @@ import MENU_FRAGMENT from "../fragments/menu";
 
 export const TOP_MENU_QUERY = gql`
   query TopMenuQuery {
-    menus(where: { location: PRIMARY }) {
+    menus(first: 1, where: { location: PRIMARY }) {
       nodes {
         ...MenuFragment
       }
@@ -14,7 +14,7 @@ export const TOP_MENU_QUERY = gql`
 
 export const CATEGORIES_MENU_QUERY = gql`
   query CategoriesMenuQuery {
-    menus(where: { location: EXPANDED }) {
+    menus(first: 1, where: { location: EXPANDED }) {
       nodes {
         ...MenuFragment
       }
@@ -25,7 +25,7 @@ export const CATEGORIES_MENU_QUERY = gql`
 
 export const FOOTER_MENU_QUERY = gql`
   query FooterMenuQuery {
-    menus(where: { location: FOOTER }) {
+    menus(first: 1, where: { location: FOOTER }) {
       nodes {
         ...MenuFragment
       }
@@ -36,7 +36,7 @@ export const FOOTER_MENU_QUERY = gql`
 
 export const USER_MENU_QUERY = gql`
   query UserMenuQuery {
-    menus(where: { location: SOCIAL }) {
+    menus(first: 1, where: { location: SOCIAL }) {
       nodes {
         ...MenuFragment
       }

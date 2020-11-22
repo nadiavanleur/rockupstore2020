@@ -1,9 +1,38 @@
 // Block
 .c-tag {
+  display: flex;
+  justify-content: center;
+  align-items: center;
   border: $border-small;
   background: $color-quaternary-500;
   padding: $border-base-width;
   font-family: $font-family-heading;
   font-weight: $font-weight-bold;
   font-size: $font-size-large;
+}
+
+// Modifiers
+.c-tag--sale {
+  background: $color-tertiary-500;
+  position: relative;
+
+  &::after {
+    content: "";
+    display: block;
+    position: absolute;
+    top: 50%;
+    left: 50%;
+    width: 90%;
+    height: 2px;
+    background: currentColor;
+    transform: translate(-50%, -50%) rotate(15deg);
+  }
+}
+
+.c-tag--featured {
+  background: $color-secondary-500;
+}
+
+.c-tag--external {
+  background: $color-quinary-500;
 }

@@ -61,17 +61,21 @@ const ProductPage = ({
   const isBackorder =
     useProduct?.stockQuantity <= 0 && useProduct.backordersAllowed;
 
-  const keywords =
+  const metaKeywords =
     useProduct.productTags?.nodes?.length &&
     useProduct.productTags.nodes.map((tag) => tag.name)?.join(", ");
 
+  const metaDescription =
+    useProduct?.shortDescription || firstDesigner?.description;
+
+  console.log(firstDesigner);
   return (
     <Layout
       menus={menus}
       settings={settings}
       title={useProduct.name}
-      keywords={keywords}
-      description={useProduct.shortDescription}
+      metaKeywords={metaKeywords}
+      metaDescription={metaDescription}
       parent={
         firstDesigner && {
           title: firstDesigner.name,
@@ -110,12 +114,15 @@ const ProductPage = ({
                   useProduct.onSale ? " c-price--on-sale" : ""
                 } u-margin-bottom-small`}
               >
-                {useProduct.salePrice && (
-                  <div className="c-price__old">{useProduct.salePrice}</div>
+                {useProduct.onSale && useProduct.regularPrice && (
+                  <>
+                    <small>
+                      <strike>{useProduct.regularPrice}</strike>
+                    </small>
+                    &emsp;
+                  </>
                 )}
-                {useProduct.price && (
-                  <div className="c-price">{useProduct.price}</div>
-                )}
+                {useProduct.price && <b>{useProduct.price}</b>}
               </div>
 
               {/* Select variation */}
@@ -158,6 +165,7 @@ const ProductPage = ({
                         backorder
                       </a>
                     </Link>
+                    .
                   </small>
                 </div>
               )}

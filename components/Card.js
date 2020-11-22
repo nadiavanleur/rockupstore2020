@@ -44,21 +44,22 @@ const Card = ({
         )}
       </div>
       {!!tags?.length && (
-        <ul className="o-list-clean c-card__tags">
-          {tags.map((tag) => {
-            if (!tag.label) return null;
+        <div className="c-card__tags">
+          <ul className="o-layout o-layout--gutter-tiny o-layout--equalheight o-layout--align-right">
+            {tags.map((tag) => {
+              if (!tag.label) return null;
 
-            return (
-              <li
-                className={tag.extraClasses}
-                key={`${tag.label}`}
-                className="c-tag"
-              >
-                {tag.label}
-              </li>
-            );
-          })}
-        </ul>
+              return (
+                <li
+                  className="o-layout__cell o-layout__cell--fit"
+                  key={`${tag.label}`}
+                >
+                  <div className={`c-tag ${tag.extraClasses}`}>{tag.label}</div>
+                </li>
+              );
+            })}
+          </ul>
+        </div>
       )}
     </div>
   );
