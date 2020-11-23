@@ -9,9 +9,9 @@ import { defaultInitialProps } from "../helpers/defaultInitialProps";
  * Index
  */
 const Index = ({
-  featuredProducts,
-  saleProducts,
-  popularProducts,
+  featuredProducts = [],
+  saleProducts = [],
+  popularProducts = [],
   menus,
   settings,
 }) => {

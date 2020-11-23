@@ -13,7 +13,7 @@ import Designer from "../../../components/Designer";
 /**
  * CategoryPage
  */
-const CategoryPage = ({ category, products, sortby, menus, settings }) => {
+const CategoryPage = ({ category, products = [], sortby, menus, settings }) => {
   const isDesignerOverview = category?.databaseId === 44;
   const isDesigner = category?.parentDatabaseId === 44;
   const metaImages = [
