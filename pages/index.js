@@ -9,14 +9,20 @@ import { defaultInitialProps } from "../helpers/defaultInitialProps";
  * Index
  */
 const Index = ({
-  popularProducts,
-  saleProducts,
   featuredProducts,
+  saleProducts,
+  popularProducts,
   menus,
   settings,
 }) => {
+  const metaImages = [
+    ...featuredProducts,
+    ...saleProducts,
+    ...popularProducts,
+  ].map((product) => product.image.sourceUrl);
+
   return (
-    <Layout menus={menus} settings={settings}>
+    <Layout menus={menus} settings={settings} metaData={{ images: metaImages }}>
       {/* Featured products */}
       {!!featuredProducts?.length && (
         <div className="o-retain o-retain--wall">

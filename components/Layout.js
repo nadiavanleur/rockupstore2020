@@ -16,11 +16,9 @@ const Layout = ({
   extraClasses,
   menus,
   settings,
-  title,
   parent,
   hideCategoryMenu,
-  metaKeywords,
-  metaDescription,
+  metaData,
 }) => {
   const { topMenu, categoriesMenu, categories, footerMenu } = menus || {};
 
@@ -30,12 +28,7 @@ const Layout = ({
         <CartProvider>
           <ApolloProvider client={client}>
             <ApolloHooksProvider client={client}>
-              <Metadata
-                settings={settings}
-                title={title}
-                metaKeywords={metaKeywords}
-                metaDescription={metaDescription}
-              />
+              <Metadata settings={settings} metaData={metaData} />
               <div className="o-body">
                 <FlashMessages />
                 {menus && settings && (
@@ -45,7 +38,7 @@ const Layout = ({
                     categoriesMenu={categoriesMenu}
                     categories={categories}
                     settings={settings}
-                    title={title}
+                    title={metaData?.title}
                     parent={parent}
                   />
                 )}

@@ -9,33 +9,41 @@ import CATEGORIES_QUERY from "../../graphql/queries/get-categories";
 /**
  * CategoryPage
  */
-const CategoryPage = ({ categories, menus, settings }) => (
-  <Layout menus={menus} settings={settings} title="Categories">
-    {/* Categories */}
-    <div className="o-retain o-retain--wall">
-      <Section title="Categories" extraClasses="c-section--black">
-        {!!categories?.length ? (
-          <ul className="o-layout o-layout--gutter-base">
-            {categories.map((category) => (
-              <li className="o-layout__cell u-fraction--6of12 u-fraction--3of12@from-md u-margin-bottom-base">
-                <Card
-                  image={category?.products?.nodes?.[0]?.image}
-                  cta={{
-                    href: "/product-category/[slug]",
-                    as: `/product-category/${category.slug}`,
-                    label: category.name,
-                  }}
-                />
-              </li>
-            ))}
-          </ul>
-        ) : (
-          <p>No categories found</p>
-        )}
-      </Section>
-    </div>
-  </Layout>
-);
+const CategoryPage = ({ categories, menus, settings }) => {
+  const metaImages = categories.map((category) => category?.image?.sourceUrl);
+
+  return (
+    <Layout
+      menus={menus}
+      settings={settings}
+      metaData={{ title: "Categories", images: metaImages }}
+    >
+      {/* Categories */}
+      <div className="o-retain o-retain--wall">
+        <Section title="Categories" extraClasses="c-section--black">
+          {!!categories?.length ? (
+            <ul className="o-layout o-layout--gutter-base">
+              {categories.map((category) => (
+                <li className="o-layout__cell u-fraction--6of12 u-fraction--3of12@from-md u-margin-bottom-base">
+                  <Card
+                    image={category?.products?.nodes?.[0]?.image}
+                    cta={{
+                      href: "/product-category/[slug]",
+                      as: `/product-category/${category.slug}`,
+                      label: category.name,
+                    }}
+                  />
+                </li>
+              ))}
+            </ul>
+          ) : (
+            <p>No categories found</p>
+          )}
+        </Section>
+      </div>
+    </Layout>
+  );
+};
 
 CategoryPage.getInitialProps = async (router) => {
   const { slug, sortby } = router.query;

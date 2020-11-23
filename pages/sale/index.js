@@ -9,8 +9,14 @@ import { defaultInitialProps } from "../../helpers/defaultInitialProps";
  * SaleProducts
  */
 const SaleProducts = ({ saleProducts, menus, settings }) => {
+  const metaImages = saleProducts.map((product) => product?.image?.sourceUrl);
+
   return (
-    <Layout menus={menus} settings={settings} title="Sale">
+    <Layout
+      menus={menus}
+      settings={settings}
+      metaData={{ title: "Sale", images: metaImages }}
+    >
       <div className="o-retain o-retain--wall">
         <Section title="Sale" extraClasses="c-section--tertiary">
           <ProductsList products={saleProducts} />

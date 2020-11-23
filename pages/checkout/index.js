@@ -17,7 +17,7 @@ const Checkout = ({ paymentMethods, menus, settings }) => {
     <Layout
       menus={menus}
       settings={settings}
-      title="Checkout"
+      metaData={{ title: "Checkout" }}
       parent={{ title: "Cart", url: "/cart" }}
       hideCategoryMenu
     >
