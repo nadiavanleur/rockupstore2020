@@ -12,7 +12,7 @@ const Metadata = ({ settings, children, metaData, router }) => {
   const metaKeywords =
     metaData?.keywords || settings?.page?.websiteInfo?.keywords;
   const ogType = metaData?.type || "website";
-  const ogImages = [...(metaData?.images || []), settings?.logo?.sourceUrl];
+  const ogImages = [settings?.logo?.sourceUrl, ...(metaData?.images || [])];
   const ogUrl = `${clientConfig.liveUrl}${router.asPath}`;
 
   /**

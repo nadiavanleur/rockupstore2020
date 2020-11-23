@@ -19,7 +19,7 @@ const Index = ({
     ...featuredProducts,
     ...saleProducts,
     ...popularProducts,
-  ].map((product) => product.image.sourceUrl);
+  ]?.nodes?.map((product) => product.image.sourceUrl);
 
   return (
     <Layout menus={menus} settings={settings} metaData={{ images: metaImages }}>

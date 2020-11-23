@@ -10,7 +10,9 @@ import CATEGORIES_QUERY from "../../graphql/queries/get-categories";
  * CategoryPage
  */
 const CategoryPage = ({ categories, menus, settings }) => {
-  const metaImages = categories.map((category) => category?.image?.sourceUrl);
+  const metaImages = categories?.nodes?.map(
+    (category) => category?.image?.sourceUrl
+  );
 
   return (
     <Layout
