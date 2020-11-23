@@ -49,7 +49,7 @@ const GET_INITIAL_DATA_QUERY = gql`
         name
         slug
         uri
-        children(where: { hideEmpty: false }) {
+        children(where: { hideEmpty: true }) {
           nodes {
             id
             name
