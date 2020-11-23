@@ -68,7 +68,7 @@ const ProductPage = ({
   const metaDescription =
     useProduct?.shortDescription || firstDesigner?.description;
 
-  const metaImages = sliderImages.map((image) => image.sourceUrl);
+  const metaImages = sliderImages?.map((image) => image.sourceUrl);
 
   return (
     <Layout
@@ -237,10 +237,7 @@ const ProductPage = ({
         )}
       </div>
 
-      <ProductSchema
-        product={product}
-        images={sliderImages.map((image) => image.sourceUrl)}
-      />
+      <ProductSchema product={product} images={metaImages} />
     </Layout>
   );
 };

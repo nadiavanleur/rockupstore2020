@@ -18,7 +18,7 @@ const CategoryPage = ({ category, products = [], sortby, menus, settings }) => {
   const isDesigner = category?.parentDatabaseId === 44;
   const metaImages = [
     category?.image?.sourceUrl,
-    ...products.map((product) => product?.image?.sourceUrl),
+    ...products?.nodes?.map((product) => product?.image?.sourceUrl),
   ];
 
   return (

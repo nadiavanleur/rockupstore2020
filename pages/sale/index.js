@@ -9,7 +9,9 @@ import { defaultInitialProps } from "../../helpers/defaultInitialProps";
  * SaleProducts
  */
 const SaleProducts = ({ saleProducts, menus, settings }) => {
-  const metaImages = saleProducts.map((product) => product?.image?.sourceUrl);
+  const metaImages = saleProducts?.nodes?.map(
+    (product) => product?.image?.sourceUrl
+  );
 
   return (
     <Layout
