@@ -16,13 +16,20 @@ import Designer from "../../../components/Designer";
 const CategoryPage = ({ category, products, sortby, menus, settings }) => {
   const isDesignerOverview = category?.databaseId === 44;
   const isDesigner = category?.parentDatabaseId === 44;
+  const metaImages = [
+    category?.image?.sourceUrl,
+    ...products.map((product) => product?.image?.sourceUrl),
+  ];
 
   return (
     <Layout
       menus={menus}
       settings={settings}
-      title={category.name}
-      metaDescription={category.description}
+      metaData={{
+        title: category.name,
+        description: category.description,
+        images: metaImages,
+      }}
       parent={{
         title: category?.parent?.node?.name,
         url: `/product-category/${category?.parent?.node?.slug}`,

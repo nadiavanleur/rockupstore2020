@@ -68,14 +68,18 @@ const ProductPage = ({
   const metaDescription =
     useProduct?.shortDescription || firstDesigner?.description;
 
-  console.log(firstDesigner);
+  const metaImages = sliderImages.map((image) => image.sourceUrl);
+
   return (
     <Layout
       menus={menus}
       settings={settings}
-      title={useProduct.name}
-      metaKeywords={metaKeywords}
-      metaDescription={metaDescription}
+      metaData={{
+        title: useProduct.name,
+        description: metaDescription,
+        keywords: metaKeywords,
+        images: metaImages,
+      }}
       parent={
         firstDesigner && {
           title: firstDesigner.name,

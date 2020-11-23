@@ -13,7 +13,7 @@ const ContentPage = ({ page, menus, settings }) => {
   if (!page) return <PageNotFound menus={menus} settings={settings} />;
 
   return (
-    <Layout menus={menus} settings={settings} title={page.title}>
+    <Layout menus={menus} settings={settings} metaData={{ title: page.title }}>
       <div className="o-retain o-retain--wall">
         <Section title={page.title}>
           <div

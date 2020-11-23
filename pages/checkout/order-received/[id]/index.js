@@ -11,7 +11,11 @@ import { defaultInitialProps } from "../../../../helpers/defaultInitialProps";
  */
 const OrderReceived = ({ menus, settings }) => {
   return (
-    <Layout menus={menus} settings={settings} title="Order received">
+    <Layout
+      menus={menus}
+      settings={settings}
+      metaData={{ title: "Order received" }}
+    >
       <OrderReceivedContent />
     </Layout>
   );
