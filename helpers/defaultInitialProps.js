@@ -15,8 +15,8 @@ export const defaultInitialProps = async () => {
     // authToken: loginGuestResult?.data?.login.authToken,
     // refreshToken: loginGuestResult?.data?.login.refreshToken,
     settings: {
-      ...initialDataResult?.data?.allSettings,
-      ...initialDataResult?.data?.page?.websiteInfo,
+      ...(initialDataResult?.data?.allSettings || []),
+      ...(initialDataResult?.data?.page?.websiteInfo || []),
     },
     menus: {
       topMenu: initialDataResult?.data?.topMenu?.nodes?.[0]?.menuItems?.nodes,
