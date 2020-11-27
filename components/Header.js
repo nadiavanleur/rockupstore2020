@@ -91,7 +91,7 @@ class Header extends Component {
         </div>
 
         {/* Mobile title section */}
-        <div className="o-retain o-retain--wall u-margin-bottom-base u-hidden@from-md">
+        <div className="o-retain o-retain--wall u-margin-bottom-base@from-md u-hidden@from-md">
           <Section title={sectionTitle} TitleTag="h2" breadcrumb={breadcrumb} />
         </div>
       </>
