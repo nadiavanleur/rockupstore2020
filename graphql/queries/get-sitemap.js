@@ -2,7 +2,7 @@ import gql from "graphql-tag";
 
 const SITEMAP_QUERY = gql`
   query SitemapQuery {
-    pages(first: 100) {
+    page: pages(first: 100) {
       nodes {
         slug
       }

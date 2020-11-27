@@ -4,12 +4,16 @@
   display: flex;
   flex-direction: column;
   border: $border-base;
-  padding: $supple-space-base;
+  padding: $supple-space-small;
   position: relative;
   background: $color-white;
 
   & > * {
     flex: 0 0 auto;
+  }
+
+  @include mq($from: md) {
+    padding: $supple-space-base;
   }
 }
 
@@ -93,5 +97,26 @@
 
   &:focus-within {
     @include backdrop;
+  }
+}
+
+.c-card--mobile {
+  @include mq($until: md) {
+    flex-direction: row;
+    align-items: center;
+
+    & > * {
+      flex: 0 0 auto;
+      width: auto;
+      margin: 0;
+
+      &:not(:first-child) {
+        padding-left: $supple-space-small;
+      }
+    }
+
+    .c-card__image-container {
+      flex-basis: 50px;
+    }
   }
 }

@@ -54,7 +54,7 @@ const CategoryPage = ({ category, products = [], sortby, menus, settings }) => {
             <ul className="o-layout o-layout--gutter-base o-layout--equalheight">
               {category.children.nodes.map((subcategory) => (
                 <li
-                  className="o-layout__cell u-fraction--6of12 u-fraction--3of12@from-md u-fraction--2of12@from-lg u-margin-bottom-base"
+                  className="o-layout__cell u-fraction--3of12@from-md u-fraction--2of12@from-lg u-margin-bottom-small@until-md u-margin-bottom-base@from-md"
                   key={subcategory.slug}
                 >
                   <Card
@@ -67,6 +67,7 @@ const CategoryPage = ({ category, products = [], sortby, menus, settings }) => {
                       as: `/product-category/${subcategory.slug}`,
                       label: subcategory.name,
                     }}
+                    extraClasses="c-card--mobile"
                   />
                 </li>
               ))}
