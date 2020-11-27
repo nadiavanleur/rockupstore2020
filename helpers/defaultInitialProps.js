@@ -25,7 +25,7 @@ export const defaultInitialProps = async () => {
       footerMenu:
         initialDataResult?.data?.footerMenu?.nodes?.[0]?.menuItems?.nodes,
       userMenu: initialDataResult?.data?.userMenu?.nodes?.[0]?.menuItems?.nodes,
-      categories: initialDataResult?.data?.productCategories?.nodes?.reverse(),
+      categories: initialDataResult?.data?.productCategories?.nodes,
     },
   };
 };
