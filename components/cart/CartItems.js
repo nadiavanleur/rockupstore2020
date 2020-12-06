@@ -75,7 +75,11 @@ const CartItems = ({ collapsed }) => {
                     <small>shipping</small>
                   </th>
                   <td />
-                  <td className="u-text-right">{cart.shippingTotal}</td>
+                  <td className="u-text-right">
+                    {cart?.shippingTotal == "€0,00"
+                      ? "Free"
+                      : cart.shippingTotal}
+                  </td>
                 </tr>
                 <tr>
                   <th>

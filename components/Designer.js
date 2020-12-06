@@ -19,7 +19,7 @@ const Designer = ({ designer }) => {
           />
         </div>
       )}
-      <div className="o-layout__cell o-layout__cell--fill">
+      <div className="o-layout__cell o-layout__cell--fill u-line-height-base">
         <Link
           href="/product-category/[slug]"
           as={`/product-category/${designer.slug}`}
@@ -30,7 +30,14 @@ const Designer = ({ designer }) => {
         </Link>
         {designer.description && (
           <div
-            dangerouslySetInnerHTML={{ __html: designer.description }}
+            dangerouslySetInnerHTML={{
+              __html: designer.description
+                .replace(/\r\n/gi, "<br>")
+                .replace(
+                  /\<a/gi,
+                  '<a target="_blank" class="u-umbrella__overlay"'
+                ),
+            }}
             className="c-editor-content"
           />
         )}
