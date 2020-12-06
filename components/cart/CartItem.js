@@ -45,7 +45,7 @@ const CartItem = ({ cartItem, collapsed }) => {
       </td>
 
       {/* Name + url */}
-      <td>
+      <td className="u-umbrella__container">
         {cartItem.product.name}
         <Link href="/product/[id]" as={`/product/${cartItem.product.slug}`}>
           <a className="u-umbrella">
@@ -186,11 +186,7 @@ const CartItem = ({ cartItem, collapsed }) => {
                     cartItem.product.backordersAllowed && (
                       <td className="u-padding-left-tiny">
                         <Link href="/page/[slug]" as="/page/backorder">
-                          <a
-                            extraClasses="u-cursor--help"
-                            target="_blank"
-                            title="Backorder"
-                          >
+                          <a target="_blank" title="Backorder">
                             <small>⚠️</small>
                             <span className="u-visually-hidden">Backorder</span>
                           </a>

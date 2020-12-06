@@ -1,0 +1,57 @@
+.user-rich-editing-wrap,
+.user-comment-shortcuts-wrap,
+.user-admin-color-wrap,
+.user-admin-bar-front-wrap,
+.user-url-wrap,
+.user-description-wrap,
+.user-profile-picture,
+#insert-jetpack-contact-form,
+label[for="_virtual"],
+label[for="_downloadable"],
+option[value="grouped"],
+option[value="external"],
+._tax_status_field,
+._tax_class_field,
+#slugdiv,
+.shipping_tab {
+  display: none !important;
+}
+
+.c-helper-text,
+.woocommerce-message,
+.woocommerce-notice-invalid-variation {
+  background: lightgoldenrodyellow;
+  font-family: monospace !important;
+  padding: 8px 12px;
+  border: none !important;
+  border-bottom: 1px solid #ccd0d4 !important;
+}
+
+.woocommerce-message {
+  margin: 0 !important;
+  background: powderblue;
+}
+
+.woocommerce-notice-invalid-variation {
+  margin: 0 !important;
+  background: mistyrose;
+}
+
+.product_data_tabs .general_tab a::after,
+.product_data_tabs .inventory_tab a::after,
+.product_data_tabs .shipping_tab a::after,
+.product_data_tabs .attribute_tab a::after,
+.product_data_tabs .variations_tab a::after {
+  content: "* required";
+  display: block;
+  font-weight: bold;
+  font-size: 0.6rem;
+}
+
+.product_data_tabs .attribute_tab a::after {
+  content: '* required for "Variable product" only';
+}
+
+.product_data_tabs .general_tab a::after {
+  content: '* required for "Simple product" only';
+}

@@ -85,6 +85,9 @@ const Metadata = ({ settings, children, metaData, router }) => {
       {/* Url */}
       {ogUrl && <meta property="og:url" content={ogUrl} />}
 
+      {/* Link Pinterest */}
+      <meta name="p:domain_verify" content="31affec53c53c8809f82db788f4e421c" />
+
       {children}
     </Head>
   );
