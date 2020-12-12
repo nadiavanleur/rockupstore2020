@@ -88,6 +88,17 @@ const Metadata = ({ settings, children, metaData, router }) => {
       {/* Link Pinterest */}
       <meta name="p:domain_verify" content="31affec53c53c8809f82db788f4e421c" />
 
+      {/* Cookiebot */}
+      {clientConfig.cookiebotCode && (
+        <script
+          id="Cookiebot"
+          src="https://consent.cookiebot.com/uc.js"
+          data-cbid={clientConfig.cookiebotCode}
+          data-blockingmode="auto"
+          type="text/javascript"
+        />
+      )}
+
       {children}
     </Head>
   );
