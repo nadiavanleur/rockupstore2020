@@ -99,6 +99,27 @@ const Metadata = ({ settings, children, metaData, router }) => {
         />
       )}
 
+      {/* Global site tag (gtag.js) - Google Analytics */}
+      {clientConfig.gtagCode && (
+        <script
+          async
+          src={`https://www.googletagmanager.com/gtag/js?id=${clientConfig.gtagCode}`}
+        />
+      )}
+      {clientConfig.gtagCode && (
+        <script
+          dangerouslySetInnerHTML={{
+            __html: `
+              window.dataLayer = window.dataLayer || [];
+              function gtag(){dataLayer.push(arguments);}
+              gtag('js', new Date());
+
+              gtag('config', '${clientConfig.gtagCode}');
+            `,
+          }}
+        />
+      )}
+
       {children}
     </Head>
   );
