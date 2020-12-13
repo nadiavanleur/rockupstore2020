@@ -16,11 +16,11 @@ var helperTexts = [
   {
     fieldLabel: "Product short description",
     text:
-      "<i>[Required]</i>\
+      '<i>[Required]</i>\
         <ul>\
             <li>- Should be 30 to 300 characters.</li>\
-            <li>- The short description will appear below the product title, above the price.</li>\
-        </ul>",
+            <li>- The short description will appear below the product title and price, above the "Add to cart"-button.</li>\
+        </ul>',
   },
   {
     fieldLabel: "Product data",
@@ -72,7 +72,18 @@ var helperTexts = [
   {
     selector: "#variable_product_options_inner > div > select",
     text:
-      '↳ In the dropdown above select "Create variations from all attributes" and click "Go".',
+      '<ol>\
+        <li>In the dropdown above select "Create variations from all attributes" and click "Go".</li>\
+        <li>For each variation created fill out:\
+          <ul>\
+            <li>- SKU</li>\
+            <li>- Manage stock</li>\
+            <li>- Regular price</li>\
+            <li>- Stock quantity (set to 0 if a product is only available on backorder)</li>\
+            <li>- Allow backorders (if an item is created after it\'s ordered this should be set to "Allow")</li>\
+          </ul>\
+        </li>\
+      </ol>',
   },
   //   {
   //     fieldLabel: "Manage stock?",
@@ -138,19 +149,6 @@ for (var i = 0; i < helperTexts.length; i++) {
   }
 
   if (beforeElement) {
-    console.log(helperText.selector);
-    console.log(helperText.fieldLabel);
-    console.log(beforeElement);
-    console.log(beforeElement.parentNode);
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-
     beforeElement = beforeElement.parentNode;
     beforeElement.parentNode.insertBefore(
       helperElement,

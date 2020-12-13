@@ -2,8 +2,15 @@
 #CybotCookiebotDialog {
   border: $border-base !important;
   padding: $supple-space-small !important;
-  width: calc(100% - #{$border-base-width * 2});
-  max-width: calc(100% - #{$border-base-width * 2});
+  width: calc(100% - #{$border-base-width * 2}) !important;
+  max-width: calc(100% - #{$border-base-width * 2}) !important;
+
+  &,
+  & a,
+  & div,
+  & #CybotCookiebotDialogBodyContentControls {
+    font-family: $font-family-base !important;
+  }
 }
 
 #CybotCookiebotDialogBody {
@@ -19,6 +26,10 @@
   margin-bottom: $supple-space-small !important;
 }
 
+#CybotCookiebotDialogBodyContentTitle {
+  font-family: $font-family-heading !important;
+}
+
 #CybotCookiebotDialogBodyButtons {
   margin: 0 !important;
   padding-left: 0 !important;
@@ -26,4 +37,21 @@
 
 .CybotCookiebotDialogBodyButton {
   margin: 0 $supple-space-tiny $supple-space-tiny 0 !important;
+  border: $border-base !important;
+  min-height: $a11y-size - (2 * $border-base-width) !important;
+  display: flex !important;
+  align-items: center !important;
+  justify-content: center !important;
+  text-transform: uppercase !important;
+  font-family: $font-family-heading !important;
+  font-weight: $font-weight-bold !important;
+  color: $color-black !important;
+}
+
+#CybotCookiebotDialogBodyButtonDecline {
+  background: $color-gray-700 !important;
+}
+
+#CybotCookiebotDialogBodyButtonAccept {
+  background: $color-quaternary-500 !important;
 }
