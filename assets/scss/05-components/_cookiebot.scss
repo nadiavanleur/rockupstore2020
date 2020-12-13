@@ -3,6 +3,7 @@
   border: $border-base !important;
   padding: $supple-space-small !important;
   width: calc(100% - #{$border-base-width * 2});
+  max-width: calc(100% - #{$border-base-width * 2});
 }
 
 #CybotCookiebotDialogBody {
@@ -24,6 +25,5 @@
 }
 
 .CybotCookiebotDialogBodyButton {
-  margin: 0 !important;
-  margin-right: $supple-space-tiny !important;
+  margin: 0 $supple-space-tiny $supple-space-tiny 0 !important;
 }
