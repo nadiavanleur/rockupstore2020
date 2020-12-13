@@ -16,11 +16,11 @@ var helperTexts = [
   {
     fieldLabel: "Product short description",
     text:
-      "<i>[Required]</i>\
+      '<i>[Required]</i>\
         <ul>\
             <li>- Should be 30 to 300 characters.</li>\
-            <li>- The short description will appear below the product title, above the price.</li>\
-        </ul>",
+            <li>- The short description will appear below the product title and price, above the "Add to cart"-button.</li>\
+        </ul>',
   },
   {
     fieldLabel: "Product data",
@@ -138,19 +138,6 @@ for (var i = 0; i < helperTexts.length; i++) {
   }
 
   if (beforeElement) {
-    console.log(helperText.selector);
-    console.log(helperText.fieldLabel);
-    console.log(beforeElement);
-    console.log(beforeElement.parentNode);
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-    console.log();
-
     beforeElement = beforeElement.parentNode;
     beforeElement.parentNode.insertBefore(
       helperElement,
