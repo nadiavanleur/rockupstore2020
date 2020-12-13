@@ -72,7 +72,18 @@ var helperTexts = [
   {
     selector: "#variable_product_options_inner > div > select",
     text:
-      '↳ In the dropdown above select "Create variations from all attributes" and click "Go".',
+      '<ol>\
+        <li>In the dropdown above select "Create variations from all attributes" and click "Go".</li>\
+        <li>For each variation created fill out:\
+          <ul>\
+            <li>- SKU</li>\
+            <li>- Manage stock</li>\
+            <li>- Regular price</li>\
+            <li>- Stock quantity (set to 0 if a product is only available on backorder)</li>\
+            <li>- Allow backorders (if an item is created after it\'s ordered this should be set to "Allow")</li>\
+          </ul>\
+        </li>\
+      </ol>',
   },
   //   {
   //     fieldLabel: "Manage stock?",
