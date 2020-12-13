@@ -6,7 +6,7 @@ const Designer = ({ designer }) => {
   if (!designer?.name) return null;
 
   return (
-    <div className="o-layout o-layout--gutter-small u-umbrella__container">
+    <div className="o-layout o-layout--gutter-small o-layout--align-middle u-umbrella__container">
       {designer.image?.sourceUrl && (
         <div className="o-layout__cell o-layout__cell--fit">
           <img

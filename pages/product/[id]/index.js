@@ -129,6 +129,18 @@ const ProductPage = ({
                 {useProduct.price && <b>{useProduct.price}</b>}
               </div>
 
+              {/* Short description */}
+              {useProduct.shortDescription && (
+                <div className="u-margin-bottom-small">
+                  <div
+                    dangerouslySetInnerHTML={{
+                      __html: useProduct.shortDescription,
+                    }}
+                    className="c-editor-content"
+                  />
+                </div>
+              )}
+
               {/* Select variation */}
               <VariationSelect
                 variations={product.variations}
@@ -143,18 +155,6 @@ const ProductPage = ({
                   <Upsells
                     currentProductImage={sliderImages?.[0]}
                     products={product.upsell.nodes}
-                  />
-                </div>
-              )}
-
-              {/* Short description */}
-              {useProduct.shortDescription && (
-                <div className="u-margin-bottom-small">
-                  <div
-                    dangerouslySetInnerHTML={{
-                      __html: useProduct.shortDescription,
-                    }}
-                    className="c-editor-content"
                   />
                 </div>
               )}

@@ -1,0 +1,29 @@
+// Cookiebot style override
+#CybotCookiebotDialog {
+  border: $border-base !important;
+  padding: $supple-space-small !important;
+  width: calc(100% - #{$border-base-width * 2});
+}
+
+#CybotCookiebotDialogBody {
+  padding: 0 !important;
+}
+
+#CybotCookiebotDialogPoweredbyLink {
+  display: none !important;
+}
+
+#CybotCookiebotDialogBodyContent {
+  padding: 0 !important;
+  margin-bottom: $supple-space-small !important;
+}
+
+#CybotCookiebotDialogBodyButtons {
+  margin: 0 !important;
+  padding-left: 0 !important;
+}
+
+.CybotCookiebotDialogBodyButton {
+  margin: 0 !important;
+  margin-right: $supple-space-tiny !important;
+}
