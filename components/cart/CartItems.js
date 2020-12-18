@@ -64,16 +64,12 @@ const CartItems = ({ collapsed }) => {
               </thead>
               <tbody>
                 <tr>
-                  <th>
-                    <small>subtotal</small>
-                  </th>
+                  <th>Subtotal</th>
                   <td />
                   <td className="u-text-right">{cart.subtotal}</td>
                 </tr>
                 <tr>
-                  <th>
-                    <small>shipping</small>
-                  </th>
+                  <th>Shipping</th>
                   <td />
                   <td className="u-text-right">
                     {cart?.shippingTotal == "€0,00"
@@ -82,14 +78,10 @@ const CartItems = ({ collapsed }) => {
                   </td>
                 </tr>
                 <tr>
-                  <th>
-                    <small>total</small>
-                  </th>
-                  <td className="u-text-right" width="100">
-                    <small>
-                      {cart.contents.itemCount} item
-                      {cart.contents.itemCount !== 1 ? "s" : ""}
-                    </small>
+                  <th>Total</th>
+                  <td className="u-text-right u-text-small" width="100">
+                    {cart.contents.itemCount} item
+                    {cart.contents.itemCount !== 1 ? "s" : ""}
                   </td>
                   <td className="u-text-right" width="100">
                     {cart.total}

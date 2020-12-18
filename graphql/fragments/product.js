@@ -94,6 +94,9 @@ const PRODUCT_FRAGMENT = gql`
         }
       }
     }
+    extraProductInfo {
+      estimateddeliverytime
+    }
     ...VariableProductFragment
     ... on SimpleProduct {
       id

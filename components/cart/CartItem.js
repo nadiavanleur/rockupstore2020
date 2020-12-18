@@ -17,7 +17,11 @@ const CartItem = ({ cartItem, collapsed }) => {
           <div className="u-umbrella__overlay">
             <RemoveFromCart keys={cartItem.keys}>
               {({ removeFromCart, disabled }) => (
-                <button onClick={removeFromCart} disabled={disabled}>
+                <button
+                  onClick={removeFromCart}
+                  disabled={disabled}
+                  className="u-text-small"
+                >
                   Delete
                 </button>
               )}
@@ -71,9 +75,7 @@ const CartItem = ({ cartItem, collapsed }) => {
                         <td>
                           <small>{variationString}</small>
                         </td>
-                        <td>
-                          <small>{variation.price}</small>
-                        </td>
+                        <td>{variation.price}</td>
                         <td className="u-text-right u-text-bottom">
                           <UpdateItemQuantity itemKey={cartItem.keys[0]}>
                             {({ updateItemQuantity, disabled }) => {
@@ -138,9 +140,7 @@ const CartItem = ({ cartItem, collapsed }) => {
               ) : (
                 <tr key={`${cartItem.product.slug}`}>
                   <td></td>
-                  <td>
-                    <small>{cartItem.product.price}</small>
-                  </td>
+                  <td>{cartItem.product.price}</td>
                   <td className="u-text-right u-text-bottom">
                     <UpdateItemQuantity itemKey={cartItem.keys[0]}>
                       {({ updateItemQuantity, disabled }) => {

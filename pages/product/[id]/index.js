@@ -70,6 +70,28 @@ const ProductPage = ({
 
   const metaImages = sliderImages?.map((image) => image.sourceUrl);
 
+  // Create datalist
+  const dataList = [];
+  // Backorder
+  if (isBackorder)
+    dataList.push(
+      <>
+        This product is available for{" "}
+        <Link href="/page/[slug]" as="/page/backorder">
+          <a extraClasses="u-cursor--help" target="_blank">
+            backorder
+          </a>
+        </Link>
+      </>
+    );
+  // Free shipping
+  dataList.push("Free shipping");
+  // Estimated delivery time
+  if (useProduct?.extraProductInfo?.estimateddeliverytime)
+    dataList.push(
+      `Estimated delivery in ${useProduct.extraProductInfo.estimateddeliverytime}.`
+    );
+
   return (
     <Layout
       menus={menus}
@@ -159,18 +181,16 @@ const ProductPage = ({
                 </div>
               )}
 
-              {/* On backorder */}
-              {isBackorder && (
-                <div className="u-margin-bottom-small">
-                  <small>
-                    This product is available for{" "}
-                    <Link href="/page/[slug]" as="/page/backorder">
-                      <a extraClasses="u-cursor--help" target="_blank">
-                        backorder
-                      </a>
-                    </Link>
-                    .
-                  </small>
+              {/* Datalist */}
+              {dataList.length > 1 ? (
+                <ul className="u-text-small u-margin-bottom-small u-padding-left-small">
+                  {dataList.map((item) => (
+                    <li>{item}</li>
+                  ))}
+                </ul>
+              ) : (
+                <div className="u-text-small u-margin-bottom-small">
+                  {dataList[0]}
                 </div>
               )}
 

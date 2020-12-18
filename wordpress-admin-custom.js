@@ -126,6 +126,11 @@ var helperTexts = [
     text:
       "<i>[Optional, but preferred]</i> Add more images so customers have more details. The main product image does not have to be added again.",
   },
+  {
+    selector: "[for='acf-field_5fdcfcbf73eb7']",
+    text:
+      '<i>[Required]</i> Time between order and reiving the product. Will be displayed on product page as "Estimated delivery in [estimated_delivery_time]."',
+  },
 ];
 
 var fieldLabels = [...document.querySelectorAll("h2")];
