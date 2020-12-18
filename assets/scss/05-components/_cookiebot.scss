@@ -2,8 +2,7 @@
 #CybotCookiebotDialog {
   border: $border-base !important;
   padding: $supple-space-small !important;
-  width: calc(100% - #{$border-base-width * 2}) !important;
-  max-width: calc(100% - #{$border-base-width * 2}) !important;
+  box-sizing: border-box !important;
 
   &,
   & a,
@@ -46,10 +45,12 @@
   font-family: $font-family-heading !important;
   font-weight: $font-weight-bold !important;
   color: $color-black !important;
+  width: auto !important;
+  padding: 0 $supple-space-small !important;
 }
 
 #CybotCookiebotDialogBodyButtonDecline {
-  background: $color-gray-700 !important;
+  background: $color-gray-500 !important;
 }
 
 #CybotCookiebotDialogBodyButtonAccept {

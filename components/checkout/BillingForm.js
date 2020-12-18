@@ -24,7 +24,7 @@ const BillingForm = ({
                 {/* First name */}
                 <div className="c-form__row">
                   <label htmlFor="first-name">
-                    First Name
+                    First name
                     <abbr className="required" title="required">
                       *
                     </abbr>
@@ -44,7 +44,7 @@ const BillingForm = ({
                 {/* Last name */}
                 <div className="c-form__row">
                   <label htmlFor="last-name">
-                    Last Name
+                    Last name
                     <abbr className="required" title="required">
                       *
                     </abbr>
@@ -64,7 +64,7 @@ const BillingForm = ({
 
             {/* Company Name */}
             <div className="c-form__row">
-              <label htmlFor="first-name">Company Name</label>
+              <label htmlFor="first-name">Company name</label>
               <input
                 onChange={onChange}
                 value={input.company}
@@ -123,7 +123,7 @@ const BillingForm = ({
             {/* Street Address */}
             <div className="c-form__row">
               <label htmlFor="street-address">
-                Street Address
+                Street address
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -150,48 +150,54 @@ const BillingForm = ({
               />
             </div>
 
-            {/* Post Code */}
-            <div className="form-group">
-              <label htmlFor="post-code">
-                Postcode
-                <abbr className="required" title="required">
-                  *
-                </abbr>
-              </label>
-              <input
-                onChange={onChange}
-                value={input.postcode}
-                type="text"
-                name="postcode"
-                className="form-control woo-next-checkout-input"
-                id="post-code"
-              />
-              <FormError errors={input.errors} fieldName={"postcode"} />
-            </div>
+            <div className="o-layout o-layout--gutter-base">
+              {/* Post Code */}
+              <div className="o-layout__cell u-fraction--6of12">
+                <div className="c-form__row">
+                  <label htmlFor="post-code">
+                    Postal code
+                    <abbr className="required" title="required">
+                      *
+                    </abbr>
+                  </label>
+                  <input
+                    onChange={onChange}
+                    value={input.postcode}
+                    type="text"
+                    name="postcode"
+                    className="form-control woo-next-checkout-input"
+                    id="post-code"
+                  />
+                  <FormError errors={input.errors} fieldName={"postcode"} />
+                </div>
+              </div>
 
-            {/* Town/City */}
-            <div className="c-form__row">
-              <label htmlFor="city">
-                Town/City
-                <abbr className="required" title="required">
-                  *
-                </abbr>
-              </label>
-              <input
-                onChange={onChange}
-                value={input.city}
-                type="text"
-                name="city"
-                className="form-control woo-next-checkout-input"
-                id="city"
-              />
-              <FormError errors={input.errors} fieldName={"city"} />
+              {/* Town/City */}
+              <div className="o-layout__cell u-fraction--6of12">
+                <div className="c-form__row">
+                  <label htmlFor="city">
+                    Town/city
+                    <abbr className="required" title="required">
+                      *
+                    </abbr>
+                  </label>
+                  <input
+                    onChange={onChange}
+                    value={input.city}
+                    type="text"
+                    name="city"
+                    className="form-control woo-next-checkout-input"
+                    id="city"
+                  />
+                  <FormError errors={input.errors} fieldName={"city"} />
+                </div>
+              </div>
             </div>
 
             {/* County */}
             <div className="c-form__row">
               <label htmlFor="state">
-                State/County
+                State/county
                 <abbr className="required" title="required">
                   *
                 </abbr>
@@ -227,6 +233,12 @@ const BillingForm = ({
                 }))}
               />
               <FormError errors={input.errors} fieldName={"country"} />
+              <p className="u-margin-bottom-none u-margin-top-small u-text-small">
+                If your preffered shipping address is not in the Netherlands,
+                please contact us via{" "}
+                <a href="mailto:info@subflow.nl">info@subflow.nl</a> before
+                ordering.
+              </p>
             </div>
           </fieldset>
         </div>
@@ -255,7 +267,7 @@ const BillingForm = ({
             }))}
           />
           {input.paymentMethod && (
-            <p className="u-margin-top-small u-margin-bottom-none">
+            <p className="u-margin-top-small u-margin-bottom-none u-text-small">
               {
                 paymentMethods?.find?.(
                   (paymentMethod) => paymentMethod.id === input.paymentMethod
