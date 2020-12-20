@@ -38,7 +38,7 @@
   margin: 0 $supple-space-tiny $supple-space-tiny 0 !important;
   border: $border-base !important;
   min-height: $a11y-size - (2 * $border-base-width) !important;
-  display: flex !important;
+  display: inline-flex !important;
   align-items: center !important;
   justify-content: center !important;
   text-transform: uppercase !important;
