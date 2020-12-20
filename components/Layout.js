@@ -10,6 +10,7 @@ import client from "./ApolloClient";
 import { ApolloProvider as ApolloHooksProvider } from "@apollo/react-hooks";
 import FlashMessages from "./FlashMessages";
 import LocalBusinessSchema from "./schema/LocalBusinessSchema";
+import clientConfig from "../client-config";
 
 const Layout = ({
   children,
@@ -29,6 +30,17 @@ const Layout = ({
           <ApolloProvider client={client}>
             <ApolloHooksProvider client={client}>
               <Metadata settings={settings} metaData={metaData} />
+              {clientConfig.pinterestCode && (
+                <noscript>
+                  <img
+                    height="1"
+                    width="1"
+                    style={{ display: "none" }}
+                    alt=""
+                    src={`https://ct.pinterest.com/v3/?event=init&tid=${clientConfig.pinterestCode}&noscript=1`}
+                  />
+                </noscript>
+              )}
               <div className="o-body">
                 <FlashMessages />
                 {menus && settings && (
