@@ -119,17 +119,17 @@ var helperTexts = [
   {
     fieldLabel: "Product image",
     text:
-      "<i>[Required]</i> This image should have a white background and will be visible in product overview.",
+      "<i>[Required]</i> This image should have a white background and will be visible in product overview. Please, crop image to square.",
   },
   {
     fieldLabel: "Product gallery",
     text:
-      "<i>[Optional, but preferred]</i> Add more images so customers have more details. The main product image does not have to be added again.",
+      "<i>[Optional, but preferred]</i> Add more images so customers have more details. The main product image does <strong>not</strong> have to be added again.  Please, crop image to square.",
   },
   {
-    selector: "[for='acf-field_5fdcfcbf73eb7']",
+    fieldLabel: "Extra product info",
     text:
-      '<i>[Required]</i> Time between order and reiving the product. Will be displayed on product page as "Estimated delivery in [estimated_delivery_time]."',
+      "<i>[Required]</i> This info is used for running ads and search engine optimization (SEO).",
   },
 ];
 
