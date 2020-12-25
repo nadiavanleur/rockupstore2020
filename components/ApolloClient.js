@@ -2,12 +2,10 @@ import fetch from "node-fetch";
 import { ApolloClient } from "apollo-client";
 import { InMemoryCache } from "apollo-cache-inmemory";
 import { createHttpLink } from "apollo-link-http";
-import { onError } from "apollo-link-error";
 import clientConfig from "../client-config";
 import { ApolloLink } from "apollo-link";
 import { IntrospectionFragmentMatcher } from "apollo-cache-inmemory";
 import introspectionQueryResultData from "../fragmentTypes.json";
-import Router from "next/router";
 
 // Fragment matcher.
 const fragmentMatcher = new IntrospectionFragmentMatcher({
@@ -59,7 +57,6 @@ export const afterware = new ApolloLink((operation, forward) => {
         // Update session new data if changed.
       } else if (localStorage.getItem("woo-session") !== session) {
         localStorage.setItem("woo-session", headers.get("woocommerce-session"));
-        Router.reload();
       }
     }
 
