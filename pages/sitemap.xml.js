@@ -34,7 +34,7 @@ const createSitemap = (sitemapResult) => {
                 </url>
             `
       )
-      .join("")}
+      ?.join("")}
   </urlset>
 `;
 };
