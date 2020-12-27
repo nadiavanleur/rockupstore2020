@@ -6,6 +6,7 @@ import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
 import ADD_TO_CART from "../../graphql/mutations/add-to-cart";
 import { FlashMessageContext } from "../context/FlashMessageContext";
+import { gtagAddToCart } from "../../helpers/gtag";
 
 const AddToCart = ({ product, variation, children }) => {
   const productQueryInput = {
@@ -16,7 +17,6 @@ const AddToCart = ({ product, variation, children }) => {
   const [cart, setCart] = useContext(CartContext);
   const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
   const [showViewCart, setShowViewCart] = useState(null);
-  let buttonElement;
 
   // Get Cart Data.
   const { loading, error, data, refetch } = useQuery(GET_CART, {
@@ -58,6 +58,7 @@ const AddToCart = ({ product, variation, children }) => {
             />
           ),
         });
+        gtagAddToCart({ product, quantity: 1, variant: variation });
       }
 
       // On Success:
@@ -77,12 +78,6 @@ const AddToCart = ({ product, variation, children }) => {
       }
     },
   });
-
-  useEffect(() => {
-    buttonElement = document.querySelector(
-      '[data-js-bind="add-to-cart-button"]'
-    );
-  }, []);
 
   return (
     <>

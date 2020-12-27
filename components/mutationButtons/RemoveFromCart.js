@@ -7,8 +7,9 @@ import GET_CART from "../../graphql/queries/get-cart";
 import REMOVE_FROM_CART from "../../graphql/mutations/remove-from-cart";
 import { FlashMessageContext } from "../context/FlashMessageContext";
 import RestoreCartItems from "../mutationButtons/RestoreCartItems";
+import { gtagRemoveFromCart } from "../../helpers/gtag";
 
-const RemoveFromCart = ({ keys, children }) => {
+const RemoveFromCart = ({ keys, children, cartItems, listName }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     keys,
@@ -16,7 +17,7 @@ const RemoveFromCart = ({ keys, children }) => {
   const [cart, setCart] = useContext(CartContext);
   const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
   const [showViewCart, setShowViewCart] = useState(null);
-
+  gtagRemoveFromCart({ cartItems, listName });
   // Get Cart Data.
   const { loading, error, data, refetch } = useQuery(GET_CART, {
     notifyOnNetworkStatusChange: true,
@@ -66,6 +67,7 @@ const RemoveFromCart = ({ keys, children }) => {
             </RestoreCartItems>
           ),
         });
+        gtagRemoveFromCart({ cartItems, listName });
       }
 
       // On Success:

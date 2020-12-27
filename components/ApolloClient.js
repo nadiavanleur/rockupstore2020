@@ -1,6 +1,6 @@
 import fetch from "node-fetch";
 import { ApolloClient } from "apollo-client";
-import { InMemoryCache } from "apollo-cache-inmemory";
+import { InMemoryCache } from "apollo-boost";
 import { createHttpLink } from "apollo-link-http";
 import clientConfig from "../client-config";
 import { ApolloLink } from "apollo-link";
@@ -74,6 +74,7 @@ const client = new ApolloClient({
     )
   ),
   cache: new InMemoryCache({ fragmentMatcher }),
+  clientState: {},
 });
 
 export default client;

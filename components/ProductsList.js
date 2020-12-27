@@ -1,48 +1,28 @@
 import React from "react";
+import { gtagImpressions } from "../helpers/gtag";
 import Product from "./Product";
 
-const ProductsList = ({ products }) => {
+const ProductsList = ({ products, listName }) => {
   if (products?.length) {
+    gtagImpressions({ products, listName });
+
     return (
       <>
         <ul className="o-layout o-layout--gutter-base o-layout--equalheight">
-          {products.map(
-            ({
-              name,
-              galleryImages,
-              image,
-              price,
-              onSale,
-              regularPrice,
-              id,
-              slug,
-              attributes,
-              type,
-              featured,
-              external,
-            }) => (
-              <li
-                className="o-layout__cell u-fraction--6of12@from-md u-fraction--4of12@from-lg u-margin-bottom-base"
-                key={`${id}-${name}`}
-              >
-                {
-                  <Product
-                    title={name}
-                    image={image}
-                    hoverImage={galleryImages?.nodes?.[0]}
-                    price={price}
-                    onSale={onSale}
-                    regularPrice={regularPrice}
-                    href="/product/[id]"
-                    as={slug && `/product/${slug}`}
-                    attributes={attributes}
-                    type={type}
-                    featured={featured}
-                  />
-                }
-              </li>
-            )
-          )}
+          {products.map((product, index) => (
+            <li
+              className="o-layout__cell u-fraction--6of12@from-md u-fraction--4of12@from-lg u-margin-bottom-base"
+              key={`${product.id}-${product.name}`}
+            >
+              {
+                <Product
+                  product={product}
+                  productIndex={index}
+                  listName={listName}
+                />
+              }
+            </li>
+          ))}
         </ul>
       </>
     );

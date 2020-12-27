@@ -15,7 +15,11 @@ const CartItem = ({ cartItem, collapsed }) => {
       {!collapsed && (
         <td width="70" className="c-responsive-table__cell--fixed-top-right">
           <div className="u-umbrella__overlay">
-            <RemoveFromCart keys={cartItem.keys}>
+            <RemoveFromCart
+              keys={cartItem.keys}
+              cartItems={[cartItem]}
+              listName="Cart | Remove single item"
+            >
               {({ removeFromCart, disabled }) => (
                 <button
                   onClick={removeFromCart}
@@ -64,8 +68,10 @@ const CartItem = ({ cartItem, collapsed }) => {
           <table>
             <tbody>
               {cartItem.variations ? (
+                // Product with variations
                 <>
                   {cartItem.variations.map((variation) => {
+                    console.log(variation.key);
                     const variationString = variation.attributes.nodes
                       .map((variable) => variable.value)
                       ?.join(", ");
@@ -77,7 +83,10 @@ const CartItem = ({ cartItem, collapsed }) => {
                         </td>
                         <td>{variation.price}</td>
                         <td className="u-text-right u-text-bottom">
-                          <UpdateItemQuantity itemKey={cartItem.keys[0]}>
+                          <UpdateItemQuantity
+                            product={cartItem.product}
+                            itemKey={variation.key}
+                          >
                             {({ updateItemQuantity, disabled }) => {
                               let timer;
 
@@ -103,7 +112,9 @@ const CartItem = ({ cartItem, collapsed }) => {
                                             items: [
                                               {
                                                 key: variation.key,
-                                                quantity: target.value,
+                                                quantity: parseInt(
+                                                  target.value || "0"
+                                                ),
                                               },
                                             ],
                                           },
@@ -111,6 +122,7 @@ const CartItem = ({ cartItem, collapsed }) => {
                                       });
                                     }, 300);
                                   }}
+                                  disabled={disabled}
                                 />
                               );
                             }}
@@ -138,11 +150,15 @@ const CartItem = ({ cartItem, collapsed }) => {
                   })}
                 </>
               ) : (
+                // Product without variations
                 <tr key={`${cartItem.product.slug}`}>
                   <td></td>
                   <td>{cartItem.product.price}</td>
                   <td className="u-text-right u-text-bottom">
-                    <UpdateItemQuantity itemKey={cartItem.keys[0]}>
+                    <UpdateItemQuantity
+                      itemKey={cartItem.keys[0]}
+                      product={cartItem.product}
+                    >
                       {({ updateItemQuantity, disabled }) => {
                         let timer;
 
@@ -169,7 +185,9 @@ const CartItem = ({ cartItem, collapsed }) => {
                                       items: [
                                         {
                                           key: cartItem.keys[0],
-                                          quantity: target.value,
+                                          quantity: parseInt(
+                                            target.value || "0"
+                                          ),
                                         },
                                       ],
                                     },

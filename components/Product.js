@@ -1,42 +1,31 @@
 import React from "react";
+import { gtagProductClick } from "../helpers/gtag";
 import Card from "./Card";
 import Variables from "./Variables";
 
-const Product = ({
-  image,
-  hoverImage,
-  title,
-  price,
-  onSale,
-  regularPrice,
-  href,
-  as,
-  attributes,
-  type,
-  featured,
-}) => {
-  if (type === "GROUP") return null; //@TODO Group product
+const Product = ({ product, productIndex, listName }) => {
+  if (product.type === "GROUP") return null; //@TODO Group product
 
   const tags = [
     {
-      label: price?.replaceAll?.(",00", ""),
+      label: product.price?.replaceAll?.(",00", ""),
       extraClasses: "c-tag--price",
     },
   ];
 
-  if (onSale && regularPrice)
+  if (product.onSale && product.regularPrice)
     tags.unshift({
-      label: regularPrice.replaceAll?.(",00", ""),
+      label: product.regularPrice.replaceAll?.(",00", ""),
       extraClasses: "c-tag--sale",
     });
 
-  if (featured)
+  if (product.featured)
     tags.unshift({
       label: "✭",
       extraClasses: "c-tag--featured",
     });
 
-  // if (type === "EXTERNAL")
+  // if (product.type === "EXTERNAL")
   //   tags.unshift({
   //     label: "➤",
   //     extraClasses: "c-tag--external",
@@ -44,13 +33,19 @@ const Product = ({
 
   return (
     <Card
-      image={image}
-      hoverImage={hoverImage}
-      title={title}
+      image={product.image}
+      hoverImage={product.galleryImages?.nodes?.[0]}
+      title={product.name}
       tags={tags}
-      cta={{ label: "View product", href, as }}
+      cta={{
+        label: "View product",
+        href: "/product/[id]",
+        as: product.slug && `/product/${product.slug}`,
+        onClick: () =>
+          gtagProductClick({ product, index: productIndex, listName }),
+      }}
     >
-      <Variables attributes={attributes} />
+      <Variables attributes={product.attributes} />
     </Card>
   );
 };

@@ -21,7 +21,7 @@ const SaleProducts = ({ saleProducts, menus, settings }) => {
     >
       <div className="o-retain o-retain--wall">
         <Section title="Sale" extraClasses="c-section--tertiary">
-          <ProductsList products={saleProducts} />
+          <ProductsList products={saleProducts} listName="Sale | Overview" />
         </Section>
       </div>
     </Layout>

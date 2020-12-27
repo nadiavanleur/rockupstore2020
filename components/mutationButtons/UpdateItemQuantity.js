@@ -5,14 +5,14 @@ import { v4 } from "uuid";
 import GET_CART from "../../graphql/queries/get-cart";
 import UPDATE_ITEM_QUANTITY from "../../graphql/mutations/update-item-quantity";
 import { FlashMessageContext } from "../context/FlashMessageContext";
+import { gtagAddToCart } from "../../helpers/gtag";
 
-const UpdateItemQuantity = ({ itemKey: key, quantity, children }) => {
+const UpdateItemQuantity = ({ product, variation, itemKey: key, children }) => {
   const productQueryInput = {
     clientMutationId: v4(),
     items: [
       {
         key,
-        quantity,
       },
     ],
   };

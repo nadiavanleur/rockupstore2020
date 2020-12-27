@@ -47,7 +47,7 @@ const CheckoutContent = ({ paymentMethods }) => {
             <CartItems />
           </Section>
           <Section title="Billing details" id="checkout">
-            <CheckoutMutation>
+            <CheckoutMutation cartItems={cart.cartItems}>
               {({ input, onSubmit, onChange, checkoutLoading }) => (
                 <BillingForm
                   input={input}

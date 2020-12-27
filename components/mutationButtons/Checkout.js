@@ -7,12 +7,14 @@ import GET_CART from "../../graphql/queries/get-cart";
 import CHECKOUT from "../../graphql/mutations/checkout";
 import validateAndSanitizeCheckoutForm from "../../helpers/validateAndSanitizeCheckoutForm";
 import createCheckoutData from "../../helpers/createCheckoutData";
+import { gtagBeginCheckout, gtagFinalizeCheckout } from "../../helpers/gtag";
 
 const Checkout = ({ children }) => {
   const [cart, setCart] = useContext(CartContext);
   const [billingInfo, setBillingInfo] = useContext(BillingContext);
   const [flashMessages, addFlashMessage] = useContext(FlashMessageContext);
   const [orderData, setOrderData] = useState(null);
+  let checkoutStarted = false;
 
   // Get Cart Data.
   const { loading, error, data, refetch } = useQuery(GET_CART, {
@@ -57,6 +59,12 @@ const Checkout = ({ children }) => {
           ),
         });
 
+        gtagFinalizeCheckout({
+          cart,
+          listName: "Checkout page",
+          orderData: data.checkout?.order,
+        });
+
         // Empty cart
         setCart(null);
 
@@ -67,11 +75,25 @@ const Checkout = ({ children }) => {
           type: "error",
           message: "Something went wrong, please try again",
         });
+        gtagFinalizeCheckout({
+          cart,
+          listName: "Checkout page",
+          error:
+            'Something went wrong, please try again. (data?.checkout?.result === "fail")',
+        });
       } else {
         addFlashMessage({
           type: "success",
           message: "Order placed successfully",
         });
+        gtagFinalizeCheckout({
+          cart,
+          listName: "Checkout page",
+          orderData: data.checkout?.order,
+        });
+
+        // Empty cart
+        setCart(null);
       }
 
       refetch();
@@ -85,6 +107,12 @@ const Checkout = ({ children }) => {
           message: error?.graphQLErrors?.[0].message || error,
         });
       }
+
+      gtagFinalizeCheckout({
+        cart,
+        listName: "Checkout page",
+        error: error?.graphQLErrors?.[0].message || error || "Unknown error",
+      });
     },
   });
 
@@ -96,8 +124,16 @@ const Checkout = ({ children }) => {
    */
   const onSubmit = (event) => {
     event.preventDefault();
+
+    if (!checkoutStarted) {
+      checkoutStarted = true;
+      gtagBeginCheckout({
+        cart,
+        listName: "Checkout page | Checkout form submit",
+      });
+    }
+
     const result = validateAndSanitizeCheckoutForm(billingInfo);
-    console.log(result);
     if (!result.isValid) {
       setBillingInfo({ ...billingInfo, errors: result.errors });
       return;
@@ -113,6 +149,14 @@ const Checkout = ({ children }) => {
    * @return {void}
    */
   const onChange = (event) => {
+    if (!checkoutStarted) {
+      checkoutStarted = true;
+      gtagBeginCheckout({
+        cart,
+        listName: "Checkout page | Checkout form change",
+      });
+    }
+
     if (event.target.name === "createAccount") {
       const newState = {
         ...billingInfo,

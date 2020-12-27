@@ -14,6 +14,7 @@ import Upsells from "../../../components/Upsells";
 import Designer from "../../../components/Designer";
 import PageNotFound from "../../../components/PageNotFound";
 import ProductSchema from "../../../components/schema/ProductSchema";
+import { gtagProductDetail } from "../../../helpers/gtag";
 
 /**
  * ProductPage
@@ -34,6 +35,8 @@ const ProductPage = ({
 
   if (!product || product?.type === "GROUP")
     return <PageNotFound menus={menus} settings={settings} />; //@TODO Group product
+
+  gtagProductDetail({ product });
 
   const defaultVariation =
     product?.variations?.nodes?.[product?.variations?.nodes?.length - 1];
@@ -78,7 +81,7 @@ const ProductPage = ({
       <>
         This product is available for{" "}
         <Link href="/page/[slug]" as="/page/backorder">
-          <a extraClasses="u-cursor--help" target="_blank">
+          <a className="u-cursor--help" target="_blank">
             backorder
           </a>
         </Link>
@@ -185,7 +188,7 @@ const ProductPage = ({
               {dataList.length > 1 ? (
                 <ul className="u-text-small u-margin-bottom-small u-padding-left-small">
                   {dataList.map((item) => (
-                    <li>{item}</li>
+                    <li key={item}>{item}</li>
                   ))}
                 </ul>
               ) : (

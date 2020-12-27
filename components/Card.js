@@ -14,6 +14,7 @@ const Card = ({
     <div
       className={`c-card ${extraClasses || ""}${cta?.href && " c-card--link"}`}
     >
+      {/* Image */}
       {(image || hoverImage) && (
         <div className="c-card__image-container">
           {image?.sourceUrl && (
@@ -34,15 +35,22 @@ const Card = ({
           )}
         </div>
       )}
+      {/* Content */}
       <div className="c-card__content">
+        {/* Title */}
         {title && <h3 className="c-card__title">{title}</h3>}
+        {/* Body */}
         <div className="c-card__body">{children}</div>
+        {/* CTA */}
         {cta?.href && (
           <Link href={cta.href} as={cta.as}>
-            <a className="c-card__cta u-umbrella">{cta.label}</a>
+            <a className="c-card__cta u-umbrella" onClick={cta.onClick}>
+              {cta.label}
+            </a>
           </Link>
         )}
       </div>
+      {/* Tags */}
       {!!tags?.length && (
         <div className="c-card__tags">
           <ul className="o-layout o-layout--gutter-tiny o-layout--equalheight o-layout--align-right">

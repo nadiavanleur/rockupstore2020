@@ -96,6 +96,7 @@ const PRODUCT_FRAGMENT = gql`
     }
     extraProductInfo {
       estimateddeliverytime
+      googlecategory
     }
     ...VariableProductFragment
     ... on SimpleProduct {

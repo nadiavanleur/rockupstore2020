@@ -27,7 +27,10 @@ const Index = ({
       {!!featuredProducts?.length && (
         <div className="o-retain o-retain--wall">
           <Section title="Featured" extraClasses="c-section--secondary">
-            <ProductsList products={featuredProducts} />
+            <ProductsList
+              products={featuredProducts}
+              listName="Homepage | Featured"
+            />
           </Section>
         </div>
       )}
@@ -40,7 +43,7 @@ const Index = ({
             extraClasses="c-section--tertiary"
             cta={{ href: "/product-category/sale", label: "View all sale" }}
           >
-            <ProductsList products={saleProducts} />
+            <ProductsList products={saleProducts} listName="Homepage | Sale" />
           </Section>
         </div>
       )}
@@ -49,7 +52,10 @@ const Index = ({
       {!!popularProducts?.length && (
         <div className="o-retain o-retain--wall">
           <Section title="Popular" extraClasses="c-section--quinary">
-            <ProductsList products={popularProducts} />
+            <ProductsList
+              products={popularProducts}
+              listName="Homepage | Popular"
+            />
           </Section>
         </div>
       )}

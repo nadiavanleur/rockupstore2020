@@ -27,13 +27,18 @@ export const getFormattedCart = (data) => {
 
     newItem.variation.quantity = dataItem.quantity;
     newItem.variation.total = dataItem.total;
+    newItem.variation.key = dataItem.key;
+    newItem.variation.product = dataItem.product;
 
-    if (!exisitingItem) {
+    if (exisitingItem) {
+      exisitingItem.variations.push(newItem.variation);
+      exisitingItem.keys.push(dataItem.key);
+      exisitingItem.quantity += dataItem.quantity;
+    } else {
       const newVariation = dataItem.variation;
 
       newItem.keys = [];
       newItem.keys.push(dataItem.key);
-      newVariation.key = dataItem.key;
       delete newItem.key;
 
       newItem.variations = [];
@@ -41,10 +46,6 @@ export const getFormattedCart = (data) => {
       delete newItem.variation;
 
       cartItems.push(newItem);
-    } else {
-      exisitingItem.variations.push(dataItem.variation);
-      exisitingItem.keys.push(dataItem.key);
-      exisitingItem.quantity += dataItem.quantity;
     }
   });
 

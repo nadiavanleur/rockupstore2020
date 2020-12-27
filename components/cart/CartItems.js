@@ -92,7 +92,11 @@ const CartItems = ({ collapsed }) => {
             {!collapsed && (
               <div className="o-layout o-layout--gutter-small o-layout--align-middle o-layout--align-right u-margin-top-base">
                 <div className="o-layout__cell o-layout__cell--fit@from-md">
-                  <RemoveFromCart keys={allItemKeys}>
+                  <RemoveFromCart
+                    keys={allItemKeys}
+                    cartItems={cartItems}
+                    listName="Cart | Remove all"
+                  >
                     {({ removeFromCart, disabled }) => (
                       <Button
                         label="Empty cart"

@@ -106,7 +106,12 @@ const CategoryPage = ({ category, products = [], sortby, menus, settings }) => {
             />
           }
         >
-          <ProductsList products={products.nodes} />
+          <ProductsList
+            products={products.nodes}
+            listName={`${
+              isDesignerOverview ? "Designer products" : category.name
+            } | Overview`}
+          />
         </Section>
       </div>
     </Layout>
