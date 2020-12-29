@@ -3,7 +3,7 @@ const formatProduct = ({ product, index, listName, quantity, variant }) => ({
   name: product.name,
   list_name: listName,
   brand: product.designers?.nodes?.map((designer) => designer.name).join(", "),
-  category: product.extraProductInfo.googlecategory,
+  category: product.extraProductInfo?.googlecategory,
   list_position: index && index + 1,
   price: product.price,
   quantity: quantity,

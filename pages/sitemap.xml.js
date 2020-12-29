@@ -15,7 +15,6 @@ const createSitemap = (sitemapResult) => {
   let paths = [...DEFAULT_PAGES];
 
   Object.entries(sitemapResult?.data || {}).forEach(([key, value]) => {
-    console.log(key, value);
     let pathKey = camelToDash(key);
 
     paths = [

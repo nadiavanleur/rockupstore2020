@@ -71,7 +71,6 @@ const CartItem = ({ cartItem, collapsed }) => {
                 // Product with variations
                 <>
                   {cartItem.variations.map((variation) => {
-                    console.log(variation.key);
                     const variationString = variation.attributes.nodes
                       .map((variable) => variable.value)
                       ?.join(", ");
